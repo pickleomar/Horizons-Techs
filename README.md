@@ -7,7 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-# Project Name
+# Horizons Tech
 
 [![Laravel](https://img.shields.io/badge/Laravel-9.x-orange)](https://laravel.com/) [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
