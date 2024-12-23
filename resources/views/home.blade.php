@@ -3,5 +3,8 @@
 
 
 @section('content')
-    Hello This is Section
+    <div>
+
+        Hello This is Section
+    </div>
 @endsection

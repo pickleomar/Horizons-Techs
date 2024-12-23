@@ -8,9 +8,12 @@
     <meta name="author" content="" />
     <title>Blog Home - Start Bootstrap Template</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
+
+
+
+    @vite(['resources/js/app.js'])
 </head>
 
 <body>
@@ -24,7 +27,6 @@
     {{-- Footer --}}
     @yield('footer')
 
-    <script src="{{ asset('js/frontend/scripts.js') }}"></script>
 </body>
 
 </html>
