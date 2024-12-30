@@ -3,17 +3,13 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
+use Illuminate\View\View;
 
 class Button extends Component
 {
-    public $type;
+    public function __construct(public string $type = "button") {}
 
-    public function __construct($type = 'button')
-    {
-        $this->type = $type;
-    }
-
-    public function render()
+    public function render(): View
     {
         return view('components.button');
     }

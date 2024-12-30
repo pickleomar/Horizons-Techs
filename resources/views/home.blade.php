@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <x-button disabled class="btn-primary">
+    <x-button class="btn-primary">
         Add Account
     </x-button>
     <x-button class="btn-secondary">
