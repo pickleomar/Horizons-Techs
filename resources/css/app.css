@@ -5,3 +5,9 @@
 @tailwind utilities;
 
 */
+
+
+@import 'variables.css';
+@import 'global.css';
+@import 'font.css';
+@import 'button.css'

@@ -1,0 +1,23 @@
+:root {
+
+    /* Components Colors */
+    --primary-color: #1f883d;
+    --secondary-color: #0969da;
+    --warning-color: #9a6700;
+    --danger-color: #cf222e;
+
+    /* Background Colors */
+    --bg-color: #1f2328;
+    --bg-color-neutral: #59636e;
+
+
+    --divider-color: #C5CBD4;
+
+
+    /* border radius */
+    --radius-s: 0.125rem;
+    --radius-m: 0.25rem;
+    --radius-l: 0.5rem;
+    --radius-xl: 1rem;
+
+}

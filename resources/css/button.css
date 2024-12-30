@@ -1,0 +1,100 @@
+.btn {
+    margin: 0;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ffffff1a;
+    box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    box-sizing: border-box;
+    text-decoration: none;
+    vertical-align: middle;
+    white-space: nowrap;
+    transition: 0.05s ease-in;
+}
+
+
+.btn:focus:not(:focus-visible):not(.focus-visible) {
+    box-shadow: none;
+    outline: none;
+}
+
+.btn:disabled {
+    color: rgba(255, 255, 255, .8);
+    cursor: not-allowed;
+    transition: none;
+}
+
+
+
+
+/* Button Primary Start here */
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: var(--radius-m);
+}
+
+.btn-primary:hover {
+    background-color: rgba(31, 136, 61, 0.8);
+}
+
+.btn-primary:active {
+    background-color: rgba(31, 136, 61, 0.85);
+    transform: scale(95%);
+}
+
+/* Button Secondary Start  here */
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+    border-radius: var(--radius-m);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(9, 105, 218, 0.8);
+}
+
+.btn-secondary:active {
+    background-color: rgba(9, 105, 218, 0.85);
+    transform: scale(95%);
+}
+
+/* Button Danger Start here */
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: white;
+    border-radius: var(--radius-m);
+}
+
+.btn-danger:hover {
+    background-color: rgba(207, 34, 46, 0.8);
+}
+
+.btn-danger:active {
+    background-color: rgba(207, 34, 46, 0.85);
+    transform: scale(95%);
+}
+
+
+
+/* Button Danger Start here */
+
+.btn-warning {
+    background-color: var(--warning-color);
+    color: white;
+    border-radius: var(--radius-m);
+}
+
+.btn-warning:hover {
+    background-color: rgba(154, 103, 0, 0.8);
+}
+
+.btn-warning:active {
+    background-color: rgba(154, 103, 0, 0.85);
+    transform: scale(95%);
+}
