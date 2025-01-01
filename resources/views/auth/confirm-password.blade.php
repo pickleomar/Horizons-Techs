@@ -17,9 +17,9 @@
         </div>
 
         <div class="">
-            <x-primary-button>
+            <button>
                 {{ __('Confirm') }}
-            </x-primary-button>
+            </button>
         </div>
     </form>
 </x-guest-layout>

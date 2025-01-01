@@ -13,26 +13,12 @@
 </head>
 
 <body class="">
-    <header class="header-container">
-        <div>
-            <a href="/">
-                <img src="/header_logo.png" alt="header tech horizon iot programming">
-            </a>
-        </div>
-        <div>
-            <input type="text" placeholder="Search ...">
-        </div>
-        <nav>
-            <a href="#">Themes</a>
-            <a href="{{ route('login') }}">Login</a>
-            <a href="{{ route('register') }}">Register</a>
-        </nav>
-    </header>
+
+    @include('layouts.header')
 
     <div class="">
 
 
-        @include('layouts.navigation')
 
         <!-- Page Heading -->
         @isset($header)
