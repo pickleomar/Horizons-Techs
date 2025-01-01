@@ -1,5 +1,5 @@
 .header-container {
-    height: 96px;
+    height: 72px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -11,7 +11,7 @@
 
 
 .header-container img {
-    width: 150px;
+    width: 120px;
     filter: drop-shadow(var(--primary-color) 0px 2px 20px);
 }
 
@@ -26,7 +26,7 @@
 .header-container nav a {
     width: 4rem;
     font-weight: 600;
-    font-size: 1.125rem;
+    font-size: 1rem;
     text-align: center;
     padding: 0.75rem 1.25rem;
     text-decoration: none;
@@ -36,7 +36,6 @@
 }
 
 .header-container nav a:hover {
-    --alpha: 0.3;
     background-color: var(--bg-color-n-1);
 }
 
@@ -56,9 +55,9 @@
 
 .header-container input {
     outline: none;
-    width: 20rem;
+    width: 22rem;
     background-color: var(--bg-color);
-    padding: 0.875rem 1.25rem;
+    padding: 0.625rem 1.25rem;
     border: 1px solid var(--divider-color);
     border-radius: 0.5rem;
     color: var(--font-color);
