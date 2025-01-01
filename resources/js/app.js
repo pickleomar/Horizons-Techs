@@ -1,7 +1,7 @@
 import './bootstrap';
-import "./script"
 
+import Alpine from 'alpinejs';
 
+window.Alpine = Alpine;
 
-import "../css/app.css"
-import "../css/font.css"
+Alpine.start();
