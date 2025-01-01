@@ -7,34 +7,44 @@
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="" type="email" name="email" :value="old('email', $request->email)" required autofocus
-                autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="" />
+            <label for="email">Email</label>
+            <input id="email" class="" type="email" name="email" :value="old('email', $request - > email)"
+                required autofocus autocomplete="username" />
+            <div>
+
+                {{ implode('', $errors->get('email')) }}
+            </div>
         </div>
 
         <!-- Password -->
         <div class="">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="" type="password" name="password" required
-                autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="" />
+            <label for="password">
+                Password
+            </label>
+            <input id="password" class="" type="password" name="password" required autocomplete="new-password" />
+            <div>
+                {{ implode('', $errors->get('password')) }}
+            </div>
         </div>
 
         <!-- Confirm Password -->
         <div class="">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+            <label for="password_confirmation">
+                Confirm Password
+            </label>
 
-            <x-text-input id="password_confirmation" class="" type="password" name="password_confirmation"
-                required autocomplete="new-password" />
+            <input id="password_confirmation" class="" type="password" name="password_confirmation" required
+                autocomplete="new-password" />
 
-            <x-input-error :messages="$errors->get('password_confirmation')" class="" />
+            <div>
+                {{ implode('', $errors->get('password_confirmation')) }}
+            </div>
         </div>
 
         <div class="">
-            <x-primary-button>
+            <button>
                 {{ __('Reset Password') }}
-            </x-primary-button>
+            </button>
         </div>
     </form>
 </x-guest-layout>

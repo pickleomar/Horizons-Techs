@@ -4,38 +4,45 @@
 
         <!-- Name -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="" type="text" name="name" :value="old('name')" required autofocus
+            <label for="name">Name</label>
+            <input id="name" class="" type="text" name="name" :value="old('name')" required autofocus
                 autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="" />
+            <div>
+                {{ implode('', $errors->get('name')) }}
+            </div>
         </div>
 
         <!-- Email Address -->
         <div class="">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="" type="email" name="email" :value="old('email')" required
+            <label for="email">Email</label>
+            <input id="email" class="" type="email" name="email" :value="old('email')" required
                 autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="" />
+            <div>
+                {{ implode('', $errors->get('email')) }}
+            </div>
         </div>
 
         <!-- Password -->
         <div class="">
-            <x-input-label for="password" :value="__('Password')" />
+            <label for="password">Password</label>
 
-            <x-text-input id="password" class="" type="password" name="password" required
-                autocomplete="new-password" />
+            <input id="password" class="" type="password" name="password" required autocomplete="new-password" />
 
-            <x-input-error :messages="$errors->get('password')" class="" />
+            <div>
+                {{ implode('', $errors->get('password')) }}
+            </div>
         </div>
 
         <!-- Confirm Password -->
         <div class="">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+            <label for="password_confirmation">
+                Confirm Password
+            </label>
+            <input id="password_confirmation" class="" type="password" name="password_confirmation" required
+                autocomplete="new-password" />
 
-            <x-text-input id="password_confirmation" class="" type="password" name="password_confirmation"
-                required autocomplete="new-password" />
+            {{ implode('', $errors->get('password_confirmation')) }}
 
-            <x-input-error :messages="$errors->get('password_confirmation')" class="" />
         </div>
 
         <div class="">
@@ -43,9 +50,9 @@
                 {{ __('Already registered?') }}
             </a>
 
-            <x-primary-button class="">
+            <button class="">
                 {{ __('Register') }}
-            </x-primary-button>
+            </button>
         </div>
     </form>
 </x-guest-layout>

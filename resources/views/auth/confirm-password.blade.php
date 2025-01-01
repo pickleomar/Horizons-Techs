@@ -8,12 +8,13 @@
 
         <!-- Password -->
         <div>
-            <x-input-label for="password" :value="__('Password')" />
+            <label for="password">Password</label>
 
-            <x-text-input id="password" class="" type="password" name="password" required
-                autocomplete="current-password" />
+            <input id="password" class="" type="password" name="password" required autocomplete="current-password" />
 
-            <x-input-error :messages="$errors->get('password')" class="" />
+            <div>
+                {{ implode('', $errors->get('password')) }}
+            </div>
         </div>
 
         <div class="">

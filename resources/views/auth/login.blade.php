@@ -1,26 +1,28 @@
 <x-guest-layout>
     <!-- Session Status -->
-    <x-auth-session-status class="" :status="session('status')" />
+    {{ session('status') }}
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="" type="email" name="email" :value="old('email')" required autofocus
+            <label for="email">Email</label>
+            <input id="email" class="" type="email" name="email" :value="old('email')" required autofocus
                 autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="" />
+            <div>
+                {{ implode('', $errors->get('email')) }}
+            </div>
         </div>
 
         <!-- Password -->
         <div class="">
-            <x-input-label for="password" :value="__('Password')" />
 
-            <x-text-input id="password" class="" type="password" name="password" required
-                autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="" />
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password" autocomplete="current-password">
+            <div>
+                {{ implode('', $errors->get('password')) }}
+            </div>
         </div>
 
         <!-- Remember Me -->
@@ -38,9 +40,9 @@
                 </a>
             @endif
 
-            <x-primary-button class="">
+            <button class="">
                 {{ __('Log in') }}
-            </x-primary-button>
+            </button>
         </div>
     </form>
 </x-guest-layout>
