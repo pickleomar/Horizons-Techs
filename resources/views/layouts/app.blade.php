@@ -16,24 +16,9 @@
 
     @include('layouts.header')
 
-    <div class="">
-
-
-
-        <!-- Page Heading -->
-        @isset($header)
-            <header class="">
-                <div class="">
-                    {{ $header }}
-                </div>
-            </header>
-        @endisset
-
-        <!-- Page Content -->
-        <main>
-            {{ $slot }}
-        </main>
-    </div>
+    <main>
+        {{ $slot }}
+    </main>
 </body>
 
 </html>
