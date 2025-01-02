@@ -1,4 +1,5 @@
 .btn {
+    width: 100%;
     margin: 0;
     padding: 0.5rem 1rem;
     border: 1px solid #ffffff1a;
@@ -7,7 +8,11 @@
     font-size: 0.875rem;
     font-weight: 600;
     cursor: pointer;
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     box-sizing: border-box;
     text-decoration: none;
@@ -80,7 +85,7 @@
 
 
 
-/* Button Danger Start here */
+/* Button Warning Start here */
 
 .btn-warning {
     background-color: var(--warning-color);
@@ -96,9 +101,23 @@
     transform: scale(95%);
 }
 
+/* Button Neutral Start here */
 
 
+.btn-neutral {
+    background-color: var(--bg-color);
+    color: white;
+}
 
+.btn-neutral:hover {
+    background-color: var(--bg-color-n-1);
+    transition: 0.2s ease;
+}
+
+.btn-neutral:active {
+    background-color: rgba(89, 99, 110, 0.75);
+    transform: scale(95%);
+}
 
 /* Sizes */
 .btn-xs {
