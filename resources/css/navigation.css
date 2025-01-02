@@ -32,7 +32,7 @@
     text-decoration: none;
     color: var(--font-color);
     border-radius: 0.5rem;
-    transition: 0.25s ease;
+    transition: 0.25s ease-in-out;
 }
 
 .header-container nav a:hover {
