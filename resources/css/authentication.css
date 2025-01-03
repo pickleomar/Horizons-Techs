@@ -7,6 +7,7 @@
     padding: 5rem 3rem;
     width: 500px;
     border-radius: 20px;
+    transition: border 0.5s ease-in-out;
 }
 
 .authentication-form:hover {
