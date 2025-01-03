@@ -1,4 +1,20 @@
-<button type={{ $type }} {{ $attributes->merge(['class' => 'btn']) }}>
+@props([
+    'class' => '',
+    'type' => 'button',
+    'href' => '',
+    'disabled' => false,
+    'attributes' => '',
+    'size' => 'md',
+])
 
-    {{ $slot }}
-</button>
+
+@if (empty($href))
+    <button {{ $disabled ? 'disabled' : '' }} {{ $attributes }} type="{{ $type }}"
+        class="btn btn-{{ $size }} {{ $class }}">
+        {{ $slot }}
+    </button>
+@else
+    <a href="{{ $href }}" {{ $attributes }} class="btn btn-{{ $size }} {{ $class }}">
+        {{ $slot }}
+    </a>
+@endif

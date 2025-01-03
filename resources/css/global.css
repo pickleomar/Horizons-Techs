@@ -1,13 +1,13 @@
-@media(prefers-color-scheme : dark){
-    :root{
-
-    }
+@media(prefers-color-scheme : dark) {
+    :root {}
 }
 
 
 
 html {
     color-scheme: dark light;
+    width: 100%;
+    height: 100%;
 }
 
 * {
@@ -18,4 +18,6 @@ html {
 
 body {
     background-color: var(--bg-color);
+    width: 100%;
+    height: 100%;
 }
