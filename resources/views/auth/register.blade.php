@@ -33,12 +33,12 @@
                 {{ implode('', $errors->get('password')) }}
             </div>
         </div>
-        <div class="inputForm">
+        {{-- <div class="inputForm">
             <input type="password" name="password_confirmation" placeholder="Enter your Password Confirmation" />
             <div>
                 {{ implode('', $errors->get('password_confirmation')) }}
             </div>
-        </div>
+        </div> --}}
 
         <div class="flex-row">
             <label for="remember_me" class="">
@@ -53,7 +53,7 @@
                 </a>
             @endif
         </div>
-        <x-button style="margin-top: 1rem;" type="submit" class="btn-primary">Sign In</x-button>
+        <x-button style="margin-top: 1rem;" type="submit" class="btn-primary">Sign Up</x-button>
         <p style="margin: 6px;text-align: center;display: inline;">Already have an account?
             <a href="{{ route('login') }}" class="span">Login</a>
         </p>
