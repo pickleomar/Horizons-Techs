@@ -1,13 +1,14 @@
-@props(['class'])
-@props(['type'])
-@props(['href'])
-@props(['disabled'])
-@props(['attributes'])
-@props(['size'])
+@props([
+    'class' => '',
+    'type' => 'button',
+    'href' => '',
+    'disabled' => false,
+    'attributes' => '',
+    'size' => 'md',
+])
 
 
-
-@if ($href == '')
+@if (empty($href))
     <button {{ $disabled ? 'disabled' : '' }} {{ $attributes }} type="{{ $type }}"
         class="btn btn-{{ $size }} {{ $class }}">
         {{ $slot }}
