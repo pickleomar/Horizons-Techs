@@ -16,10 +16,11 @@
 <body class="">
     @include('layouts.header')
 
-    <div class="">
+    <main>
+
         {{ $slot }}
-    </div>
-    </div>
+    </main>
+
 
 </body>
 
