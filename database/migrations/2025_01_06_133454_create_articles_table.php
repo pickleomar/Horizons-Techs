@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('image');
             $table->foreignId('theme_id')->constrained('themes')->onDelete('cascade');
             $table->foreignId('author_id')->constrained('users')->onDelete('cascade');
-            $table->enum('status',['Rejected','Approved','Pending','Published']);
+            $table->enum('status', ['Rejected', 'Approved', 'Pending', 'Published']);
             $table->dateTime('publication_date');
             $table->timestamps();
         });
