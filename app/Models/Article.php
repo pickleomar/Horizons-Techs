@@ -32,4 +32,21 @@ class Article extends Model
     {
         return $this->belongsTo(Theme::class);
     }
+
+
+    /**
+     * Get the rating of the article.
+     */
+    public function rating()
+    {
+        return $this->hasOne(Rating::class);
+    }
+
+    /**
+     * Get the chats of the article.
+     */
+    public function chats()
+    {
+        return $this->hasMany(Chat::class);
+    }
 }
