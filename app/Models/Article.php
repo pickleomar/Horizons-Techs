@@ -15,4 +15,38 @@ class Article extends Model
         'status',
         'publication_date',
     ];
+
+
+    /**
+     * Get the author of the article.
+     */
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
+
+    /**
+     * Get the theme of the article.
+     */
+    public function theme()
+    {
+        return $this->belongsTo(Theme::class);
+    }
+
+
+    /**
+     * Get the rating of the article.
+     */
+    public function rating()
+    {
+        return $this->hasOne(Rating::class);
+    }
+
+    /**
+     * Get the chats of the article.
+     */
+    public function chats()
+    {
+        return $this->hasMany(Chat::class);
+    }
 }

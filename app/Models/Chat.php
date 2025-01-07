@@ -12,4 +12,21 @@ class Chat extends Model
         'message',
         'message_date',
     ];
+
+    /**
+     * Get the user that the chat belongs to.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
+    /**
+     * Get the article that the chat belongs to.
+     */
+    public function article()
+    {
+        return $this->belongsTo(Article::class);
+    }
 }

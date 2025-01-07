@@ -45,4 +45,57 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+    /**
+     * Get the articles for the user.
+     */
+    public function articles()
+    {
+        return $this->hasMany(Article::class, 'author_id');
+    }
+
+
+    /**
+     * Get the histories for the user.
+     */
+    public function histories()
+    {
+        return $this->hasMany(History::class);
+    }
+
+    /**
+     * Get the themes for the user.
+     */
+    public function themes()
+    {
+        return $this->hasMany(Theme::class, "manager_id");
+    }
+
+    /**
+     * Get the subscriptions for the user.
+     */
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+
+    /**
+     * Get the ratings for the user.
+     */
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+
+
+    /**
+     * Get the chats for the user.
+     */
+    public function chats()
+    {
+        return $this->hasMany(Chat::class);
+    }
 }
