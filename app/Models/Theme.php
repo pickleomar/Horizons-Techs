@@ -17,4 +17,10 @@ class Theme extends Model
     {
         return $this->belongsTo(User::class, "manager_id");
     }
+
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
 }
