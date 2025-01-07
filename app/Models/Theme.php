@@ -23,4 +23,11 @@ class Theme extends Model
     {
         return $this->hasMany(Article::class);
     }
+
+
+    public function subscriptions()
+    {
+
+        return $this->hasMany(Subscription::class);
+    }
 }
