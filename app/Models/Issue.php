@@ -12,4 +12,8 @@ class Issue extends Model
         'publication_date',
         'public',
     ];
+
+    /**
+     * Todo Handle Issue Relationship
+     */
 }
