@@ -45,4 +45,27 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+    /**
+     * Get the articles for the user.
+     */
+    public function articles()
+    {
+        return $this->hasMany(Article::class, 'author_id');
+    }
+
+
+    /**
+     * Get the histories for the user.
+     */
+    public function histories()
+    {
+        return $this->hasMany(History::class);
+    }
+
+
+
+    // Todo Later
+    // Finish the other relationship
 }
