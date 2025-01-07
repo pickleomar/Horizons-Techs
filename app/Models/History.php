@@ -13,4 +13,16 @@ class History extends Model
         'article_id',
         'consultation_date',
     ];
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
+    public function article()
+    {
+        return $this->belongsTo(Article::class);
+    }
 }
