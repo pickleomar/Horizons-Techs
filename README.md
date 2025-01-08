@@ -67,7 +67,7 @@ Follow these steps to set up the project locally:
 5. Run migrations to set up the database:
 
    ```bash
-   php artisan migrate
+   php artisan migrate --seed
    ```
 
 6. Install frontend dependencies:
