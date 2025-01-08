@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -7,6 +8,10 @@ Route::get('/', function () {
     return view('home');
 });
 
+
+Route::get('/articles', [ArticleController::class, "index"])->middleware(["auth", "verified"])->name('articles.index');
+Route::get('/articles/create', [ArticleController::class, "create"])->middleware(["auth", "verified"])->name('article.create');
+Route::post('/articles/create', [ArticleController::class, "store"])->middleware(["auth", "verified"]);
 
 
 Route::get('/dashboard', function () {
