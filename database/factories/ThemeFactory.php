@@ -18,8 +18,8 @@ class ThemeFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->unique()->word(),
-            'description' => $this->faker->sentence(),
+            'name' => fake()->unique()->word(),
+            'description' => fake()->sentence(),
             'manager_id' => \App\Models\User::factory(),
         ];
     }
