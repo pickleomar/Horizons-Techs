@@ -17,13 +17,13 @@ class ArticleFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->sentence,
-            'content' => $this->faker->paragraphs(3, true),
-            'image' => $this->faker->imageUrl(),
+            'title' => fake()->sentence,
+            'content' => fake()->paragraphs(3, true),
+            'image' => fake()->imageUrl(),
             'theme_id' => \App\Models\Theme::factory(),
             'author_id' => \App\Models\User::factory(),
-            'status' => $this->faker->randomElement(['Rejected', 'Approved', 'Pending', 'Published']),
-            'publication_date' => $this->faker->optional()->dateTime,
+            'status' => fake()->randomElement(['Rejected', 'Approved', 'Pending', 'Published']),
+            'publication_date' => fake()->optional()->dateTime,
         ];
     }
 }

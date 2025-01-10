@@ -5,22 +5,19 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Theme>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Issue>
  */
-class ThemeFactory extends Factory
+class IssueFactory extends Factory
 {
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
      */
-
     public function definition(): array
     {
         return [
-            'name' => fake()->unique()->word(),
-            'description' => fake()->sentence(),
-            'manager_id' => \App\Models\User::factory(),
+            //
         ];
     }
 }
