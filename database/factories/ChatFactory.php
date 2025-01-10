@@ -22,7 +22,7 @@ class ChatFactory extends Factory
             "article_id" => Article::factory(),
             "user_id" => User::factory(),
             "message" => fake()->sentence,
-            'message_date' => fake()->optional()->dateTime,
+            'message_date' => fake()->dateTimeThisYear(),
         ];
     }
 }

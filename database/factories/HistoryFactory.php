@@ -21,7 +21,7 @@ class HistoryFactory extends Factory
         return [
             "user_id" => User::factory(),
             "article_id" => Article::factory(),
-            "consultation_date" => fake()->optional()->dateTime,
+            "consultation_date" => fake()->dateTimeThisYear(),
         ];
     }
 }

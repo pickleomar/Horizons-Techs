@@ -21,7 +21,7 @@ class SubscriptionFactory extends Factory
         return [
             "user_id" => User::factory(),
             "theme_id" => Theme::factory(),
-            'subscription_date' => fake()->optional()->dateTime,
+            'subscription_date' => fake()->dateTimeThisYear(),
         ];
     }
 }
