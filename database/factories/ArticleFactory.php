@@ -23,7 +23,7 @@ class ArticleFactory extends Factory
             'theme_id' => \App\Models\Theme::factory(),
             'author_id' => \App\Models\User::factory(),
             'status' => fake()->randomElement(['Rejected', 'Approved', 'Pending', 'Published']),
-            'publication_date' => fake()->optional()->dateTime,
+            'publication_date' => fake()->dateTimeThisYear(),
         ];
     }
 }

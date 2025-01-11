@@ -38,12 +38,30 @@
     </div> --}}
 
     {{-- {{ $articles }} --}}
+    <div class="slideshow-container">
+        <div class="slides">
+            @foreach ($articles as $article)
+                <div class="slide">
+                    <img src="{{ $article->image }}" alt="{{ $article->title }}">
+                    <div class="slide-info">
+                        <h1>{{ $article->title }}</h1>
+                        <h4>Published on: {{ $article->publication_date }} | {{ $article->author->name }}
+                        </h4>
+                        {{-- <h4>Published on: Date Here| {{ $author }}</h4> --}}
+                        <p>
+                            {{ $article->content }}
+                        </p>
+                        <x-button href="#" class="btn-primary">
+                            Read Article
+                        </x-button>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <div class="arrow left" onclick="prevSlide()">&#10094;</div>
+        <div class="arrow right" onclick="nextSlide()">&#10095;</div>
+    </div>
 
-    <x-slider.slider>
-        @foreach ($articles as $article)
-            <x-slider.item :title="$article->title" :publication_date='$article->publication_date' :content="$article->content" :image="$article->image" :author="$article->author->name" url="#" />
-        @endforeach
-    </x-slider.slider>
 
     {{-- <div class="articles-layout">
         <!-- Featured Article -->
