@@ -5,76 +5,145 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Models\Theme;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
     /**
-     * Class ArticleController
-     *
-     * This controller handles the CRUD operations for the Article model.
-     *
-     * Methods:
-     * - index(): Display a listing of the articles.
-     * - create(): Show the form for creating a new article.
-     * - store(Request $request): Store a newly created article in storage.
-     * - show(Article $article): Display the specified article.
-     * - edit(Article $article): Show the form for editing the specified article.
-     * - update(Request $request, Article $article): Update the specified article in storage.
-     * - destroy(Article $article): Remove the specified article from storage.
-     *
-     * @package App\Http\Controllers
+     * Display a listing of the articles.
      */
     public function index()
     {
-        $articles = Article::all();
+        $user = Auth::user();
+
+        // Filter articles based on user role
+        if ($user) {
+            switch ($user->type) {
+                case 'Subscriber':
+                    $articles = Article::where('status', 'Published')
+                        ->orWhereIn('theme_id', $user->subscriptions()->pluck('theme_id'))
+                        ->with(['theme', 'author'])
+                        ->latest('publication_date')
+                        ->paginate(10);
+                    break;
+
+                case 'Manager':
+                    $articles = Article::whereIn('theme_id', $user->managedThemes()->pluck('id'))
+                        ->with(['theme', 'author'])
+                        ->latest('publication_date')
+                        ->paginate(10);
+                    break;
+
+                case 'Editor':
+                    $articles = Article::with(['theme', 'author'])
+                        ->latest('publication_date')
+                        ->paginate(10);
+                    break;
+
+                default:
+                    $articles = Article::where('status', 'Published')
+                        ->with(['theme', 'author'])
+                        ->latest('publication_date')
+                        ->paginate(10);
+                    break;
+            }
+        } else {
+            // Guest users: Only show published articles
+            $articles = Article::where('status', 'Published')
+                ->with(['theme', 'author'])
+                ->latest('publication_date')
+                ->paginate(10);
+        }
+
         return view('articles.index', compact('articles'));
     }
 
+    /**
+     * Show the form for creating a new article.
+     */
     public function create()
     {
-        $themes = Theme::all(); //TODO Remove later , linked automaticly
-        return view('articles.create', compact("themes"));
+        $themes = Theme::all();   //TODO Remove later , linked automaticly
+        return view('articles.create', compact('themes'));
     }
 
+    /**
+     * Store a newly created article in storage.
+     */
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
+            'title' => 'required|max:255',
             'content' => 'required',
+            //'theme_id' => 'required|exists:themes,id',
+            //'image' => 'nullable|url',
         ]);
-
         // Article::create([$request->all(), "status" => "Pending"]);
         Article::create(array_merge($request->all(), ["author_id" => $request->user()->id]));
+        /*Article::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'image' => $request->image,
+            'theme_id' => $request->theme_id,
+            'author_id' => $request->user()->id,
+            'status' => 'Pending', // Default status for new articles
+        ]);*/
 
         return redirect()->route('articles.index')
-            ->with('success', 'Article created successfully.');
+            ->with('success', 'Article created successfully and is now under review.');
     }
 
+    /**
+     * Display the specified article.
+     */
     public function show(Article $article)
     {
         return view('articles.show', compact('article'));
     }
 
+    /**
+     * Show the form for editing the specified article.
+     */
     public function edit(Article $article)
     {
-        return view('articles.edit', compact('article'));
+        //$this->authorize('update', $article);
+        //$themes = Theme::all();
+        return view('articles.edit', compact('article', 'themes'));
     }
 
+    /**
+     * Update the specified article in storage.
+     */
     public function update(Request $request, Article $article)
     {
+        /*
+        $this->authorize('update', $article);
+
+        $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required',
+            'theme_id' => 'required|exists:themes,id',
+            'image' => 'nullable|url',
+        ]);
+
+        $article->update($request->only('title', 'content', 'theme_id', 'image', 'status'));
+        */
         $request->validate([
             'title' => 'required',
             'content' => 'required',
         ]);
 
         $article->update($request->all());
-
         return redirect()->route('articles.index')
             ->with('success', 'Article updated successfully.');
     }
 
+    /**
+     * Remove the specified article from storage.
+     */
     public function destroy(Article $article)
     {
+        /* $this->authorize('delete', $article); */
         $article->delete();
 
         return redirect()->route('articles.index')
