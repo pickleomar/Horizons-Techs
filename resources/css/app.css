@@ -5,3 +5,9 @@
 @import 'navigation.css';
 @import 'authentication.css';
 @import 'articles.css';
+
+
+
+
+/* Components */
+@import "Components/slider.css";

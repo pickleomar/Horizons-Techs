@@ -12,6 +12,7 @@ Route::get('/', function () {
 Route::get('/articles', [ArticleController::class, "index"])->middleware(["auth", "verified"])->name('articles.index');
 Route::get('/articles/create', [ArticleController::class, "create"])->middleware(["auth", "verified"])->name('article.create');
 Route::post('/articles/create', [ArticleController::class, "store"])->middleware(["auth", "verified"]);
+Route::get('/articles/{article}', [ArticleController::class, "show"]);
 
 
 Route::get('/dashboard', function () {

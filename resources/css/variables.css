@@ -1,18 +1,22 @@
 :root {
     --alpha: 1;
     /* Components Colors */
-    --primary-color: #1f883d;
+    --primary-color: rgba(31, 136, 61, 1.0);
     --secondary-color: rgba(9, 105, 218, 1.0);
+    --tertiary-color: rgba(75, 98, 133, 1.0);
     --warning-color: rgba(154, 103, 0, 1.0);
     --danger-color: rgba(207, 34, 46, 1.0);
 
     /* Background Colors */
-    --bg-color: #010409;
+    --bg-color: rgba(1, 4, 9, 1.0);
     --bg-color-n-1: rgba(31, 35, 40, 1.0);
     --bg-color-n-2: rgba(89, 99, 110, 1.0);
 
 
-    --divider-color: #C5CBD4;
+    /* Font Color */
+
+    --font-color: rgba(240, 246, 252, 1.0);
+    --divider-color: rgba(197, 203, 212, 1.0);
 
 
     /* border radius */
