@@ -1,5 +1,4 @@
 .btn {
-    width: 100%;
     margin: 0;
     padding: 0.5rem 1rem;
     border: 1px solid #ffffff1a;
@@ -21,6 +20,10 @@
     transition: transform 0.05s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+.full-w {
+    width: 100%;
+
+}
 
 .btn:focus:not(:focus-visible):not(.focus-visible) {
     box-shadow: none;

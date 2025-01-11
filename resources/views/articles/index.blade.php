@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="slideshow-container">
+    {{-- <div class="slideshow-container">
         <div class="slides">
             <!-- Slide 1 -->
             <div class="slide">
@@ -35,12 +35,39 @@
         <!-- Navigation -->
         <div class="arrow left" onclick="prevSlide()">&#10094;</div>
         <div class="arrow right" onclick="nextSlide()">&#10095;</div>
+    </div> --}}
+
+    {{-- {{ $articles }} --}}
+    <div class="slideshow-container">
+        <div class="slides">
+            @foreach ($articles as $article)
+                <div class="slide">
+                    <img src="{{ $article->image }}" alt="{{ $article->title }}">
+                    <div class="slide-info">
+                        <h1>{{ $article->title }}</h1>
+                        <h4>Published on: {{ $article->publication_date }} | {{ $article->author->name }}
+                        </h4>
+                        {{-- <h4>Published on: Date Here| {{ $author }}</h4> --}}
+                        <p>
+                            {{ $article->content }}
+                        </p>
+                        <x-button href="#" class="btn-primary">
+                            Read Article
+                        </x-button>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <div class="arrow left" onclick="prevSlide()">&#10094;</div>
+        <div class="arrow right" onclick="nextSlide()">&#10095;</div>
     </div>
 
-    <div class="articles-layout">
+
+    {{-- <div class="articles-layout">
         <!-- Featured Article -->
         <div class="featured-article">
-            <img src="https://ischoolonline.berkeley.edu/wp-content/uploads/sites/37/2021/01/4430_whatismachinelearning_hero.jpg" alt="ML">
+            <img src="https://ischoolonline.berkeley.edu/wp-content/uploads/sites/37/2021/01/4430_whatismachinelearning_hero.jpg"
+                alt="ML">
             <div class="featured-info">
                 <h2>Machine learning Article</h2>
                 <p>Published on: May 17, 2023 | By Mark Bonn</p>
@@ -52,24 +79,27 @@
         <!-- Small Articles -->
         <div class="small-articles">
             <div class="small-article">
-                <img src="https://assets.new.siemens.com/siemens/assets/api/uuid:cfa16190-9fdc-487a-a94f-d37aacdcd367/width:2224/quality:high/simatic-rtls-robotics-1-926846266.jpg" alt="Small Article 1">
+                <img src="https://assets.new.siemens.com/siemens/assets/api/uuid:cfa16190-9fdc-487a-a94f-d37aacdcd367/width:2224/quality:high/simatic-rtls-robotics-1-926846266.jpg"
+                    alt="Small Article 1">
                 <h3>Robotics Article 1</h3>
                 <p>Short description...</p>
                 <a href="/articles/4" class="read-article-button">Read Article</a>
             </div>
             <div class="small-article">
-                <img src="https://src.n-ix.com/uploads/2024/08/29/1b2cf562-e226-440f-9f8f-b2f827471c6e.webp" alt="Small Article 2">
+                <img src="https://src.n-ix.com/uploads/2024/08/29/1b2cf562-e226-440f-9f8f-b2f827471c6e.webp"
+                    alt="Small Article 2">
                 <h3>Robotics in healthcare: A comprehensive overview</h3>
                 <p>Short description...</p>
                 <a href="/articles/5" class="read-article-button">Read Article</a>
             </div>
             <div class="small-article">
-                <img src="https://static01.nyt.com/images/2025/01/09/multimedia/ROOSE-meta-store-hfpm/ROOSE-meta-store-hfpm-superJumbo.jpg?quality=75&auto=webp" alt="Small Article 3">
+                <img src="https://static01.nyt.com/images/2025/01/09/multimedia/ROOSE-meta-store-hfpm/ROOSE-meta-store-hfpm-superJumbo.jpg?quality=75&auto=webp"
+                    alt="Small Article 3">
                 <h3>What’s Behind Meta’s MAGA Makeover?</h3>
                 <p>Short description...</p>
                 <a href="/articles/6" class="read-article-button">Read Article</a>
             </div>
         </div>
     </div>
-    <script src="{{ asset('js/articles.js') }}"></script>
+    <script src="{{ asset('js/articles.js') }}"></script> --}}
 </x-app-layout>

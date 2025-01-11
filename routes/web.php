@@ -14,6 +14,11 @@ Route::get('/articles/create', [ArticleController::class, "create"])->middleware
 Route::post('/articles/create', [ArticleController::class, "store"])->middleware(["auth", "verified"]);
 
 
+
+
+Route::get('/articles/{article}', [ArticleController::class, "show"]);
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

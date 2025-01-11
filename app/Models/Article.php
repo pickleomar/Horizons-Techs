@@ -21,6 +21,12 @@ class Article extends Model
     ];
 
 
+
+    protected $casts = [
+        'publication_date' => 'datetime',
+    ];
+
+
     /**
      * Get the author of the article.
      */

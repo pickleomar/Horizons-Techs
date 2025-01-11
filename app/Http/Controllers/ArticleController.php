@@ -16,45 +16,10 @@ class ArticleController extends Controller
     {
         $user = Auth::user();
 
+        // TODO THIS FEATURE ISN'T IMPLEMENTED YET
         // Filter articles based on user role
-        if ($user) {
-            switch ($user->type) {
-                case 'Subscriber':
-                    $articles = Article::where('status', 'Published')
-                        ->orWhereIn('theme_id', $user->subscriptions()->pluck('theme_id'))
-                        ->with(['theme', 'author'])
-                        ->latest('publication_date')
-                        ->paginate(10);
-                    break;
 
-                case 'Manager':
-                    $articles = Article::whereIn('theme_id', $user->managedThemes()->pluck('id'))
-                        ->with(['theme', 'author'])
-                        ->latest('publication_date')
-                        ->paginate(10);
-                    break;
-
-                case 'Editor':
-                    $articles = Article::with(['theme', 'author'])
-                        ->latest('publication_date')
-                        ->paginate(10);
-                    break;
-
-                default:
-                    $articles = Article::where('status', 'Published')
-                        ->with(['theme', 'author'])
-                        ->latest('publication_date')
-                        ->paginate(10);
-                    break;
-            }
-        } else {
-            // Guest users: Only show published articles
-            $articles = Article::where('status', 'Published')
-                ->with(['theme', 'author'])
-                ->latest('publication_date')
-                ->paginate(10);
-        }
-
+        $articles = Article::all();
         return view('articles.index', compact('articles'));
     }
 
@@ -75,11 +40,13 @@ class ArticleController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'content' => 'required',
-            //'theme_id' => 'required|exists:themes,id',
-            //'image' => 'nullable|url',
+            'theme_id' => 'required|exists:themes,id',
+            'image' => 'nullable|url',
         ]);
-        // Article::create([$request->all(), "status" => "Pending"]);
+
+
         Article::create(array_merge($request->all(), ["author_id" => $request->user()->id]));
+
         /*Article::create([
             'title' => $request->title,
             'content' => $request->content,
