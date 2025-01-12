@@ -20,11 +20,10 @@ class Article extends Model
         'publication_date',
     ];
 
-
-
     protected $casts = [
         'publication_date' => 'datetime',
     ];
+
 
 
     /**
