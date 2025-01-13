@@ -17,7 +17,7 @@ Route::post('/articles/create', [ArticleController::class, "store"])->middleware
 Route::get('/articles/{article}', [ArticleController::class, "show"]);
 
 // Themes Routes
-Route::get("/themes", [ThemeController::class, "index"])->name("themes");
+Route::get("/themes", [ThemeController::class, "index"])->name("themes.index");
 Route::get("/themes/create", [ThemeController::class, "create"])->name("themes.create");
 Route::post("/themes/create", [ThemeController::class, "store"]);
 Route::get("/themes/{theme}", [ThemeController::class, "show"])->name("themes.show");
@@ -25,9 +25,6 @@ Route::get("/themes/{theme}", [ThemeController::class, "show"])->name("themes.sh
 
 // Retrieve History Based on the USER
 Route::get("history", [HistoryController::class, "index"])->name("history");
-
-Route::get('/themes', [ThemeController::class, 'index'])->name('themes');
-Route::get('/themes/{theme}', [ThemeController::class, 'show'])->name('themes.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
