@@ -17,7 +17,7 @@ Route::get('/articles/{article}', [ArticleController::class, "show"]);
 
 
 Route::get('/themes', [ThemeController::class, 'index'])->name('themes');
-Route::get('/themes/{id}', [ThemeController::class, 'show'])->name('themes.show');
+Route::get('/themes/{theme}', [ThemeController::class, 'show'])->name('themes.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
