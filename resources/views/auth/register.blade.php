@@ -9,9 +9,9 @@
         </div>
         <div class="inputForm">
             <input type="email" name="email" :value="old('email')" required placeholder="Enter your Email" />
-            <div>
-                {{ implode('', $errors->get('email')) }}
-            </div>
+        </div>
+        <div style="color: #F14336">
+            {{ implode('', $errors->get('email')) }}
         </div>
 
         <div class="flex-column">
@@ -19,9 +19,9 @@
         </div>
         <div class="inputForm">
             <input type="text" name="name" required placeholder="Enter your Name" />
-            <div>
-                {{ implode('', $errors->get('name')) }}
-            </div>
+        </div>
+        <div style="color: #F14336">
+            {{ implode('', $errors->get('name')) }}
         </div>
 
         <div class="flex-column">
@@ -29,16 +29,10 @@
         </div>
         <div class="inputForm">
             <input type="password" name="password" placeholder="Enter your Password" />
-            <div>
-                {{ implode('', $errors->get('password')) }}
-            </div>
         </div>
-        {{-- <div class="inputForm">
-            <input type="password" name="password_confirmation" placeholder="Enter your Password Confirmation" />
-            <div>
-                {{ implode('', $errors->get('password_confirmation')) }}
-            </div>
-        </div> --}}
+        <div style="color: #F14336">
+            {{ implode('', $errors->get('password')) }}
+        </div>
 
         <div class="flex-row">
             <label for="remember_me" class="">
@@ -53,7 +47,7 @@
                 </a>
             @endif
         </div>
-        <x-button style="margin-top: 1rem;" type="submit" class="btn-primary">Sign Up</x-button>
+        <x-button style="margin-top: 1rem;" type="submit" class="full-w btn-primary">Sign Up</x-button>
         <p style="margin: 6px;text-align: center;display: inline;">Already have an account?
             <a href="{{ route('login') }}" class="span">Login</a>
         </p>
@@ -64,7 +58,7 @@
         </div>
 
         <div class="flex-row">
-            <x-button class="btn btn-neutral ">
+            <x-button class="btn btn-neutral full-w">
                 <svg version="1.1" width="20" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
                     style="enable-background:new 0 0 512 512;" xml:space="preserve">
@@ -90,7 +84,7 @@
 
 
 
-            <x-button class="btn btn-neutral">
+            <x-button class="btn btn-neutral full-w">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="icon icon-tabler icons-tabler-outline icon-tabler-brand-github">

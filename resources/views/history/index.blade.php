@@ -1,3 +1,3 @@
 <x-app-layout>
-    {{ $theme }}
+    {{ $history }}
 </x-app-layout>
