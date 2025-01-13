@@ -49,7 +49,7 @@
                         </h4>
                         {{-- <h4>Published on: Date Here| {{ $author }}</h4> --}}
                         <p>
-                            {{ $article->content }}
+                                 {{ Str::limit($article->content, 250, '...') }}
                         </p>
                         <x-button href="#" class="btn-primary">
                             Read Article
@@ -61,6 +61,7 @@
         <div class="arrow left" onclick="prevSlide()">&#10094;</div>
         <div class="arrow right" onclick="nextSlide()">&#10095;</div>
     </div>
+    <script src="{{ asset('js/articles.js') }}"></script> 
 
 
     {{-- <div class="articles-layout">
@@ -100,6 +101,5 @@
                 <a href="/articles/6" class="read-article-button">Read Article</a>
             </div>
         </div>
-    </div>
-    <script src="{{ asset('js/articles.js') }}"></script> --}}
+    </div> --}}
 </x-app-layout>
