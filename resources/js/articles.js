@@ -1,7 +1,6 @@
 let slideIndex = 0;
 let autoSlideInterval;
 
-// Function to show the slides
 function showSlides() {
     const slides = document.querySelectorAll('.slide');
     slides.forEach((slide, index) => {
@@ -9,41 +8,52 @@ function showSlides() {
     });
 }
 
-// Next Slide
 function nextSlide() {
+    pauseAutoSlide(); // Pause the auto-slide during transition
     const slides = document.querySelectorAll('.slide');
     slideIndex = (slideIndex + 1) % slides.length;
     showSlides();
+    startAutoSlide(); // Restart the auto-slide
 }
 
-// Previous Slide
 function prevSlide() {
+    pauseAutoSlide(); // Pause the auto-slide during transition
     const slides = document.querySelectorAll('.slide');
     slideIndex = (slideIndex - 1 + slides.length) % slides.length;
     showSlides();
+    startAutoSlide(); // Restart the auto-slide
 }
 
-// Auto Slide
 function startAutoSlide() {
-    autoSlideInterval = setInterval(nextSlide, 10000); // Change slides every 5 seconds
+    console.log('Starting auto-slide...');
+    autoSlideInterval = setInterval(() => {
+        console.log('Auto-sliding to next slide...');
+        nextSlide();
+    }, 15000); // 10 seconds
 }
 
-// Pause Auto Slide
 function pauseAutoSlide() {
+    console.log('Pausing auto-slide...');
     clearInterval(autoSlideInterval);
 }
 
-// Attach event listeners
 document.addEventListener('DOMContentLoaded', () => {
-    // Start auto-sliding when the page loads
+    const slides = document.querySelectorAll('.slide');
+    if (slides.length === 0) {
+        console.error('No slides found.');
+        return;
+    }
+
     startAutoSlide();
 
-    // Event listeners for navigation arrows
-    document.querySelector('.arrow.left').addEventListener('click', prevSlide);
-    document.querySelector('.arrow.right').addEventListener('click', nextSlide);
+    const leftArrow = document.querySelector('.arrow.left');
+    const rightArrow = document.querySelector('.arrow.right');
+    if (leftArrow) leftArrow.addEventListener('click', prevSlide);
+    if (rightArrow) rightArrow.addEventListener('click', nextSlide);
 
-    // Pause auto-slide on hover
     const slideshowContainer = document.querySelector('.slideshow-container');
-    slideshowContainer.addEventListener('mouseenter', pauseAutoSlide);
-    slideshowContainer.addEventListener('mouseleave', startAutoSlide);
+    if (slideshowContainer) {
+        slideshowContainer.addEventListener('mouseenter', pauseAutoSlide);
+        slideshowContainer.addEventListener('mouseleave', startAutoSlide);
+    }
 });

@@ -1,0 +1,66 @@
+.themes-container {
+    display: flex; /* Enables Flexbox for horizontal alignment */
+    flex-wrap: wrap; /* Allows items to wrap to the next row if needed */
+    justify-content: center; /* Centers the cards horizontally */
+    gap: 20px; /* Adds spacing between the cards */
+    padding: 20px;
+    max-width: 1200px; /* Optional: Prevents stretching too far */
+    margin: 0 auto; /* Centers the container */
+}
+
+.theme-card {
+    background-color: var(--bg-color-n-1); /* Background color */
+    color: var(--font-color); /* Font color */
+    border: 2px solid var(--primary-color); /* Border color */
+    border-radius: var(--radius-l); /* Border radius */
+    width: 300px; /* Fixed width for all cards */
+    text-align: center;
+    display: flex;
+    flex-direction: column; /* Vertical stacking inside the card */
+    justify-content: space-between; /* Space out elements inside the card */
+    padding: 15px;
+    transition: transform 0.3s;
+}
+
+.theme-card:hover {
+    transform: scale(1.05);
+}
+
+.theme-card img {
+    width: 100%; /* Makes the image fit the card */
+    height: 200px; /* Fixed height for uniformity */
+    object-fit: cover; /* Ensures the image is cropped properly */
+    border-bottom: 2px solid var(--primary-color); /* Adds a border below the image */
+}
+
+.theme-card h2 {
+    font-family: 'Masthead, sans-serif';
+    font-size: 20px;
+    margin: 10px 0;
+    color: var(--font-color); /* Consistent font color */
+}
+
+.theme-card p {
+    font-size: 14px;
+    margin: 10px;
+    color: var(--divider-color); /* Slightly lighter color for descriptions */
+}
+
+.theme-card .btn-primary {
+    background-color: var(--primary-color); /* Primary button color */
+    color: var(--font-color); /* Font color */
+    border: none;
+    padding: 10px 15px;
+    border-radius: var(--radius-m); /* Rounded button edges */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: 10px; /* Adds space above the button */
+    align-self: center; /* Centers the button horizontally */
+}
+
+.theme-card .btn-primary:hover {
+    background-color: var(--primary-color); /* Keep consistent hover color */
+    opacity: 0.8; /* Hover effect with transparency */
+    transform: scale(1.1); /* Add slight zoom effect */
+}

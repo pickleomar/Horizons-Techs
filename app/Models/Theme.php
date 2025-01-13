@@ -27,8 +27,11 @@ class Theme extends Model
 
 
     /**
-     * Get the manager that owns the theme.
+     * Define a relationship: The manager that owns the theme.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
+
     public function manager()
     {
         return $this->belongsTo(User::class, "manager_id");
@@ -36,7 +39,9 @@ class Theme extends Model
 
 
     /**
-     * Get the articles for the theme.
+     * Define a relationship: Articles that belong to the theme.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function articles()
     {
@@ -46,7 +51,9 @@ class Theme extends Model
 
 
     /**
-     * Get the subscriptions for the theme.
+     * Define a relationship: Subscriptions that belong to the theme.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function subscriptions()
     {

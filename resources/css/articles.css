@@ -34,6 +34,8 @@
 }
 
 .featured-info p {
+    font-size: 14px;
+    margin: 10px;
     color: var(--divider-color);
 }
 
