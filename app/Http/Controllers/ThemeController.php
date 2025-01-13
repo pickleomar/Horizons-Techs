@@ -58,9 +58,4 @@ class ThemeController extends Controller
         $theme->delete();
         // return view();
     }
-    public function index()
-    {
-        $themes = Theme::all();
-        return view('themes.index', compact('themes'));
-    }
 }
