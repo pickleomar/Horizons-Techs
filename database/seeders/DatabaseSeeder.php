@@ -22,9 +22,9 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory(20)->create();
+        User::factory(5)->create();
         Theme::factory(10)->create();
-        Article::factory(30)->create();
+        Article::factory(10)->create();
         Rating::factory(20)->create();
         Chat::factory(10)->create();
         Subscription::factory(10)->create();
