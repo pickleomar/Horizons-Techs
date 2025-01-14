@@ -24,5 +24,6 @@
     --radius-m: 0.25rem;
     --radius-l: 0.5rem;
     --radius-xl: 1rem;
-
+    /* Related Dashboard */
+    --sidebar-width: 20rem;
 }
