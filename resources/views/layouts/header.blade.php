@@ -8,7 +8,7 @@
         <input type="text" placeholder="Search ...">
     </div>
     <nav>
-        <a href="{{ route('themes') }}">Themes</a>
+        <a href="{{ route('themes.index') }}">Themes</a>
         @guest
             <a href="{{ route('login') }}">Login</a>
             <a href="{{ route('register') }}">Register</a>
