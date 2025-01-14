@@ -128,7 +128,7 @@
 
 /* History Table */
 .history-container {
-    background: var(--bg-color-n-1);
+    background: var(--bg-color-n-3);
     padding: 1.5rem;
     border-radius: var(--radius-l);
     border: 1px solid var(--bg-color-n-2);
@@ -153,7 +153,7 @@
 }
 
 .history-table tbody tr:hover {
-    background: var(--bg-color);
+    background: var(--outline-color);
 }
 
 /* Badge */

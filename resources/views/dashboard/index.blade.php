@@ -27,17 +27,19 @@
             <div class="subscription-card">
                 <h3>Intelligence Artificielle</h3>
                 <div class="badge badge-warning">8 articles non lus</div>
-                <button class="button button-primary">Explorer</button>
+                <x-button class="btn-primary">Explorer</x-button>
             </div>
             <div class="subscription-card">
                 <h3>Cybersécurité</h3>
                 <div class="badge badge-warning">3 articles non lus</div>
-                <button class="button button-primary">Explorer</button>
+                <x-button class="btn-primary">Explorer</x-button>
+
             </div>
             <div class="subscription-card">
                 <h3>IoT</h3>
                 <div class="badge badge-primary">1 article non lu</div>
-                <button class="button button-primary">Explorer</button>
+                <x-button class="btn-primary">Explorer</x-button>
+
             </div>
         </div>
 
@@ -57,13 +59,17 @@
                         <td>L'avenir de l'IA générative</td>
                         <td>Marie Martin</td>
                         <td>14/01/2025</td>
-                        <td><button class="button">Voir</button></td>
+                        <td>
+                            <x-button size="sm" class="btn-secondary">Voir</x-button>
+                        </td>
                     </tr>
                     <tr>
                         <td>Sécurité des objets connectés</td>
                         <td>Paul Dubois</td>
                         <td>13/01/2025</td>
-                        <td><button class="button">Voir</button></td>
+                        <td>
+                            <x-button size="sm" class="btn-secondary">Voir</x-button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
