@@ -17,7 +17,7 @@ Route::post('/articles/create', [ArticleController::class, "store"])->middleware
 Route::get('/articles/{article}', [ArticleController::class, "show"]);
 
 // Themes Routes
-Route::get("/themes", [ThemeController::class, "index"])->middleware("role:editor")->name("themes.index");
+Route::get("/themes", [ThemeController::class, "index"])->middleware("role:user")->name("themes.index");
 Route::get("/themes/create", [ThemeController::class, "create"])->name("themes.create");
 Route::post("/themes/create", [ThemeController::class, "store"]);
 Route::get("/themes/{theme}", [ThemeController::class, "show"])->name("themes.show");

@@ -17,7 +17,7 @@ class RoleMiddleware
     public function handle(Request $request, Closure $next, $role): Response
     {
         // Check if the user is authenticated and has the required role
-        if (!Auth::check() || Auth::user()->role !== $role) {
+        if (!Auth::check() || Auth::user()->hasRole($role)) {
             abort(403, 'Unauthorized');
         }
 

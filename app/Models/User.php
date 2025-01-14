@@ -9,6 +9,15 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+
+    public const ROLE_HIERARCHY = [
+        'user' => 1,
+        'subscriber' => 2,
+        'admin' => 3,
+        'super-admin' => 4,
+    ];
+
+
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
@@ -134,5 +143,18 @@ class User extends Authenticatable
     public function isEditor()
     {
         return $this->role === 'editor';
+    }
+
+    /**
+     * Check if the user role
+     */
+
+
+    public function hasRole($role): bool
+    {
+        $userRoleLevel = self::ROLE_HIERARCHY[$this->role] ?? 0;
+        $requiredRoleLevel = self::ROLE_HIERARCHY[$role] ?? 0;
+
+        return $userRoleLevel >= $requiredRoleLevel;
     }
 }
