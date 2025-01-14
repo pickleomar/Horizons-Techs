@@ -6,11 +6,13 @@
     --tertiary-color: rgba(75, 98, 133, 1.0);
     --warning-color: rgba(154, 103, 0, 1.0);
     --danger-color: rgba(207, 34, 46, 1.0);
+    --outline-color: rgba(37, 44, 52, 1.0);
 
     /* Background Colors */
     --bg-color: rgba(1, 4, 9, 1.0);
     --bg-color-n-1: rgba(31, 35, 40, 1.0);
     --bg-color-n-2: rgba(89, 99, 110, 1.0);
+    --bg-color-n-3: rgba(21, 27, 35, 1.0);
 
 
     /* Font Color */
