@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        "role",
     ];
 
     /**
@@ -97,5 +98,41 @@ class User extends Authenticatable
     public function chats()
     {
         return $this->hasMany(Chat::class);
+    }
+
+
+    /**
+     * Check if the user is user
+     */
+    public function isUser()
+    {
+        return $this->role === 'user';
+    }
+
+    /**
+     * Check if the user is Subscriber
+     */
+
+    public function isSubscriber()
+    {
+        return $this->role === 'subscriber';
+    }
+
+    /**
+     * Check if the user is Admin
+     */
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    /**
+     * Check if the user is Super Admin
+     */
+
+    public function isEditor()
+    {
+        return $this->role === 'editor';
     }
 }
