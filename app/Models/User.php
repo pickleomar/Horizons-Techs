@@ -9,6 +9,15 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+
+    public const ROLE_HIERARCHY = [
+        'user' => 1,
+        'subscriber' => 2,
+        'admin' => 3,
+        'super-admin' => 4,
+    ];
+
+
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
@@ -21,6 +30,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        "role",
     ];
 
     /**
@@ -97,5 +107,54 @@ class User extends Authenticatable
     public function chats()
     {
         return $this->hasMany(Chat::class);
+    }
+
+
+    /**
+     * Check if the user is user
+     */
+    public function isUser()
+    {
+        return $this->role === 'user';
+    }
+
+    /**
+     * Check if the user is Subscriber
+     */
+
+    public function isSubscriber()
+    {
+        return $this->role === 'subscriber';
+    }
+
+    /**
+     * Check if the user is Admin
+     */
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    /**
+     * Check if the user is Super Admin
+     */
+
+    public function isEditor()
+    {
+        return $this->role === 'editor';
+    }
+
+    /**
+     * Check if the user role
+     */
+
+
+    public function hasRole($role): bool
+    {
+        $userRoleLevel = self::ROLE_HIERARCHY[$this->role] ?? 0;
+        $requiredRoleLevel = self::ROLE_HIERARCHY[$role] ?? 0;
+
+        return $userRoleLevel >= $requiredRoleLevel;
     }
 }
