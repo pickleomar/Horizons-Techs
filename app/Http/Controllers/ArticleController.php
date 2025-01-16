@@ -35,7 +35,7 @@ class ArticleController extends Controller
     /**
      * Store a newly created article in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Theme $theme)
     {
         $request->validate([
             'title' => 'required|max:255',
@@ -43,7 +43,6 @@ class ArticleController extends Controller
             'theme_id' => 'required|exists:themes,id',
             'image' => 'nullable|url',
         ]);
-
 
         Article::create(array_merge($request->all(), ["author_id" => $request->user()->id]));
 

@@ -13,8 +13,7 @@ Route::get('/', function () {
 
 // Articles Routes
 Route::get('/articles', [ArticleController::class, "index"])->middleware(["auth", "verified", "role:admin"])->name('articles.index');
-Route::get('/articles/create', [ArticleController::class, "create"])->middleware(["auth", "verified"])->name('article.create');
-Route::post('/articles/create', [ArticleController::class, "store"])->middleware(["auth", "verified"]);
+
 Route::get('/articles/{article}', [ArticleController::class, "show"]);
 
 // Themes Routes
@@ -23,10 +22,8 @@ Route::get("/themes/create", [ThemeController::class, "create"])->name("themes.c
 Route::post("/themes/create", [ThemeController::class, "store"]);
 Route::get("/themes/{theme}", [ThemeController::class, "show"])->name("themes.show");
 
-
-// Retrieve History Based on the USER
-Route::get("/history", [HistoryController::class, "index"])->name("history");
-
+Route::get('themes/{theme}/articles/create', [ArticleController::class, "create"])->middleware(["auth", "verified"])->name('article.create');
+Route::post('themes/{theme}/articles/create', [ArticleController::class, "store"])->middleware(["auth", "verified"]);
 
 //
 Route::get('/dashboard', function () {
