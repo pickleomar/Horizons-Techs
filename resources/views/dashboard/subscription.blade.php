@@ -12,9 +12,9 @@
                 <p>Explore the latest in AI technology and machine learning advancements.</p>
                 <div class="subscription-action">
 
-                    <x-button class="btn-primary full-w"> Unsubscribe</x-button>
+                    <x-button class="btn-primary  full-w"> Details</x-button>
+                    <x-button class="btn-warning outline full-w"> Unsubscribe</x-button>
 
-                    <x-button class="btn-danger full-w"> Details</x-button>
                 </div>
             </div>
             <div class="theme-card">
@@ -22,9 +22,9 @@
                 <p>Explore the latest in AI technology and machine learning advancements.</p>
                 <div class="subscription-action">
 
-                    <x-button class="btn-primary full-w"> Unsubscribe</x-button>
+                    <x-button class="btn-primary  full-w"> Details</x-button>
+                    <x-button class="btn-warning outline full-w"> Unsubscribe</x-button>
 
-                    <x-button class="btn-danger full-w"> Details</x-button>
                 </div>
             </div>
             <div class="theme-card">
@@ -32,9 +32,9 @@
                 <p>Explore the latest in AI technology and machine learning advancements.</p>
                 <div class="subscription-action">
 
-                    <x-button class="btn-primary full-w"> Unsubscribe</x-button>
+                    <x-button class="btn-primary  full-w"> Details</x-button>
+                    <x-button class="btn-warning outline full-w"> Unsubscribe</x-button>
 
-                    <x-button class="btn-danger full-w"> Details</x-button>
                 </div>
             </div>
             <div class="theme-card">
@@ -42,9 +42,20 @@
                 <p>Explore the latest in AI technology and machine learning advancements.</p>
                 <div class="subscription-action">
 
-                    <x-button class="btn-primary full-w"> Unsubscribe</x-button>
+                    <x-button class="btn-primary  full-w"> Details</x-button>
+                    <x-button class="btn-warning outline full-w"> Unsubscribe</x-button>
 
-                    <x-button class="btn-danger full-w"> Details</x-button>
+                </div>
+            </div>
+
+            <div class="theme-card">
+                <h2>Artificial Intelligence</h2>
+                <p>Explore the latest in AI technology and machine learning advancements.</p>
+                <div class="subscription-action">
+
+                    <x-button class="btn-primary  full-w"> Details</x-button>
+                    <x-button class="btn-warning outline full-w"> Unsubscribe</x-button>
+
                 </div>
             </div>
             <div class="theme-card">
@@ -52,19 +63,9 @@
                 <p>Explore the latest in AI technology and machine learning advancements.</p>
                 <div class="subscription-action">
 
-                    <x-button class="btn-primary full-w"> Unsubscribe</x-button>
+                    <x-button class="btn-primary  full-w"> Details</x-button>
+                    <x-button class="btn-warning outline full-w"> Unsubscribe</x-button>
 
-                    <x-button class="btn-danger full-w"> Details</x-button>
-                </div>
-            </div>
-            <div class="theme-card">
-                <h2>Artificial Intelligence</h2>
-                <p>Explore the latest in AI technology and machine learning advancements.</p>
-                <div class="subscription-action">
-
-                    <x-button class="btn-primary full-w"> Unsubscribe</x-button>
-
-                    <x-button class="btn-danger full-w"> Details</x-button>
                 </div>
             </div>
         </section>

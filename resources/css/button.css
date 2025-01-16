@@ -36,11 +36,20 @@
 }
 
 
+.outline {
+    background-color: transparent !important;
+    border-color: var(--button-color) !important;
+}
 
+.outline:hover {
+    background-color: var(--button-color) !important;
+    color: white !important;
+}
 
 /* Button Primary Start here */
 .btn-primary {
-    background-color: var(--primary-color);
+    --button-color: var(--primary-color);
+    background-color: var(--button-color);
     color: white;
 }
 
@@ -55,7 +64,8 @@
 /* Button Secondary Start  here */
 
 .btn-secondary {
-    background-color: var(--secondary-color);
+    --button-color: var(--secondary-color);
+    background-color: var(--button-color);
     color: white;
 }
 
@@ -70,7 +80,8 @@
 /* Button Danger Start here */
 
 .btn-danger {
-    background-color: var(--danger-color);
+    --button-color: var(--danger-color);
+    background-color: var(--button-color);
     color: white;
 }
 
@@ -87,7 +98,8 @@
 /* Button Warning Start here */
 
 .btn-warning {
-    background-color: var(--warning-color);
+    --button-color: var(--warning-color);
+    background-color: var(--button-color);
     color: white;
 }
 
@@ -103,7 +115,8 @@
 
 
 .btn-neutral {
-    background-color: var(--bg-color);
+    --button-color: var(--bg-color);
+    background-color: var(--button-color);
     color: white;
 }
 
