@@ -17,7 +17,6 @@
     text-decoration: none;
     vertical-align: middle;
     white-space: nowrap;
-    transition: transform 0.05s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .full-w {
@@ -37,11 +36,20 @@
 }
 
 
+.outline {
+    background-color: transparent !important;
+    border-color: var(--button-color) !important;
+}
 
+.outline:hover {
+    background-color: var(--button-color) !important;
+    color: white !important;
+}
 
 /* Button Primary Start here */
 .btn-primary {
-    background-color: var(--primary-color);
+    --button-color: var(--primary-color);
+    background-color: var(--button-color);
     color: white;
 }
 
@@ -51,13 +59,13 @@
 
 .btn-primary:active {
     background-color: rgba(31, 136, 61, 0.85);
-    transform: scale(95%);
 }
 
 /* Button Secondary Start  here */
 
 .btn-secondary {
-    background-color: var(--secondary-color);
+    --button-color: var(--secondary-color);
+    background-color: var(--button-color);
     color: white;
 }
 
@@ -67,13 +75,13 @@
 
 .btn-secondary:active {
     background-color: rgba(9, 105, 218, 0.85);
-    transform: scale(95%);
 }
 
 /* Button Danger Start here */
 
 .btn-danger {
-    background-color: var(--danger-color);
+    --button-color: var(--danger-color);
+    background-color: var(--button-color);
     color: white;
 }
 
@@ -83,7 +91,6 @@
 
 .btn-danger:active {
     background-color: rgba(207, 34, 46, 0.85);
-    transform: scale(95%);
 }
 
 
@@ -91,7 +98,8 @@
 /* Button Warning Start here */
 
 .btn-warning {
-    background-color: var(--warning-color);
+    --button-color: var(--warning-color);
+    background-color: var(--button-color);
     color: white;
 }
 
@@ -101,14 +109,14 @@
 
 .btn-warning:active {
     background-color: rgba(154, 103, 0, 0.85);
-    transform: scale(95%);
 }
 
 /* Button Neutral Start here */
 
 
 .btn-neutral {
-    background-color: var(--bg-color);
+    --button-color: var(--bg-color);
+    background-color: var(--button-color);
     color: white;
 }
 

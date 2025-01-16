@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ThemeController;
@@ -24,11 +25,23 @@ Route::get("/themes/{theme}", [ThemeController::class, "show"])->name("themes.sh
 
 
 // Retrieve History Based on the USER
-Route::get("history", [HistoryController::class, "index"])->name("history");
+Route::get("/history", [HistoryController::class, "index"])->name("history");
 
+
+//
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+//
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/dashboard/subscription', [DashboardController::class, 'subscription'])->name('dashboard.subscription');
+    Route::get('/dashboard/history', [DashboardController::class, 'history'])->name('dashboard.history');
+});
+
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
