@@ -74,38 +74,6 @@
                 </tbody>
             </table>
         </div>
-
-        <script>
-            // Navigation active state
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.addEventListener('click', (e) => {
-                    document.querySelector('.nav-item.active')?.classList.remove('active');
-                    item.classList.add('active');
-                });
-            });
-
-            // Simple notification system
-            let notifications = [];
-
-            function addNotification(message) {
-                notifications.push({
-                    id: Date.now(),
-                    message,
-                    read: false
-                });
-                updateNotificationCount();
-            }
-
-            function updateNotificationCount() {
-                const unreadCount = notifications.filter(n => !n.read).length;
-                document.querySelector('.stat-card:nth-child(3) .stat-number').textContent = unreadCount;
-            }
-
-            // Example usage
-            setTimeout(() => {
-                addNotification('Nouvel article disponible dans Intelligence Artificielle');
-            }, 3000);
-        </script>
     </section>
 
 </x-dashboard-layout>
