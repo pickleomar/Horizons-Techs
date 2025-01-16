@@ -5,13 +5,14 @@
         </a>
 
 
-        <a href="{{ route('dashboard.index') }}" class="nav-item active">
+        <a href="{{ route('dashboard.index') }}" class="nav-item {{ request()->is('dashboard') ? 'active' : '' }}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
             </svg>
             <span>Dashboard</span>
         </a>
-        <a href="{{ route('dashboard.subscription') }}" class="nav-item">
+        <a href="{{ route('dashboard.subscription') }}"
+            class="nav-item {{ request()->is('dashboard/subscription') ? 'active' : '' }}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                 <path d="M22 6l-10 7L2 6"></path>
@@ -25,7 +26,8 @@
             </svg>
             <span>Proposer un Article</span>
         </a>
-        <a href="{{ route('dashboard.history') }}" class="nav-item">
+        <a href="{{ route('dashboard.history') }}"
+            class="nav-item {{ request()->is('dashboard/history') ? 'active' : '' }}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
