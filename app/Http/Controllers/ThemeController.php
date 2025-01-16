@@ -23,9 +23,19 @@ class ThemeController extends Controller
         $request->validate([
             'name' => 'required|unique:themes',
             'description' => 'nullable|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $theme = Theme::create(array_merge($request->all(), ["manager_id" => $request->user()->id]));
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('images'), $imageName);
+        $theme = new Theme();
+
+        $theme->name = $request->name;
+        $theme->manager_id = $request->user()->id;
+        $theme->description = $request->description;
+        $theme->image = "images/$imageName";
+
+        $theme->save();
 
         return redirect()->route('themes.show', ["theme" => $theme->id])
             ->with('success', 'Article created successfully and is now under review.');
