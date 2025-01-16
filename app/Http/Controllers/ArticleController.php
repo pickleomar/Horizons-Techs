@@ -12,24 +12,24 @@ class ArticleController extends Controller
     /**
      * Display a listing of the articles.
      */
-    public function index()
+    public function index(Theme $theme)
     {
         $user = Auth::user();
 
-        // TODO THIS FEATURE ISN'T IMPLEMENTED YET
-        // Filter articles based on user role
+        // TODO THIS FEATURE ISN'T IMPLEMENTED YET : Filtering
 
-        $articles = Article::all();
+        $articles = $theme->articles;
+
         return view('articles.index', compact('articles'));
     }
 
     /**
      * Show the form for creating a new article.
      */
-    public function create()
+    public function create(Theme $theme)
     {
-        $themes = Theme::all();   //TODO Remove later , linked automaticly
-        return view('articles.create', compact('themes'));
+
+        return view('articles.create', compact('theme'));
     }
 
     /**
@@ -40,22 +40,24 @@ class ArticleController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'content' => 'required',
-            'theme_id' => 'required|exists:themes,id',
-            'image' => 'nullable|url',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        Article::create(array_merge($request->all(), ["author_id" => $request->user()->id]));
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('images'), $imageName);
+        $article = new Article();
 
-        /*Article::create([
-            'title' => $request->title,
-            'content' => $request->content,
-            'image' => $request->image,
-            'theme_id' => $request->theme_id,
-            'author_id' => $request->user()->id,
-            'status' => 'Pending', // Default status for new articles
-        ]);*/
+        $article->title = $request->title;
+        $article->content = $request->content;
+        $article->image = "images/$imageName";
+        $article->author_id = Auth::user()->id;
+        $article->theme_id = $theme->id;
+        $article->status = "Pending";
 
-        return redirect()->route('articles.index')
+        $article->save();
+
+
+        return redirect()->route('articles.index', ["theme" => $theme->id])
             ->with('success', 'Article created successfully and is now under review.');
     }
 

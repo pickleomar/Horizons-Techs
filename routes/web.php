@@ -12,7 +12,7 @@ Route::get('/', function () {
 });
 
 // Articles Routes
-Route::get('/articles', [ArticleController::class, "index"])->middleware(["auth", "verified", "role:admin"])->name('articles.index');
+// Route::get('/articles', [ArticleController::class, "index"])->middleware(["auth", "verified", "role:admin"])->name('articles.index');
 
 Route::get('/articles/{article}', [ArticleController::class, "show"]);
 
@@ -22,6 +22,7 @@ Route::get("/themes/create", [ThemeController::class, "create"])->name("themes.c
 Route::post("/themes/create", [ThemeController::class, "store"]);
 Route::get("/themes/{theme}", [ThemeController::class, "show"])->name("themes.show");
 
+Route::get('themes/{theme}/articles', [ArticleController::class, "index"])->middleware(["auth", "verified"])->name('articles.index');
 Route::get('themes/{theme}/articles/create', [ArticleController::class, "create"])->middleware(["auth", "verified"])->name('article.create');
 Route::post('themes/{theme}/articles/create', [ArticleController::class, "store"])->middleware(["auth", "verified"]);
 

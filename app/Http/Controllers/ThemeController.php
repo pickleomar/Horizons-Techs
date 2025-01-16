@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Theme;
+use Illuminate\Support\Facades\Auth;
+
 
 class ThemeController extends Controller
 {
@@ -31,7 +33,7 @@ class ThemeController extends Controller
         $theme = new Theme();
 
         $theme->name = $request->name;
-        $theme->manager_id = $request->user()->id;
+        $theme->manager_id = Auth::user()->id;
         $theme->description = $request->description;
         $theme->image = "images/$imageName";
 
