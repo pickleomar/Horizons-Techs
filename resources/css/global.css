@@ -21,3 +21,45 @@ body {
     width: 100%;
     height: 100%;
 }
+
+
+
+
+
+/* Global Animation */
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+
+
+
+/* Toast */
+
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background-color: var(--primary-color);
+    color: var(--font-color);
+    padding: 1rem;
+    border-radius: var(--radius-m);
+    animation: slideIn 0.3s ease, fadeOut 0.3s ease 4.7s;
+}
