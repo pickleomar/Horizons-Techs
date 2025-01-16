@@ -17,7 +17,6 @@
     text-decoration: none;
     vertical-align: middle;
     white-space: nowrap;
-    transition: transform 0.05s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .full-w {
@@ -51,7 +50,6 @@
 
 .btn-primary:active {
     background-color: rgba(31, 136, 61, 0.85);
-    transform: scale(95%);
 }
 
 /* Button Secondary Start  here */
@@ -67,7 +65,6 @@
 
 .btn-secondary:active {
     background-color: rgba(9, 105, 218, 0.85);
-    transform: scale(95%);
 }
 
 /* Button Danger Start here */
@@ -83,7 +80,6 @@
 
 .btn-danger:active {
     background-color: rgba(207, 34, 46, 0.85);
-    transform: scale(95%);
 }
 
 
@@ -101,7 +97,6 @@
 
 .btn-warning:active {
     background-color: rgba(154, 103, 0, 0.85);
-    transform: scale(95%);
 }
 
 /* Button Neutral Start here */
