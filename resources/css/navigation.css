@@ -1,12 +1,13 @@
 .header-container {
     height: 72px;
+    background-color: var(--bg-color-n-4);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 0 10%;
     border-bottom: 1px solid var(--bg-color-n-1);
-    box-shadow: 0 5px 8px rgb(20, 20, 20);
+    /* box-shadow: 0 5px 8px rgb(20, 20, 20); */
 }
 
 
