@@ -49,14 +49,16 @@ class ThemeController extends Controller
         $user = Auth::user();
         $theme = Theme::findOrFail($id);
 
-        if ($user->role == "user") {
-            $articles = Article::where('theme_id', $id)
-                ->where('public', 1)
-                ->get();
-        } else if ($user->role == "subscriber" || ($user->role == "admin" && $theme->manager_id == $user->id) || $user->role == "editor") {
-            // TODO Configure this To check if the user is subscribed to the theme
-            $articles = $theme->articles;
-        }
+        // if ($user->role == "user") {
+        //     $articles = Article::where('theme_id', $id)
+        //         ->where('public', 1)
+        //         ->get();
+        // } else if ($user->role == "subscriber" || ($user->role == "admin" && $theme->manager_id == $user->id) || $user->role == "editor") {
+        //     // TODO Configure this To check if the user is subscribed to the theme
+        //     $articles = $theme->articles;
+        // }
+
+        $articles = $theme->articles;
 
         return view("themes.show", compact("theme", "articles"));
     }
