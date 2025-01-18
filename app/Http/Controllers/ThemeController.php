@@ -78,10 +78,12 @@ class ThemeController extends Controller
 
     }
 
-    public function destroy($id)
+    public function destroy(Theme $theme)
     {
-        $theme = Theme::findOrFail($id);
+        // TODO Check Permission
         $theme->delete();
-        // return view();
+
+        // Return the the Themes Page
+        return $this->index();
     }
 }
