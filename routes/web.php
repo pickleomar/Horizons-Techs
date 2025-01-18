@@ -20,8 +20,12 @@ Route::get('/articles/{article}', [ArticleController::class, "show"]);
 Route::get("/themes", [ThemeController::class, "index"])->name("themes.index");
 Route::get("/themes/create", [ThemeController::class, "create"])->name("themes.create");
 Route::post("/themes/create", [ThemeController::class, "store"]);
-Route::get("/themes/{theme}", [ThemeController::class, "show"])->name("themes.show");
 
+// View Theme
+Route::get("/themes/{theme}", [ThemeController::class, "show"])->name("themes.show");
+// Delete Themes
+Route::delete("/themes/{theme}", [ThemeController::class, "destroy"])->name("themes.destroy");
+// View Theme Articles
 Route::get('themes/{theme}/articles', [ArticleController::class, "index"])->middleware(["auth", "verified"])->name('articles.index');
 Route::get('themes/{theme}/articles/create', [ArticleController::class, "create"])->middleware(["auth", "verified"])->name('article.create');
 Route::post('themes/{theme}/articles/create', [ArticleController::class, "store"])->middleware(["auth", "verified"]);
