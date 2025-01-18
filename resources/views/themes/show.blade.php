@@ -1,7 +1,18 @@
 <x-app-layout>
-    {{ $theme }}
+    <pre>
+
+        {{ $theme }}
+    </pre>
     Related Articles
-    {{ $theme->articles }}
+
+    @foreach ($articles as $article)
+        <pre>
+            <span> Theme id {{ $article->theme_id }} </span> <br>
+            <span> Title {{ $article->title }} </span> <br>
+            <span> Public = {{ $article->public }} </span> <br>
+        </pre>
+    @endforeach
+    {{-- {{ $articles }} --}}
 
     <div>
 
