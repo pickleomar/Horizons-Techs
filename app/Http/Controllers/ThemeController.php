@@ -6,25 +6,26 @@ use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Models\Theme;
 use App\Repositories\ThemeRepositoryInterface;
+use App\Services\ThemeServiceInterface;
 use Illuminate\Support\Facades\Auth;
 
 
 class ThemeController extends Controller
 {
 
-    protected $themeRepository;
+    protected $themeService;
 
 
-    public function __construct(ThemeRepositoryInterface $themeRepository)
+    public function __construct(ThemeServiceInterface $themeService)
     {
-        $this->themeRepository = $themeRepository;
+        $this->themeService = $themeService;
     }
 
 
 
     public function index()
     {
-        $themes = $this->themeRepository->all();
+        $themes = $this->themeService->getAllThemes();
         return view("themes.index", compact("themes"));
     }
 
@@ -51,7 +52,7 @@ class ThemeController extends Controller
             "image" => "images/$imageName"
         ];
 
-        $theme = $this->themeRepository->create($data);
+        $theme = $this->themeService->createTheme($data);
 
         return redirect()->route('themes.show', ["theme" => $theme->id])
             ->with('success', 'Article created successfully and is now under review.');
@@ -68,7 +69,7 @@ class ThemeController extends Controller
         //     // TODO Configure this To check if the user is subscribed to the theme
         //     $articles = $theme->articles;
         // }
-        $theme = $this->themeRepository->find($id);
+        $theme = $this->themeService->getThemeById($id);
 
         $articles = $theme->articles;
 
@@ -93,7 +94,7 @@ class ThemeController extends Controller
     public function destroy($id)
     {
         // TODO Check Permission
-        $this->themeRepository->delete($id);
+        $this->themeService->deleteTheme($id);
         // Return the the Themes Page
         return $this->index();
     }
