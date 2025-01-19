@@ -5,14 +5,26 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Models\Theme;
+use App\Repositories\ThemeRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 
 
 class ThemeController extends Controller
 {
+
+    protected $themeRepository;
+
+
+    public function __construct(ThemeRepositoryInterface $themeRepository)
+    {
+        $this->themeRepository = $themeRepository;
+    }
+
+
+
     public function index()
     {
-        $themes = Theme::all();
+        $themes = $this->themeRepository->all();
         return view("themes.index", compact("themes"));
     }
 
@@ -31,14 +43,15 @@ class ThemeController extends Controller
 
         $imageName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('images'), $imageName);
-        $theme = new Theme();
 
-        $theme->name = $request->name;
-        $theme->manager_id = Auth::user()->id;
-        $theme->description = $request->description;
-        $theme->image = "images/$imageName";
+        $data = [
+            "name" => $request->name,
+            "manager_id" => Auth::user()->id,
+            "description" => $request->description,
+            "image" => "images/$imageName"
+        ];
 
-        $theme->save();
+        $theme = $this->themeRepository->create($data);
 
         return redirect()->route('themes.show', ["theme" => $theme->id])
             ->with('success', 'Article created successfully and is now under review.');
@@ -46,8 +59,6 @@ class ThemeController extends Controller
 
     public function show($id)
     {
-        $user = Auth::user();
-        $theme = Theme::findOrFail($id);
 
         // if ($user->role == "user") {
         //     $articles = Article::where('theme_id', $id)
@@ -57,6 +68,7 @@ class ThemeController extends Controller
         //     // TODO Configure this To check if the user is subscribed to the theme
         //     $articles = $theme->articles;
         // }
+        $theme = $this->themeRepository->find($id);
 
         $articles = $theme->articles;
 
@@ -78,11 +90,10 @@ class ThemeController extends Controller
 
     }
 
-    public function destroy(Theme $theme)
+    public function destroy($id)
     {
         // TODO Check Permission
-        $theme->delete();
-
+        $this->themeRepository->delete($id);
         // Return the the Themes Page
         return $this->index();
     }
