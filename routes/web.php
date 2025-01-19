@@ -24,7 +24,7 @@ Route::post("/themes/create", [ThemeController::class, "store"]);
 // View Theme
 Route::get("/themes/{theme}", [ThemeController::class, "show"])->name("themes.show");
 // Delete Themes
-Route::delete("/themes/{theme}", [ThemeController::class, "destroy"])->name("themes.destroy");
+Route::delete("/themes/{id}", [ThemeController::class, "destroy"])->name("themes.destroy");
 // View Theme Articles
 Route::get('themes/{theme}/articles', [ArticleController::class, "index"])->middleware(["auth", "verified"])->name('articles.index');
 Route::get('themes/{theme}/articles/create', [ArticleController::class, "create"])->middleware(["auth", "verified"])->name('article.create');

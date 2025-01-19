@@ -5,10 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Models\Theme;
+use App\Services\ArticleServiceInterface;
 use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
+
+    protected $articleService;
+
+    public function __construct(ArticleServiceInterface $articleService)
+    {
+        $this->articleService = $articleService;
+    }
     /**
      * Display a listing of the articles.
      */
@@ -45,17 +53,19 @@ class ArticleController extends Controller
 
         $imageName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('images'), $imageName);
-        $article = new Article();
 
-        $article->title = $request->title;
-        $article->content = $request->content;
-        $article->image = "images/$imageName";
-        $article->author_id = Auth::user()->id;
-        $article->theme_id = $theme->id;
-        $article->status = "Pending";
 
-        $article->save();
+        $data = [
+            "title" => $request->title,
+            "content" => $request->content,
+            "image" => "images/$imageName",
+            "author_id" => Auth::user()->id,
+            "theme_id" => $theme->id,
+            "status" => "Pending"
+        ];
 
+
+        $this->articleService->createArticle($data);
 
         return redirect()->route('articles.index', ["theme" => $theme->id])
             ->with('success', 'Article created successfully and is now under review.');
@@ -84,18 +94,6 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        /*
-        $this->authorize('update', $article);
-
-        $request->validate([
-            'title' => 'required|max:255',
-            'content' => 'required',
-            'theme_id' => 'required|exists:themes,id',
-            'image' => 'nullable|url',
-        ]);
-
-        $article->update($request->only('title', 'content', 'theme_id', 'image', 'status'));
-        */
         $request->validate([
             'title' => 'required',
             'content' => 'required',
@@ -109,10 +107,9 @@ class ArticleController extends Controller
     /**
      * Remove the specified article from storage.
      */
-    public function destroy(Article $article)
+    public function destroy($id)
     {
-        /* $this->authorize('delete', $article); */
-        $article->delete();
+        $this->articleService->deleteArticle($id);
 
         return redirect()->route('articles.index')
             ->with('success', 'Article deleted successfully.');

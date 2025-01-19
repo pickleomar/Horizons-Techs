@@ -23,6 +23,7 @@ class Theme extends Model
         'name',
         'description',
         'manager_id',
+        "image",
     ];
 
 
