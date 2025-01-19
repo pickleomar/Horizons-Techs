@@ -1,5 +1,5 @@
 <x-app-layout>
-    <form method="POST" action="{{ route('article.create') }}">
+    <form method="POST" action="{{ route('article.create', ['theme' => $theme->id]) }}" enctype="multipart/form-data">
         @csrf
 
 
@@ -14,13 +14,6 @@
         <input type="file" name="image" accept="image/png, image/jpeg"><br>
 
 
-
-        <label for="">Theme</label><br>
-        <select name="theme_id" id="">
-            @foreach ($themes as $theme)
-                <option value="{{ $theme->id }}">{{ $theme->name }}</option>
-            @endforeach
-        </select><br>
 
         <button type="submit">
             Submit
