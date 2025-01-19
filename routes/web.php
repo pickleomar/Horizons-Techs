@@ -6,6 +6,7 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ThemeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SubscriptionController;
 
 Route::get('/', function () {
     return view('home');
@@ -38,6 +39,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/dashboard/subscription', [DashboardController::class, 'subscription'])->name('dashboard.subscription');
     Route::get('/dashboard/history', [DashboardController::class, 'history'])->name('dashboard.history');
+    Route::get('/dashboard/subscription', [SubscriptionController::class, 'index'])->name('dashboard.subscription');
+    Route::delete('/dashboard/subscription/{id}', [SubscriptionController::class, 'destroy'])->name('subscription.destroy');
+    //for superadmins to create subs
+    Route::get('/subscription/create', [SubscriptionController::class, 'create'])->name('subscription.create'); 
+    Route::post('/subscription', [SubscriptionController::class, 'store'])->name('subscription.store');
 });
 
 

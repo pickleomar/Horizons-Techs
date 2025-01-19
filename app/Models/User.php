@@ -85,7 +85,7 @@ class User extends Authenticatable
     /**
      * Get the subscriptions for the user.
      */
-    public function subscriptions()
+    public function subscription()
     {
         return $this->hasMany(Subscription::class);
     }
