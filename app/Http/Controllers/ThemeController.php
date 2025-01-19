@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Models\Theme;
+use Illuminate\Support\Facades\Auth;
+
 
 class ThemeController extends Controller
 {
@@ -31,7 +34,7 @@ class ThemeController extends Controller
         $theme = new Theme();
 
         $theme->name = $request->name;
-        $theme->manager_id = $request->user()->id;
+        $theme->manager_id = Auth::user()->id;
         $theme->description = $request->description;
         $theme->image = "images/$imageName";
 
@@ -43,8 +46,21 @@ class ThemeController extends Controller
 
     public function show($id)
     {
+        $user = Auth::user();
         $theme = Theme::findOrFail($id);
-        return view("themes.show", compact("theme"));
+
+        // if ($user->role == "user") {
+        //     $articles = Article::where('theme_id', $id)
+        //         ->where('public', 1)
+        //         ->get();
+        // } else if ($user->role == "subscriber" || ($user->role == "admin" && $theme->manager_id == $user->id) || $user->role == "editor") {
+        //     // TODO Configure this To check if the user is subscribed to the theme
+        //     $articles = $theme->articles;
+        // }
+
+        $articles = $theme->articles;
+
+        return view("themes.show", compact("theme", "articles"));
     }
 
     public function update(Request $request, $id)
@@ -62,10 +78,12 @@ class ThemeController extends Controller
 
     }
 
-    public function destroy($id)
+    public function destroy(Theme $theme)
     {
-        $theme = Theme::findOrFail($id);
+        // TODO Check Permission
         $theme->delete();
-        // return view();
+
+        // Return the the Themes Page
+        return $this->index();
     }
 }

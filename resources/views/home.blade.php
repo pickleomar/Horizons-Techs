@@ -6,7 +6,7 @@
             <br>
             <span style="font-size: 1rem;font-weight: 700;margin:1rem 0">Explore the new tech update</span>
             <div style="display: flex;gap: 2rem;margin:1rem 0;">
-                <x-button size="lg" style="" class="btn-primary" :href="route('articles.index')">Start Reading </x-button>
+                <x-button size="lg" style="" class="btn-primary" href="#">Start Reading </x-button>
                 <x-button size="lg" style="" class="btn-primary">Subscribe</x-button>
             </div>
         </div>

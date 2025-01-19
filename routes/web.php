@@ -12,21 +12,23 @@ Route::get('/', function () {
 });
 
 // Articles Routes
-Route::get('/articles', [ArticleController::class, "index"])->middleware(["auth", "verified", "role:admin"])->name('articles.index');
-Route::get('/articles/create', [ArticleController::class, "create"])->middleware(["auth", "verified"])->name('article.create');
-Route::post('/articles/create', [ArticleController::class, "store"])->middleware(["auth", "verified"]);
+// Route::get('/articles', [ArticleController::class, "index"])->middleware(["auth", "verified", "role:admin"])->name('articles.index');
+
 Route::get('/articles/{article}', [ArticleController::class, "show"]);
 
 // Themes Routes
-Route::get("/themes", [ThemeController::class, "index"])->middleware("role:user")->name("themes.index");
+Route::get("/themes", [ThemeController::class, "index"])->name("themes.index");
 Route::get("/themes/create", [ThemeController::class, "create"])->name("themes.create");
 Route::post("/themes/create", [ThemeController::class, "store"]);
+
+// View Theme
 Route::get("/themes/{theme}", [ThemeController::class, "show"])->name("themes.show");
-
-
-// Retrieve History Based on the USER
-Route::get("/history", [HistoryController::class, "index"])->name("history");
-
+// Delete Themes
+Route::delete("/themes/{theme}", [ThemeController::class, "destroy"])->name("themes.destroy");
+// View Theme Articles
+Route::get('themes/{theme}/articles', [ArticleController::class, "index"])->middleware(["auth", "verified"])->name('articles.index');
+Route::get('themes/{theme}/articles/create', [ArticleController::class, "create"])->middleware(["auth", "verified"])->name('article.create');
+Route::post('themes/{theme}/articles/create', [ArticleController::class, "store"])->middleware(["auth", "verified"]);
 
 //
 Route::get('/dashboard', function () {

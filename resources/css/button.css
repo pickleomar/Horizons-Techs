@@ -24,6 +24,10 @@
 
 }
 
+.fit-w {
+    width: fit-content;
+}
+
 .btn:focus:not(:focus-visible):not(.focus-visible) {
     box-shadow: none;
     outline: none;
