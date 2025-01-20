@@ -5,10 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Subscription;
 use App\Models\Theme;
+use App\Services\SubscriptionServiceInterface;
 use Illuminate\Support\Facades\Auth;
 
 class SubscriptionController extends Controller
 {
+
+    protected $subscriptionService;
+
+    public function __construct(SubscriptionServiceInterface $subscriptionService)
+    {
+        $this->subscriptionService = $subscriptionService;
+    }
+
+
     //Displays a list of users subscriptions
     public function index()
     {
