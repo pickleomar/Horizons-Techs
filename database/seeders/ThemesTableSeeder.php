@@ -19,7 +19,7 @@ class ThemesTableSeeder extends Seeder
                 'name' => 'Technology',
                 'description' => 'Articles related to the latest technology trends.',
                 'manager_id' => 1, // Assuming a user with ID 1 exists
-                "image" => "images/1737052807.jpg",
+                "image" => "https://static.vecteezy.com/system/resources/previews/008/857/678/non_2x/data-center-network-concept-banner-isometric-style-vector.jpg",
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -33,7 +33,7 @@ class ThemesTableSeeder extends Seeder
             ],
             [
                 'name' => 'Iot : Internet of thins',
-                "image" => "images/1737052807.jpg",
+                "image" => "https://static.vecteezy.com/system/resources/previews/002/062/136/non_2x/server-room-isometric-cloud-storage-data-data-center-big-data-processing-and-computing-technology-illustration-vector.jpg",
 
                 'description' => 'Articles about Iot : Internet of thins',
                 'manager_id' => 3, // Assuming a user with ID 3 exists

@@ -28,7 +28,7 @@ class ArticlesTableSeeder extends Seeder
             [
                 'title' => 'Top 10 Travel Destinations in 2023',
                 'content' => 'Here are the top 10 travel destinations you should visit in 2023...',
-                'image' => 'images/1737052939.png',
+                'image' => 'https://static.vecteezy.com/system/resources/previews/008/351/302/non_2x/data-center-server-banner-set-isometric-style-vector.jpg',
                 'theme_id' => 3, // Assuming a theme with ID 3 exists
                 'author_id' => 2, // Assuming a user with ID 2 exists
                 'status' => 'Approved',
@@ -39,7 +39,7 @@ class ArticlesTableSeeder extends Seeder
             [
                 'title' => 'Healthy Eating Habits',
                 'content' => 'Maintaining a healthy diet is essential for a balanced lifestyle...',
-                'image' => 'images/1737052939.png',
+                'image' => 'https://static.vecteezy.com/system/resources/thumbnails/018/913/684/small_2x/abstract-dark-technology-background-with-circuit-diagram-and-fingerprint-vector.jpg',
                 'theme_id' => 2, // Assuming a theme with ID 2 exists
                 'author_id' => 3, // Assuming a user with ID 3 exists
                 'status' => 'Pending',
@@ -50,7 +50,7 @@ class ArticlesTableSeeder extends Seeder
             [
                 'title' => 'The Future of Renewable Energy',
                 'content' => 'Renewable energy is the key to a sustainable future...',
-                'image' => 'images/1737052939.png',
+                'image' => 'https://static.vecteezy.com/system/resources/previews/008/857/678/non_2x/data-center-network-concept-banner-isometric-style-vector.jpg',
                 'theme_id' => 4, // Assuming a theme with ID 4 exists
                 'author_id' => 4, // Assuming a user with ID 4 exists
                 'status' => 'Rejected',
