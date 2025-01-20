@@ -8,38 +8,43 @@ use App\Models\Theme;
 use Illuminate\Support\Facades\Auth;
 
 class SubscriptionController extends Controller
-{   
-   //Displays a list of users subscriptions 
-   public function index(){
-    $user= Auth::user();
-    $subscriptions= $user->subscription()->with('theme')->get();
-    return view("dashboard.subscription",compact('subscriptions'));
-   }
+{
+    //Displays a list of users subscriptions
+    public function index()
+    {
+        $user = Auth::user();
+        $subscriptions = $user->subscriptions()->with('theme')->get();
+        return view("dashboard.subscription", compact('subscriptions'));
+    }
 
-   
-   //Shows the form for subscribing to a theme
-   public function create(){
-    $themes=Theme::all();
-    return view("subscriptions.create", compact('themes'));
-   }
 
-   public function store(){
-        $request->validate(['theme_id'=>'required|exists:themes,id']);
-        $user= Auth::user();
-        if($user->subscriptions()->where('theme_id',$request->theme_id)->exits()){
-            return redirect()->route('subscription.index')->with('error','You are already subscribed to this theme. ');
+    //Shows the form for subscribing to a theme
+    public function create()
+    {
+        $themes = Theme::all();
+        return view("subscriptions.create", compact('themes'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate(['theme_id' => 'required|exists:themes,id']);
+        $user = Auth::user();
+        if ($user->subscriptions()->where('theme_id', $request->theme_id)->exits()) {
+            return redirect()->route('subscription.index')->with('error', 'You are already subscribed to this theme. ');
         }
-        Subscription::create(['user_id'=>$user->id,
-                            'theme_id'=>$request->themes_id,
-                            'subscription_date'=> now(),]);
-        return redirect()->route('subscriptions.index')->with('success','Subscription added! ');
+        Subscription::create([
+            'user_id' => $user->id,
+            'theme_id' => $request->themes_id,
+            'subscription_date' => now(),
+        ]);
+        return redirect()->route('subscriptions.index')->with('success', 'Subscription added! ');
     }
 
     //Unsubscibe
     public function destroy($id)
     {
         $user = Auth::user();
-        $subscription = $user->subscriptions()->where('id', $id)->first();
+        $subscription = Auth::user()->subscriptions()->where('id', $id)->first();
         if (!$subscription) {
             return redirect()->route('subscriptions.index')->with('error', 'Subscription not found.');
         }
@@ -47,4 +52,3 @@ class SubscriptionController extends Controller
         return redirect()->route('subscriptions.index')->with('success', 'Subscription removed successfully.');
     }
 }
-
