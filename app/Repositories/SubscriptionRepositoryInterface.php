@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * Interface SubscriptionRepositoryInterface
+ *
+ * This interface defines the contract for a repository that manages Subscriptions.
+ *
+ * @package App\Repositories
+ */
+
+namespace App\Repositories;
+
+interface SubscriptionRepositoryInterface
+{
+    /**
+     * Retrieve all Subscriptions.
+     *
+     * @return mixed
+     */
+    public function all();
+
+    /**
+     * Find a Subscription by its ID.
+     *
+     * @param mixed $id
+     * @return mixed
+     */
+    public function find($id);
+
+    /**
+     * Create a new Subscription.
+     *
+     * @param array $data
+     * @return mixed
+     */
+    public function create(array $data);
+
+    /**
+     * Update an existing Subscription.
+     *
+     * @param mixed $id
+     * @param array $data
+     * @return mixed
+     */
+    public function update($id, array $data);
+
+    /**
+     * Delete a Subscription by its ID.
+     *
+     * @param mixed $id
+     * @return mixed
+     */
+    public function delete($id);
+}
