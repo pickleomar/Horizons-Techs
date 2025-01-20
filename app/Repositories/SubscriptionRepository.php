@@ -46,9 +46,11 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface
      * @param int $id The ID of the subscription.
      * @return Subscription|null The subscription if found, null otherwise.
      */
-    public function find($id)
+    public function find($user_id, $theme_id)
     {
-        return $this->model->find($id);
+        return $this->model->where('user_id', $user_id)
+            ->where('theme_id', $theme_id);
+        // TODO SOME OFFSET ERROR COMES FROM HERE
     }
 
     /**
@@ -69,9 +71,9 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface
      * @param array $data The data to update the subscription.
      * @return Subscription|null The updated subscription if found, null otherwise.
      */
-    public function update($id, array $data)
+    public function update($user_id, $theme_id, array $data)
     {
-        $subscription = $this->find($id);
+        $subscription = $this->find($user_id, $theme_id);
         if ($subscription) {
             $subscription->update($data);
             return $subscription;
@@ -85,9 +87,9 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface
      * @param int $id The ID of the subscription to delete.
      * @return bool True if the subscription was deleted, false otherwise.
      */
-    public function delete($id)
+    public function delete($user_id, $theme_id)
     {
-        $subscription = $this->find($id);
+        $subscription = $this->find($user_id, $theme_id);
         if ($subscription) {
             $subscription->delete();
             return true;

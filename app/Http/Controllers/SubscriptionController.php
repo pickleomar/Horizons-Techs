@@ -23,43 +23,42 @@ class SubscriptionController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $subscriptions = $user->subscriptions()->with('theme')->get();
+        $subscriptions = $this->subscriptionService->getSubscriptionsByUser($user->id);
         return view("dashboard.subscription", compact('subscriptions'));
     }
 
-
-    //Shows the form for subscribing to a theme
-    public function create()
-    {
-        $themes = Theme::all();
-        return view("subscriptions.create", compact('themes'));
-    }
 
     public function store(Request $request)
     {
         $request->validate(['theme_id' => 'required|exists:themes,id']);
         $user = Auth::user();
-        if ($user->subscriptions()->where('theme_id', $request->theme_id)->exits()) {
-            return redirect()->route('subscription.index')->with('error', 'You are already subscribed to this theme. ');
+
+
+        $subscription = $this->subscriptionService->getSubscriptionById($user->id, $request->theme_id)->first();
+
+        if ($subscription) {
+            return redirect()->route('themes.show', ["theme" => $request->theme_id])->with('error', 'You are already subscribed to this theme. ');
         }
-        Subscription::create([
+
+        $data = [
             'user_id' => $user->id,
-            'theme_id' => $request->themes_id,
+            'theme_id' => $request->theme_id,
             'subscription_date' => now(),
-        ]);
-        return redirect()->route('subscriptions.index')->with('success', 'Subscription added! ');
+        ];
+
+        $this->subscriptionService->createSubscription($data);
+
+        return redirect()->route('themes.show', ["theme" => $request->theme_id])->with('success', 'Subscription added! ');
     }
 
     //Unsubscibe
-    public function destroy($id)
+    public function destroy($theme_id)
     {
-        $subscription = Auth::user()->subscriptions()->where('id', $id)->first();
-
+        $subscription = $this->subscriptionService->deleteSubscription(Auth::user()->id, $theme_id);
 
         if (!$subscription) {
             return redirect()->route('subscriptions.index')->with('error', 'Subscription not found.');
         }
-        $subscription->delete();
         return redirect()->route('dashboard.subscriptions')->with('success', 'Subscription removed successfully.');
     }
 }

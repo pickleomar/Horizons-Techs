@@ -1,4 +1,8 @@
 <x-app-layout>
+    <div style="color: #F14336">
+        {{ implode('', $errors->get('error')) }}
+    </div>
+
     <pre>
 
         {{ $theme }}
@@ -31,4 +35,16 @@
             </form>
         </div>
     @endif
+
+
+
+    {{-- @if ((Auth::user()->role == 'admin' && $theme->manager_id == Auth::user()->id) || Auth::user()->isEditor()) --}}
+    <div>
+        <form method="POST" action="{{ route('subscriptions.store') }}">
+            @csrf
+            <input type="hidden" name="theme_id" value="{{ $theme->id }}">
+            <x-button type="submit" class="btn-secondary outline fit-w">Subscribe</x-button>
+        </form>
+    </div>
+    {{-- @endif --}}
 </x-app-layout>

@@ -17,20 +17,31 @@ class SubscriptionService implements SubscriptionServiceInterface
     {
         return $this->subscriptionRepository->all();
     }
-    public function getSubscriptionById($id)
+
+    public function getSubscriptionById($user_id, $theme_id)
     {
-        return $this->subscriptionRepository->find($id);
+        return $this->subscriptionRepository->find($user_id, $theme_id);
     }
+
     public function createSubscription(array $data)
     {
         return $this->subscriptionRepository->create($data);
     }
-    public function updateSubscription($id, array $data)
+
+    public function updateSubscription($user_id, $theme_id, array $data)
     {
-        return $this->subscriptionRepository->update($id, $data);
+        return $this->subscriptionRepository->update($user_id, $theme_id, $data);
     }
-    public function deleteSubscription($id)
+
+    public function deleteSubscription($user_id, $theme_id)
     {
-        return $this->subscriptionRepository->delete($id);
+        return $this->subscriptionRepository->delete($user_id, $theme_id);
+    }
+
+    public function getSubscriptionsByUser($user_id)
+    {
+        $subscriptions = $this->subscriptionRepository->all()->where("user_id", $user_id);
+
+        return $subscriptions;
     }
 }
