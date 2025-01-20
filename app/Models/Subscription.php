@@ -20,6 +20,12 @@ class Subscription extends Model
      * @method \Illuminate\Database\Eloquent\Relations\BelongsTo user() Get the user that owns the subscription.
      * @method \Illuminate\Database\Eloquent\Relations\BelongsTo theme() Get the theme that the subscription belongs to.
      */
+
+
+    protected $primaryKey = ['user_id', 'theme_id'];
+    public $incrementing = false;
+
+
     protected $fillable = [
         'user_id',
         'theme_id',

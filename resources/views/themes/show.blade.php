@@ -1,4 +1,8 @@
 <x-app-layout>
+    <div style="color: #F14336">
+        {{ implode('', $errors->get('error')) }}
+    </div>
+
     <pre>
 
         {{ $theme }}
@@ -28,6 +32,18 @@
                 @csrf
                 @method('DELETE')
                 <x-button type="submit" class="btn-danger outline fit-w" href="">DeleteTheme</x-button>
+            </form>
+        </div>
+    @endif
+
+
+
+    @if (!Auth::user()->isSubscribedToTheme($theme->id))
+        <div>
+            <form method="POST" action="{{ route('subscriptions.store') }}">
+                @csrf
+                <input type="hidden" name="theme_id" value="{{ $theme->id }}">
+                <x-button type="submit" class="btn-secondary outline fit-w">Subscribe</x-button>
             </form>
         </div>
     @endif

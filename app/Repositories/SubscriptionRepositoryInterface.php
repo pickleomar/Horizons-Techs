@@ -12,43 +12,13 @@ namespace App\Repositories;
 
 interface SubscriptionRepositoryInterface
 {
-    /**
-     * Retrieve all Subscriptions.
-     *
-     * @return mixed
-     */
     public function all();
 
-    /**
-     * Find a Subscription by its ID.
-     *
-     * @param mixed $id
-     * @return mixed
-     */
-    public function find($id);
+    public function find($user_id, $theme_id);
 
-    /**
-     * Create a new Subscription.
-     *
-     * @param array $data
-     * @return mixed
-     */
     public function create(array $data);
 
-    /**
-     * Update an existing Subscription.
-     *
-     * @param mixed $id
-     * @param array $data
-     * @return mixed
-     */
-    public function update($id, array $data);
+    public function update($user_id, $theme_id, array $data);
 
-    /**
-     * Delete a Subscription by its ID.
-     *
-     * @param mixed $id
-     * @return mixed
-     */
-    public function delete($id);
+    public function delete($user_id, $theme_id);
 }

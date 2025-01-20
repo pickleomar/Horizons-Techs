@@ -111,6 +111,17 @@ class User extends Authenticatable
 
 
     /**
+     * Check if the user is subscribed to a theme
+     */
+
+    public function isSubscribedToTheme($theme_id)
+    {
+        return $this->subscriptions()->where('theme_id', $theme_id)->exists();
+    }
+
+
+
+    /**
      * Check if the user is user
      */
     public function isUser()
