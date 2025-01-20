@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('articles', function (Blueprint $table) {
-            $table->boolean("public")->default(false);
+        Schema::table("subscriptions", function (Blueprint $table) {
+            $table->dropColumn("id");
+            $table->primary(["user_id", "theme_id"]);
         });
     }
 
@@ -21,8 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('articles', function (Blueprint $table) {
-            $table->dropColumn("public");
+        Schema::table("subscriptions", function (Blueprint $table) {
+            $table->dropPrimary(["user_id", "theme_id"]);
+            $table->id()->first();
         });
     }
 };
