@@ -11,7 +11,7 @@
             </svg>
             <span>Dashboard</span>
         </a>
-        <a href="{{ route('dashboard.subscription') }}"
+        <a href="{{ route('dashboard.subscriptions') }}"
             class="nav-item {{ request()->is('dashboard/subscription') ? 'active' : '' }}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>

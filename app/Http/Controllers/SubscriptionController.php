@@ -43,12 +43,13 @@ class SubscriptionController extends Controller
     //Unsubscibe
     public function destroy($id)
     {
-        $user = Auth::user();
         $subscription = Auth::user()->subscriptions()->where('id', $id)->first();
+
+
         if (!$subscription) {
             return redirect()->route('subscriptions.index')->with('error', 'Subscription not found.');
         }
         $subscription->delete();
-        return redirect()->route('subscriptions.index')->with('success', 'Subscription removed successfully.');
+        return redirect()->route('dashboard.subscriptions')->with('success', 'Subscription removed successfully.');
     }
 }
