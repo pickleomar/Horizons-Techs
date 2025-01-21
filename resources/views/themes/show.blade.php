@@ -1,7 +1,15 @@
 <x-app-layout>
-    <div style="color: #F14336">
-        {{ implode('', $errors->get('error')) }}
-    </div>
+    @if (session('error'))
+        <div style="color: #F14336">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    @if (session('success'))
+        <div style="color: green">
+            {{ session('success') }}
+        </div>
+    @endif
 
     <pre>
 

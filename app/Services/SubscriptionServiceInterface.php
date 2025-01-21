@@ -11,4 +11,5 @@ interface SubscriptionServiceInterface
     public function createSubscription(array $data);
     public function updateSubscription($user_id, $theme_id, array $data);
     public function deleteSubscription($user_id, $theme_id);
+    public function isUserSubscribed($user_id, $theme_id);
 }

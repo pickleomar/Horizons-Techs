@@ -34,7 +34,8 @@ class SubscriptionController extends Controller
         $user = Auth::user();
 
 
-        $subscription = $this->subscriptionService->getSubscriptionById($user->id, $request->theme_id)->first();
+        $subscription = $this->subscriptionService->isUserSubscribed($user->id, $request->theme_id);
+
 
         if ($subscription) {
             return redirect()->route('themes.show', ["theme" => $request->theme_id])->with('error', 'You are already subscribed to this theme. ');
