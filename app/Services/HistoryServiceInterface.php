@@ -11,4 +11,5 @@ interface HistoryServiceInterface
     public function createHistory(array $data);
     public function updateHistory($user_id, $article_id, array $data);
     public function deleteHistory($user_id, $article_id);
+    public function trackHistory($user_id, $article_id);
 }
