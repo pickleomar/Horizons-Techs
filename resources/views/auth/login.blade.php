@@ -1,4 +1,10 @@
 <x-auth-layout>
+    @if (session('error'))
+        <div style="color: #F14336">
+            {{ session('error') }}
+        </div>
+    @endif
+
     {{ session('status') }}
 
     <form class="authentication-form" method="POST" action="{{ route('login') }}">
@@ -48,7 +54,7 @@
         </div>
 
         <div class="flex-row">
-            <x-button class="btn btn-neutral full-w">
+            <x-button href="{{ route('login.google') }}" class="btn btn-neutral full-w">
                 <svg version="1.1" width="20" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
                     style="enable-background:new 0 0 512 512;" xml:space="preserve">
@@ -73,7 +79,7 @@
 
 
 
-            <x-button class="btn btn-neutral full-w">
+            <x-button href="{{ route('login.github') }}" class="btn btn-neutral full-w">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="icon icon-tabler icons-tabler-outline icon-tabler-brand-github">
