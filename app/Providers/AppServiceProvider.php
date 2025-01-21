@@ -4,12 +4,16 @@ namespace App\Providers;
 
 use App\Repositories\ArticleRepository;
 use App\Repositories\ArticleRepositoryInterface;
+use App\Repositories\HistoryRepository;
+use App\Repositories\HistoryRepositoryInterface;
 use App\Repositories\SubscriptionRepository;
 use App\Repositories\SubscriptionRepositoryInterface;
 use App\Repositories\ThemeRepository;
 use App\Repositories\ThemeRepositoryInterface;
 use App\Services\ArticleService;
 use App\Services\ArticleServiceInterface;
+use App\Services\HistoryService;
+use App\Services\HistoryServiceInterface;
 use App\Services\SubscriptionService;
 use App\Services\SubscriptionServiceInterface;
 use App\Services\ThemeService;
@@ -35,7 +39,12 @@ class AppServiceProvider extends ServiceProvider
         // Subscription Binding
         $this->app->bind(SubscriptionRepositoryInterface::class, SubscriptionRepository::class);
         $this->app->bind(SubscriptionServiceInterface::class, SubscriptionService::class);
+
+        // History Binding
+        $this->app->bind(HistoryRepositoryInterface::class, HistoryRepository::class);
+        $this->app->bind(HistoryServiceInterface::class, HistoryService::class);
     }
+
 
 
     /**
