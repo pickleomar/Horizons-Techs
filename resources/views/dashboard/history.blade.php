@@ -14,65 +14,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>L'avenir de l'IA générative</td>
-                        <td>Marie Martin</td>
-                        <td>14/01/2025</td>
-                        <td>
-                            <x-button size="sm" class="btn-secondary">Voir</x-button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Sécurité des objets connectés</td>
-                        <td>Paul Dubois</td>
-                        <td>13/01/2025</td>
-                        <td>
-                            <x-button size="sm" class="btn-secondary">Voir</x-button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Sécurité des objets connectés</td>
-                        <td>Paul Dubois</td>
-                        <td>13/01/2025</td>
-                        <td>
-                            <x-button size="sm" class="btn-secondary">Voir</x-button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Sécurité des objets connectés</td>
-                        <td>Paul Dubois</td>
-                        <td>13/01/2025</td>
-                        <td>
-                            <x-button size="sm" class="btn-secondary">Voir</x-button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Sécurité des objets connectés</td>
-                        <td>Paul Dubois</td>
-                        <td>13/01/2025</td>
-                        <td>
-                            <x-button size="sm" class="btn-secondary">Voir</x-button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Sécurité des objets connectés</td>
-                        <td>Paul Dubois</td>
-                        <td>13/01/2025</td>
-                        <td>
-                            <x-button size="sm" class="btn-secondary">Voir</x-button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Sécurité des objets connectés</td>
-                        <td>Paul Dubois</td>
-                        <td>13/01/2025</td>
-                        <td>
-                            <x-button size="sm" class="btn-secondary">Voir</x-button>
-                        </td>
-                    </tr>
+
+                    @foreach ($histories as $history)
+                        <tr>
+                            <td>{{ $history->article->title }}</td>
+                            <td>{{ $history->user->name }}</td>
+                            <td>{{ $history->consultation_date }}</td>
+                            <td>
+                                <x-button
+                                    href="{{ route('articles.show', ['theme' => $history->article->theme_id, 'article' => $history->article]) }}"
+                                    size="sm" class="btn-secondary">Voir</x-button>
+                            </td>
+                        </tr>
+                    @endforeach
+
                 </tbody>
             </table>
         </div>
+
+        {{-- {{ $histories }} --}}
     </section>
 
 </x-dashboard-layout>
