@@ -6,16 +6,19 @@ use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Models\Theme;
 use App\Services\ArticleServiceInterface;
+use App\Services\HistoryServiceInterface;
 use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
 
     protected $articleService;
+    protected $historyService;
 
-    public function __construct(ArticleServiceInterface $articleService)
+    public function __construct(ArticleServiceInterface $articleService, HistoryServiceInterface $historyService)
     {
         $this->articleService = $articleService;
+        $this->historyService = $historyService;
     }
     /**
      * Display a listing of the articles.
@@ -74,8 +77,9 @@ class ArticleController extends Controller
     /**
      * Display the specified article.
      */
-    public function show(Article $article)
+    public function show(Theme $theme, Article $article)
     {
+        $this->historyService->trackHistory(Auth::user()->id, $article->id);
         return view('articles.show', compact('article'));
     }
 
