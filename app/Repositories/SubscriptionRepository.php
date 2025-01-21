@@ -25,7 +25,7 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface
      *
      * @param Subscription $model The subscription model instance.
      */
-    public function __construct(subscription $model)
+    public function __construct(Subscription $model)
     {
         $this->model = $model;
     }
