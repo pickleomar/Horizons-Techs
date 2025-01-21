@@ -14,10 +14,13 @@
                     <div class="subscription-action">
                         <x-button class="btn-primary full-w"
                             href="{{ route('themes.show', ['theme' => $subscription->theme_id]) }}">Details</x-button>
-                        <form action="{{ route('subscriptions.destroy', ['theme_id' => $subscription->theme_id]) }}"
-                            method="POST" class="inline-form">
+
+
+
+                        <form action="{{ route('subscriptions.destroy') }}" method="POST" class="inline-form">
                             @csrf
                             @method('DELETE')
+                            <input type="hidden" required name="theme_id" value="{{ $subscription->theme_id }}">
                             <x-button class="btn-warning outline full-w" type="submit">Unsubscribe</x-button>
                         </form>
                     </div>

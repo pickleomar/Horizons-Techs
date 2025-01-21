@@ -53,9 +53,14 @@ class SubscriptionController extends Controller
     }
 
     //Unsubscibe
-    public function destroy($theme_id)
+    public function destroy(Request $request)
     {
-        $subscription = $this->subscriptionService->deleteSubscription(Auth::user()->id, $theme_id);
+
+        $request->validate([
+            "theme_id" => "required|exists:themes,id"
+        ]);
+
+        $subscription = $this->subscriptionService->deleteSubscription(Auth::user()->id, $request->theme_id);
 
         if (!$subscription) {
             return redirect()->route('subscriptions.index')->with('error', 'Subscription not found.');
