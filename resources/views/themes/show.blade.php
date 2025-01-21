@@ -6,7 +6,7 @@
     @endif
 
     @if (session('success'))
-        <div style="color: green">
+        <div style="color: var(--primary-color)">
             {{ session('success') }}
         </div>
     @endif
@@ -34,7 +34,7 @@
 
 
 
-    @if ((Auth::user()->role == 'admin' && $theme->manager_id == Auth::user()->id) || Auth::user()->isEditor())
+    @if ((Auth::user()->isAdmin() && $theme->manager_id == Auth::user()->id) || Auth::user()->isEditor())
         <div>
             <form method="POST" action="{{ route('themes.destroy', ['id' => $theme->id]) }}">
                 @csrf

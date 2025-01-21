@@ -1,4 +1,17 @@
 <x-app-layout>
+    @if (session('error'))
+        <div style="color: var(--danger-color)">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    @if (session('success'))
+        <div style="color: var(--primary-color)">
+            {{ session('success') }}
+        </div>
+    @endif
+
+
     <div class="themes-container">
         @foreach ($themes as $theme)
             <div class="theme-card">

@@ -33,4 +33,11 @@ class ThemeService implements ThemeServiceInterface
     {
         return $this->themeRepository->delete($id);
     }
+
+
+    public function isUserThemeManager($user_id, $theme_id)
+    {
+        $theme = $this->themeRepository->find($theme_id);
+        return $theme->manager_id === $user_id;
+    }
 }

@@ -60,15 +60,6 @@ class ThemeController extends Controller
 
     public function show($id)
     {
-
-        // if ($user->role == "user") {
-        //     $articles = Article::where('theme_id', $id)
-        //         ->where('public', 1)
-        //         ->get();
-        // } else if ($user->role == "subscriber" || ($user->role == "admin" && $theme->manager_id == $user->id) || $user->role == "editor") {
-        //     // TODO Configure this To check if the user is subscribed to the theme
-        //     $articles = $theme->articles;
-        // }
         $theme = $this->themeService->getThemeById($id);
 
         $articles = $theme->articles;
@@ -93,9 +84,12 @@ class ThemeController extends Controller
 
     public function destroy($id)
     {
-        // TODO Check Permission
-        $this->themeService->deleteTheme($id);
-        // Return the the Themes Page
-        return $this->index();
+        $user = Auth::user();
+
+        if ($user->role == "editor" || $this->themeService->isUserThemeManager($user->id, $id)) {
+            $this->themeService->deleteTheme($id);
+            return redirect()->route('themes.index')->with("success", "Theme deleted with success");
+        }
+        return redirect()->route('themes.index')->with("error", "An error occured !");
     }
 }
