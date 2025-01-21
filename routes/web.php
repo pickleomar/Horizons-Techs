@@ -10,7 +10,7 @@ use App\Http\Controllers\SubscriptionController;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name("home");
 
 // Articles Routes
 // Route::get('/articles', [ArticleController::class, "index"])->middleware(["auth", "verified", "role:admin"])->name('articles.index');
@@ -31,21 +31,6 @@ Route::get('themes/{theme}/articles', [ArticleController::class, "index"])->midd
 Route::get('themes/{theme}/articles/create', [ArticleController::class, "create"])->middleware(["auth", "verified"])->name('article.create');
 Route::post('themes/{theme}/articles/create', [ArticleController::class, "store"])->middleware(["auth", "verified"]);
 
-//
-Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::get('/dashboard/history', [DashboardController::class, 'history'])->name('dashboard.history');
-    Route::get('/dashboard/subscriptions', [SubscriptionController::class, 'index'])->name('dashboard.subscriptions');
-
-    // Create a subscription
-    Route::post('/subscriptions/store', [SubscriptionController::class, 'store'])->name('subscriptions.store');
-    // Remove Subscription
-    Route::delete('/subscriptions/{theme_id}', [SubscriptionController::class, 'destroy'])->name('subscriptions.destroy');
-    //for superadmins to create subs
-    Route::get('/subscription/create', [SubscriptionController::class, 'create'])->name('subscription.create');
-});
-
-
 
 
 Route::middleware('auth')->group(function () {
@@ -55,3 +40,4 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+require __DIR__ . "/dashboard.php";
