@@ -42,4 +42,14 @@ class HistoryService implements HistoryServiceInterface
     {
         return $this->historyRepository->all()->where("user_id", $user_id);
     }
+
+
+    public function trackHistory($user_id, $article_id)
+    {
+        $history = $this->getHistoryById($user_id, $article_id)->first();
+        if (!$history) {
+            return $this->createHistory(["user_id" => $user_id, "article_id" => $article_id, "consultation_date" => now()]);
+        }
+        return $this->updateHistory($user_id, $article_id, ["consultation_date" => now()]);
+    }
 }
