@@ -40,8 +40,15 @@ class SubscriptionService implements SubscriptionServiceInterface
 
     public function getSubscriptionsByUser($user_id)
     {
-        $subscriptions = $this->subscriptionRepository->all()->where("user_id", $user_id);
+        return $this->subscriptionRepository->all()->where("user_id", $user_id);
+    }
 
-        return $subscriptions;
+    public function isUserSubscribed($user_id, $theme_id)
+    {
+        $subscription = $this->subscriptionRepository->find($user_id, $theme_id)->first();
+        if ($subscription) {
+            return true;
+        }
+        return false;
     }
 }
