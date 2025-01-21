@@ -10,7 +10,7 @@
 
 .featured-article {
     flex: 2;
-    background-color: var(--bg-color-n-1);
+    background-color: var(--bg-neutral-3);
     color: var(--font-color);
     border-radius: var(--radius-l);
     overflow: hidden;
@@ -51,7 +51,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--bg-color-n-1);
+    background-color: var(--bg-neutral-3);
     color: var(--font-color);
     padding: 15px;
     border-radius: var(--radius-m);

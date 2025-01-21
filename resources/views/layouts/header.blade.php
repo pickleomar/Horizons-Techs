@@ -16,14 +16,12 @@
 
         @auth
 
+            <a href="{{ route('dashboard.index') }}">Dashboard</a>
 
             <form method="POST" action="{{ route('logout') }}">
-                <label style="font-weight: 800;text-decoration: underline" for="">
-                    {{ Auth::user()->name }}
-                </label>
                 @csrf
 
-                <a href="route('logout')"
+                <a href=""
                     onclick="event.preventDefault();
                                 this.closest('form').submit();">
                     {{ __('Log Out') }}

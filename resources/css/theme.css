@@ -1,60 +1,41 @@
 .themes-container {
     display: flex;
-    /* Enables Flexbox for horizontal alignment */
     flex-wrap: wrap;
-    /* Allows items to wrap to the next row if needed */
     justify-content: center;
-    /* Centers the cards horizontally */
     gap: 20px;
-    /* Adds spacing between the cards */
     padding: 20px;
-    max-width: 1200px;
-    /* Optional: Prevents stretching too far */
-    margin: 0 auto;
-    /* Centers the container */
+    /* max-width: 1200px; */
+    margin: 0 10%;
 }
 
 .theme-card {
-    background-color: var(--bg-color-n-4);
-    /* Background color */
+    background-color: var(--bg-neutral-1);
     color: var(--font-color);
-    /* Font color */
     border: 1px solid var(--outline-color);
-    /* Border color */
     border-radius: var(--radius-l);
-    /* Border radius */
     width: 300px;
-    /* Fixed width for all cards */
     text-align: center;
     display: flex;
     flex-direction: column;
-    /* Vertical stacking inside the card */
     justify-content: space-between;
-    /* Space out elements inside the card */
     padding: 1.5rem;
 }
 
 .theme-card img {
     width: 100%;
-    /* Makes the image fit the card */
     height: 200px;
-    /* Fixed height for uniformity */
     object-fit: cover;
-    /* Ensures the image is cropped properly */
     border-bottom: 2px solid var(--primary-color);
-    /* Adds a border below the image */
 }
 
 .theme-card h2 {
     font-size: 20px;
     margin: 10px 0;
     color: var(--font-color);
-    /* Consistent font color */
 }
 
 .theme-card p {
     font-size: 14px;
     margin: 10px;
     color: var(--divider-color);
-    /* Slightly lighter color for descriptions */
 }

@@ -125,7 +125,7 @@
 }
 
 .btn-neutral:hover {
-    background-color: var(--bg-color-n-1);
+    background-color: var(--bg-neutral-3);
     transition: 0.2s ease;
 }
 
