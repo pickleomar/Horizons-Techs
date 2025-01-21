@@ -20,6 +20,7 @@ Route::middleware('auth', "role:subscriber",)->group(function () {
 
     // History Related
     Route::get('/dashboard/history', [HistoryController::class, 'index'])->name('dashboard.history');
+    // Route::post('/history', [HistoryController::class, 'storeOrUpdate']);
 });
 
 Route::get('/apply', function () {
