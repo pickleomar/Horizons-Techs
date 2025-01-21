@@ -9,7 +9,11 @@ class History extends Model
 {
 
     use HasFactory;
+
     protected $table = 'history';
+    protected $primaryKey = ['user_id', 'article_id'];
+    public $incrementing = false;
+
 
     protected $fillable = [
         'user_id',
