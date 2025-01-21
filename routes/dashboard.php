@@ -13,7 +13,7 @@ Route::middleware('auth', "role:subscriber",)->group(function () {
     // Create a subscription
     Route::post('/subscriptions/store', [SubscriptionController::class, 'store'])->name('subscriptions.store');
     // Remove Subscription
-    Route::delete('/subscriptions/{theme_id}', [SubscriptionController::class, 'destroy'])->name('subscriptions.destroy');
+    Route::delete('/subscriptions', [SubscriptionController::class, 'destroy'])->name('subscriptions.destroy');
     //for superadmins to create subs
     Route::get('/subscription/create', [SubscriptionController::class, 'create'])->name('subscription.create');
 

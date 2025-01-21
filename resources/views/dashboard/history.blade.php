@@ -29,7 +29,8 @@
                                     @csrf
                                     @method('DELETE')
 
-                                    <input type="hidden" name="article_id" value="{{ $history->article->id }}">
+                                    <input type="hidden" required name="article_id"
+                                        value="{{ $history->article->id }}">
                                     <x-button type="submit" size="sm"
                                         class="btn-danger outline full-w">Suprimmer</x-button>
                                 </form>
