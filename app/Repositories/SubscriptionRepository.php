@@ -11,9 +11,8 @@
 namespace App\Repositories;
 
 use App\Models\Subscription;
-use App\Repositories\SubscriptionRepositoryInterface;
 
-class SubscriptionRepository implements SubscriptionRepositoryInterface
+class SubscriptionRepository
 {
     /**
      * @var Subscription The subscription model instance.

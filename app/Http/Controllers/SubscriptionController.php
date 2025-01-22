@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Subscription;
-use App\Models\Theme;
-use App\Services\SubscriptionServiceInterface;
+use App\Services\SubscriptionService;
 use Illuminate\Support\Facades\Auth;
 
 class SubscriptionController extends Controller
@@ -13,7 +11,7 @@ class SubscriptionController extends Controller
 
     protected $subscriptionService;
 
-    public function __construct(SubscriptionServiceInterface $subscriptionService)
+    public function __construct(SubscriptionService $subscriptionService)
     {
         $this->subscriptionService = $subscriptionService;
     }

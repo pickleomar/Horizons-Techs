@@ -27,22 +27,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-
-
-        // Themes Binding
-        $this->app->bind(ThemeRepositoryInterface::class, ThemeRepository::class);
-        $this->app->bind(ThemeServiceInterface::class, ThemeService::class);
         // Articles Binding
         $this->app->bind(ArticleRepositoryInterface::class, ArticleRepository::class);
         $this->app->bind(ArticleServiceInterface::class, ArticleService::class);
-
-        // Subscription Binding
-        $this->app->bind(SubscriptionRepositoryInterface::class, SubscriptionRepository::class);
-        $this->app->bind(SubscriptionServiceInterface::class, SubscriptionService::class);
-
-        // History Binding
-        $this->app->bind(HistoryRepositoryInterface::class, HistoryRepository::class);
-        $this->app->bind(HistoryServiceInterface::class, HistoryService::class);
     }
 
 

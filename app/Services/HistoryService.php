@@ -2,13 +2,12 @@
 
 namespace App\Services;
 
-use App\Repositories\HistoryRepositoryInterface;
-use App\Services\HistoryServiceInterface;
+use App\Repositories\HistoryRepository;
 
-class HistoryService implements HistoryServiceInterface
+class HistoryService
 {
     protected $historyRepository;
-    public function __construct(HistoryRepositoryInterface $historyRepository)
+    public function __construct(HistoryRepository $historyRepository)
     {
         $this->historyRepository = $historyRepository;
     }

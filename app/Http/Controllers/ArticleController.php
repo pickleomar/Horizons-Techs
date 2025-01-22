@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Models\Theme;
-use App\Services\ArticleServiceInterface;
-use App\Services\HistoryServiceInterface;
+use App\Services\ArticleService;
+use App\Services\HistoryService;
 use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
@@ -15,7 +15,7 @@ class ArticleController extends Controller
     protected $articleService;
     protected $historyService;
 
-    public function __construct(ArticleServiceInterface $articleService, HistoryServiceInterface $historyService)
+    public function __construct(ArticleService $articleService, HistoryService $historyService)
     {
         $this->articleService = $articleService;
         $this->historyService = $historyService;

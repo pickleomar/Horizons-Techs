@@ -11,9 +11,8 @@
 namespace App\Repositories;
 
 use App\Models\History;
-use App\Repositories\HistoryRepositoryInterface;
 
-class HistoryRepository implements HistoryRepositoryInterface
+class HistoryRepository
 {
     /**
      * @var History The History model instance.
