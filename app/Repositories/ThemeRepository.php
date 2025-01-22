@@ -11,9 +11,8 @@
 namespace App\Repositories;
 
 use App\Models\Theme;
-use App\Repositories\ThemeRepositoryInterface;
 
-class ThemeRepository implements ThemeRepositoryInterface
+class ThemeRepository
 {
     /**
      * @var Theme The Theme model instance.

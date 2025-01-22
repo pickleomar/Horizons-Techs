@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\History;
-use App\Services\HistoryServiceInterface;
+use App\Services\HistoryService;
 use Illuminate\Http\Request;
 
 class HistoryController extends Controller
@@ -11,7 +10,7 @@ class HistoryController extends Controller
 
     protected $historyService;
 
-    public function __construct(HistoryServiceInterface $historyService)
+    public function __construct(HistoryService $historyService)
     {
         $this->historyService = $historyService;
     }

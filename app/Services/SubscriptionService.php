@@ -2,13 +2,12 @@
 
 namespace App\Services;
 
-use App\Repositories\SubscriptionRepositoryInterface;
-use App\Services\SubscriptionServiceInterface;
+use App\Repositories\SubscriptionRepository;
 
-class SubscriptionService implements SubscriptionServiceInterface
+class SubscriptionService
 {
     protected $subscriptionRepository;
-    public function __construct(SubscriptionRepositoryInterface $subscriptionRepository)
+    public function __construct(SubscriptionRepository $subscriptionRepository)
     {
         $this->subscriptionRepository = $subscriptionRepository;
     }

@@ -2,13 +2,12 @@
 
 namespace App\Services;
 
-use App\Repositories\ThemeRepositoryInterface;
-use App\Services\ThemeServiceInterface;
+use App\Repositories\ThemeRepository;
 
-class ThemeService implements ThemeServiceInterface
+class ThemeService
 {
     protected $themeRepository;
-    public function __construct(ThemeRepositoryInterface $themeRepository)
+    public function __construct(ThemeRepository $themeRepository)
     {
         $this->themeRepository = $themeRepository;
     }

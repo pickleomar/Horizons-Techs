@@ -11,9 +11,8 @@
 namespace App\Repositories;
 
 use App\Models\Article;
-use App\Repositories\ArticleRepositoryInterface;
 
-class ArticleRepository implements ArticleRepositoryInterface
+class ArticleRepository
 {
     /**
      * @var Article The article model instance.
