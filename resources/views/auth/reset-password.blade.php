@@ -8,7 +8,7 @@
         <!-- Email Address -->
         <div>
             <label for="email">Email</label>
-            <input id="email" class="" type="email" name="email" :value="old('email', $request - > email)"
+            <input id="email" class="" type="email" name="email" :value="old('email', $request -> email)"
                 required autofocus autocomplete="username" />
             <div>
 
