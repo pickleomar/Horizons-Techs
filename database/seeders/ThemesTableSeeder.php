@@ -73,6 +73,15 @@ class ThemesTableSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'name' => 'Hello world',
+                'description' => ' Some Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long Text Some Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long TextSome Long Text',
+                "image" => "images/1737052807.jpg",
+                'manager_id' => 4, // Assuming a user with ID 4 exists
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+
         ]);
 
         $this->command->info('Themes table seeded successfully!');
