@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Models\Theme;
-use App\Services\ThemeService;
+use App\Repositories\ThemeRepositoryInterface;
+use App\Services\ThemeServiceInterface;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -14,7 +16,7 @@ class ThemeController extends Controller
     protected $themeService;
 
 
-    public function __construct(ThemeService $themeService)
+    public function __construct(ThemeServiceInterface $themeService)
     {
         $this->themeService = $themeService;
     }
@@ -36,7 +38,7 @@ class ThemeController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:themes',
-            'description' => 'nullable|string',
+            'description' => 'required|string|max:65535', // Limit description to fit TEXT type
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
