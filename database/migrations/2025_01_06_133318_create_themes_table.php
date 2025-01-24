@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('themes', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->text('description')->change();
+            $table->text('description');
             $table->foreignId('manager_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });

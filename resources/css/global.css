@@ -70,6 +70,8 @@ html {
 * {
     margin: 0;
     line-height: normal;
+    box-sizing: border-box;
+
 }
 
 
