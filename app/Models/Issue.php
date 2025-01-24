@@ -12,6 +12,10 @@ class Issue extends Model
         'publication_date',
         'public',
     ];
+    protected $casts = [
+        'publication_date' => 'datetime',
+    ];
+    
 
     /**
      * Todo Handle Issue Relationship

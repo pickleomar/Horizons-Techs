@@ -1,0 +1,306 @@
+.magazine {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the child elements vertically */
+    justify-content: flex-start; /* Align content to the top */
+    width: 100%; /* Full width */
+    height: auto; /* Full viewport height */
+    padding: 0rem 0; /* Add some vertical spacing */
+}
+.magazine-topper{
+    display: flex;
+    margin-top: 1%;
+    justify-content:space-between; /* Spread title and menu */
+    align-items: center; /* Vertically center align */
+    width: 100%; /* Full width */
+    margin-bottom: 0.5rem; /* Add spacing below */
+}
+
+.menu-bar{
+    list-style-type: none;
+    margin-top:2.6em;
+    margin-left:31.3em;
+}
+.menu-item{
+    color:var(--font-color);
+    margin-right:17em;
+    margin-top: 4em;
+    font-size:1.12em;
+    
+}
+.menu-item:hover {
+    color: var(--tertiary-color); 
+    text-decoration: underline; 
+}
+
+.menu-item:active {
+    color: #003d80; 
+}
+.issue-container {
+    display: flex;
+    align-items: center; /* Center items vertically */
+    width: 60%; /* Take a larger width for balance */
+    height: auto; /* Let the container height adjust dynamically */
+    padding-top: 1.3rem;
+    margin-top: 0.2em;
+    padding-right: 1.3rem;
+    padding-left: 1.3rem;
+    padding-bottom: 1.3rem;
+    background-color: #000000;
+    position: relative;
+}
+h1{
+    font-family: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+    font-weight: bold;
+    font-size:1.8em;
+    color:var(--divider-color);
+    margin-left: 19rem;
+    margin-top:2.38rem;
+}
+
+.issue {
+    display: flex;
+    gap: 20px;
+    width: 100%; /* Take full width */
+    max-width: 900px; /* Limit the size */
+    overflow: hidden;
+    background-color: #000000;
+}
+
+.issue-image img {
+    width: 300px; /* Slightly larger size for the image */
+    height: 450px; /* Maintain aspect ratio */
+    object-fit: cover;
+    border: none; /* Remove any borders */
+}
+
+.issue-details {
+    display: flex;
+    height: auto;
+    justify-content:flex-start;
+    flex-direction: column;
+    width: calc(100% - 300px); /* Automatically adjust to image size */
+    padding-left: 40px;
+    padding-top: 20px;
+    padding-right: 40px;
+    flex-wrap: wrap;
+}
+
+.issue-title {
+    font-size: 2.2em;
+    font-family: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+    font-weight: bold;
+    color: var(--font-color);
+}
+
+.issue-date {
+    display: flex;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: var(--tertiary-color);
+}
+
+.issue-description {
+    display: flex;
+    position: relative;
+    font-size: 1.43rem;
+    font-family: 'Neue Haas Grotesk Text Pro', sans-serif;
+    line-height: 1.2;
+    color: var(--font-color);
+    padding-top: 2em;
+
+
+}
+
+.issue-links a {
+    display:block;
+    box-sizing: border-box;
+    width: 110PX;
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem; /* Slightly larger link text */
+    transition: color 0.1s ease;
+    padding: 0%;
+    margin: 0%;
+}
+
+
+.issue-links a:hover {
+    color: var(--primary-color);
+}
+.issue-links{
+    display: inline-block;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+    display: flex;
+}
+.download-issue{
+    display:flex;
+    padding-top: 2em;
+
+}
+
+/* Navigation Container */
+#navigate-issues {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--outline-color);
+    width: 100%;
+    margin-top: 2.8rem;
+}
+
+/* Navigation List */
+.navList {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Previous & Next Issue Items */
+.previous-issue, .next-issue {
+    text-align: left;
+}
+
+/* Link Styling */
+.navLink {
+    display: inline-flex;
+    font-family: 'Neue Haas Grotesk Text Pro', sans-serif;;
+    align-items: center;
+    justify-content: center;
+    color: #fff; /* Default white text */
+    font-size: 1rem;
+    font-weight: 1em;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease, stroke 0.3s ease;
+}
+
+
+/* Icon Container */
+.nav_icon {
+    display: inline-block;
+    margin: 0 0.4rem;
+}
+.nav_icon svg {
+    width:0.8em;
+    height: 1.5em;
+}
+
+/*Past Issues */
+
+#past-issues {
+    padding-top:5rem; /* Padding around the section */
+    width: 65%; /* Full width */
+    box-sizing: border-box; /* Ensure consistent sizing */
+}
+
+/* Section Title */
+.past-issues-container .title {
+    font-family: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+    border-bottom: 3px solid var(--outline-color);
+    padding-bottom: 20px;
+    font-weight: bold;
+    font-size:1.8em;
+    color:var(--divider-color);
+    margin-left: 2.5rem;
+    margin-top:2.38rem;
+    margin-bottom: 2rem; /* Space below the title */
+    text-align: left; /* Center align the title */
+}
+
+/* Grid Layout for Issues */
+.issues-grid {
+    display: grid;
+    width: 96.2%;
+    margin-left: 2.4em;
+    grid-template-columns: repeat(3, 1fr); /* Ensure 3 columns per row */
+    gap: 1.5rem; /* Spacing between cards */
+    justify-content: center; /* Center the grid items */
+    align-items: stretch; /* Ensure items fill their grid cells */
+}
+
+/* Individual Issue Card */
+.issue-card {
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    align-items: center; /* Center content */
+    background-color: #000; /* Black card background */
+    color: #fff; /* White text for contrast */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    text-align: center; /* Center the text */
+    padding: 3em 0 3em 0; /* Internal padding */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover Effect for Cards */
+.issue-card:hover {
+    transform: translateY(-5px); /* Lift card slightly */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.5); /* Enhanced shadow */
+}
+
+/* Issue Image */
+.issue-card .issue-image {
+    width: 55%; /* Full width of the card */
+    height: auto; /* Maintain aspect ratio */
+    
+    object-fit: cover; /* Cover the container */
+    margin-bottom: 0rem; /* Space below the image */
+}
+
+/* Placeholder for Missing Images */
+.placeholder-year {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Full width */
+    height: 300px; /* Fixed height */
+    font-size: 2rem; /* Large text for the year */
+    font-weight: bold;
+    background-color: #333; /* Neutral dark color */
+    color: #fff; /* White text for visibility */
+    border-radius: 8px; /* Match card corners */
+}
+
+.load-more-container {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.load-more-button {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--secondary-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.load-more-button:hover {
+    background-color: var(--primary-color);
+}
+
+
+/* Responsive Design: Adjust for Smaller Screens */
+@media (max-width: 1024px) {
+    .issues-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .issues-grid {
+        grid-template-columns: repeat(1, 1fr); /* Single column for small screens */
+    }
+}

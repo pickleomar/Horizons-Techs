@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\IssueController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\ProfileController;
@@ -31,6 +32,13 @@ Route::get('themes/{theme}/articles', [ArticleController::class, "index"])->midd
 Route::get('themes/{theme}/articles/{article}', [ArticleController::class, "show"])->middleware(["auth", "verified"])->name('articles.show');
 Route::get('themes/{theme}/articles/create', [ArticleController::class, "create"])->middleware(["auth", "verified"])->name('article.create');
 Route::post('themes/{theme}/articles/create', [ArticleController::class, "store"])->middleware(["auth", "verified"]);
+
+//Magazines Routes
+Route::get("/magazines", [IssueController::class , "index"])->name("magazines.index");
+Route::get("/magazines/create", [IssueController::class, "create"])->name("magazines.create");
+Route::get('/magazines/{id}', [IssueController::class, 'show'])->name('magazines.show');
+Route::get('/magazines/{id}/download', [IssueController::class, 'download'])->name('magazines.download');
+Route::get('/magazines/{id}/load-more', [IssueController::class, 'loadMore'])->name('magazines.loadMore');
 
 
 
