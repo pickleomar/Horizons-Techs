@@ -12,6 +12,9 @@ Route::middleware('auth', "role:subscriber",)->group(function () {
     Route::get('/dashboard/subscriptions', [SubscriptionController::class, 'index'])->name('dashboard.subscriptions');
     // Create a subscription
     Route::post('/subscriptions', [SubscriptionController::class, 'store'])->name('subscriptions.store');
+    // approve / reject Subscription
+    Route::post('/subscriptions/{id}/approve', [SubscriptionController::class, 'approve'])->name('subscriptions.approve');
+    Route::post('/subscriptions/{id}/reject', [SubscriptionController::class, 'reject'])->name('subscriptions.reject');
     // Remove Subscription
     Route::delete('/subscriptions', [SubscriptionController::class, 'destroy'])->name('subscriptions.destroy');
     //for superadmins to create subs
