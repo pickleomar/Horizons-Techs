@@ -50,4 +50,11 @@ class SubscriptionService
         }
         return false;
     }
+
+
+    public function getSubscriptionRequestByTheme($theme_id)
+    {
+        $subscriptions = $this->subscriptionRepository->all()->where("theme_id", $theme_id)->where("status", "pending");
+        return $subscriptions;
+    }
 }
