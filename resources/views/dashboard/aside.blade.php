@@ -14,14 +14,35 @@
             </svg>
             <span>Dashboard</span>
         </a>
-        <a href="{{ route('dashboard.subscriptions') }}"
-            class="nav-item {{ request()->is('dashboard/subscriptions') ? 'active' : '' }}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                <path d="M22 6l-10 7L2 6"></path>
-            </svg>
-            <span>Abonnements</span>
-        </a>
+
+        @if (!Auth::user()->isEditor())
+            <a href="{{ route('dashboard.subscriptions') }}"
+                class="nav-item {{ request()->is('dashboard/subscriptions') ? 'active' : '' }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <path d="M22 6l-10 7L2 6"></path>
+                </svg>
+                <span>Abonnements</span>
+            </a>
+        @endif
+
+        @if (Auth::user()->isEditor() || Auth::user()->isAdmin())
+            <a href="{{ route('dashboard.themes') }}"
+                class="nav-item {{ request()->is('dashboard/themes') ? 'active' : '' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-template">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M4 4m0 1a1 1 0 0 1 1 -1h14a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-14a1 1 0 0 1 -1 -1z" />
+                    <path d="M4 12m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                    <path d="M14 12l6 0" />
+                    <path d="M14 16l6 0" />
+                    <path d="M14 20l6 0" />
+                </svg>
+                <span>Theme Management</span>
+            </a>
+        @endif
+
         <a href="#" class="nav-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
