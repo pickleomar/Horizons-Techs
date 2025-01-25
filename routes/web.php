@@ -23,6 +23,7 @@ Route::get("/themes", [ThemeController::class, "index"])->name("themes.index");
 Route::get("/themes/create", [ThemeController::class, "create"])->name("themes.create");
 Route::post("/themes/create", [ThemeController::class, "store"]);
 
+
 // View Theme
 Route::get("/themes/{theme}", [ThemeController::class, "show"])->name("themes.show");
 // Delete Themes
@@ -34,7 +35,7 @@ Route::get('themes/{theme}/articles/create', [ArticleController::class, "create"
 Route::post('themes/{theme}/articles/create', [ArticleController::class, "store"])->middleware(["auth", "verified"]);
 
 //Magazines Routes
-Route::get("/magazines", [IssueController::class , "index"])->name("magazines.index");
+Route::get("/magazines", [IssueController::class, "index"])->name("magazines.index");
 Route::get("/magazines/create", [IssueController::class, "create"])->name("magazines.create");
 Route::get('/magazines/{id}', [IssueController::class, 'show'])->name('magazines.show');
 Route::get('/magazines/{id}/download', [IssueController::class, 'download'])->name('magazines.download');
