@@ -18,7 +18,7 @@ Route::middleware('auth', "role:subscriber",)->group(function () {
     // Route::get('/subscription/request', [SubscriptionController::class, 'create'])->name('subscription.create');
 
     Route::get('/dashboard/themes', [ThemeController::class, 'manage'])->name('dashboard.themes');
-    Route::get('/dashboard/themes/{id}/subscription', [ThemeController::class, 'manage_subscriptions'])->name('dashboard.theme.subscriptions');
+    Route::get('/dashboard/themes/{id}/subscription', [SubscriptionController::class, 'manage_subscriptions'])->name('dashboard.theme.subscriptions');
 
 
     // History Related

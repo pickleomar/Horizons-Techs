@@ -109,10 +109,4 @@ class ThemeController extends Controller
 
         return view("dashboard.themes-manage", compact("themes"));
     }
-
-    public function manage_subscriptions(Request $request, $theme_id)
-    {
-        $subscription_requests = $this->subscriptionService->getSubscriptionRequestByTheme($theme_id);
-        return view("dashboard.themes-manage.subscriptions", compact("subscription_requests"));
-    }
 }
