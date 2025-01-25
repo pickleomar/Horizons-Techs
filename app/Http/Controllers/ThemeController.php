@@ -91,4 +91,19 @@ class ThemeController extends Controller
         }
         return redirect()->route('themes.index')->with("error", "An error occured !");
     }
+
+
+
+    public function manage(Request $request)
+    {
+        $themes = [];
+        if (Auth::user()->isEditor()) {
+            $themes = $this->themeService->getAllThemes();
+        } else if (Auth::user()->isAdmin()) {
+
+            $themes = $this->themeService->getThemeByManger(Auth::user()->id);
+        }
+
+        return view("dashboard.themes-manage", compact("themes"));
+    }
 }
