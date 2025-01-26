@@ -50,4 +50,32 @@ class SubscriptionService
         }
         return false;
     }
+
+
+    public function getSubscriptionRequestByTheme($theme_id)
+    {
+        $subscriptions = $this->subscriptionRepository->all()->where("theme_id", $theme_id)->where("status", "pending");
+        return $subscriptions;
+    }
+
+
+    public function approveSubscription($user_id, $theme_id)
+    {
+        $subscription = $this->subscriptionRepository->find($user_id, $theme_id)->first();
+        if (!$subscription) {
+            return false;
+        }
+        $this->subscriptionRepository->update($user_id, $theme_id, ["status" => "approved"]);
+        return true;
+    }
+    public function rejectSubscription($user_id, $theme_id)
+    {
+
+        $subscription = $this->subscriptionRepository->find($user_id, $theme_id)->first();
+        if (!$subscription) {
+            return false;
+        }
+        $this->subscriptionRepository->update($user_id, $theme_id, ["status" => "rejected"]);
+        return true;
+    }
 }

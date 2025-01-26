@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Models\Theme;
+use App\Services\SubscriptionService;
 use App\Services\ThemeService;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,11 +14,13 @@ class ThemeController extends Controller
 {
 
     protected $themeService;
+    protected $subscriptionService;
 
 
-    public function __construct(ThemeService $themeService)
+    public function __construct(ThemeService $themeService, SubscriptionService $subscriptionService)
     {
         $this->themeService = $themeService;
+        $this->subscriptionService = $subscriptionService;
     }
 
 
@@ -90,5 +93,20 @@ class ThemeController extends Controller
             return redirect()->route('themes.index')->with("success", "Theme deleted with success");
         }
         return redirect()->route('themes.index')->with("error", "An error occured !");
+    }
+
+
+
+    public function manage(Request $request)
+    {
+        $themes = [];
+        if (Auth::user()->role === "editor") {
+            $themes = $this->themeService->getAllThemes();
+        } else if (Auth::user()->role === "admin") {
+
+            $themes = $this->themeService->getThemeByManger(Auth::user()->id);
+        }
+
+        return view("dashboard.themes-manage", compact("themes"));
     }
 }

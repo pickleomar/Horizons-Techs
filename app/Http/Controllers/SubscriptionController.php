@@ -65,4 +65,32 @@ class SubscriptionController extends Controller
         }
         return redirect()->route('dashboard.subscriptions')->with('success', 'Subscription removed successfully.');
     }
+
+    public function manage_subscriptions(Request $request, $theme_id)
+    {
+        $subscription_requests = $this->subscriptionService->getSubscriptionRequestByTheme($theme_id);
+        return view("dashboard.themes-manage.subscriptions", compact("subscription_requests"));
+    }
+
+
+    public function approve($user_id, $theme_id)
+    {
+        $subscription = $this->subscriptionService->approveSubscription($user_id, $theme_id);
+        if (!$subscription) {
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+
+        return redirect()->back()->with('success', 'Subscription approved.');
+    }
+
+
+    public function reject($user_id, $theme_id)
+    {
+
+        $subscription = $this->subscriptionService->rejectSubscription($user_id, $theme_id);
+        if (!$subscription) {
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+        return redirect()->back()->with('success', 'Subscription rejected.');
+    }
 }

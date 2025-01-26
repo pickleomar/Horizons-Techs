@@ -39,4 +39,10 @@ class ThemeService
         $theme = $this->themeRepository->find($theme_id);
         return $theme->manager_id === $user_id;
     }
+
+    public function getThemeByManger($user_id)
+    {
+        $themes = $this->themeRepository->all()->where("manager_id", $user_id);
+        return $themes;
+    }
 }
