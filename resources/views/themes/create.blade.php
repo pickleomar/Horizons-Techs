@@ -1,30 +1,98 @@
 <x-app-layout>
-    {{-- <form method="POST" action="{{ route('themes.create') }}" enctype="multipart/form-data">
-        @csrf
 
 
-        <label for="">Name</label><br>
-        <input type="text" placeholder="Theme name ..." name="name"><br>
-        <div style="color: #F14336">
-            {{ implode('', $errors->get('name')) }}
-        </div>
+    <style>
+        .container-theme-form {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
 
-        <label for="">Image</label><br>
-        <input type="file" accept="image/png, image/jpeg" name="image" id="image"><br>
+        .container-theme-form header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--bg-neutral-3);
+        }
 
-        <div style="color: #F14336">
-            {{ implode('', $errors->get('image')) }}
-        </div>
-        <label for="">Description</label><br>
-        <textarea name="description" placeholder="description  ..."></textarea><br>
-        <div style="color: #F14336">
-            {{ implode('', $errors->get('description')) }}
-        </div>
+        .theme-form-container {
+            background-color: var(--bg-neutral-2);
+            border-radius: var(--radius-l);
+            border: 1px solid var(--bg-neutral-3);
+            padding: 2rem;
+        }
 
-        <button type="submit">
-            Submit
-        </button>
-    </form> --}}
+        .theme-form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .theme-form-container label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--divider-color);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .theme-form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background-color: var(--bg-neutral-3);
+            border: 1px solid var(--bg-neutral-4);
+            border-radius: var(--radius-m);
+            color: var(--font-color);
+            font-size: 1rem;
+        }
+
+        .theme-form-input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+
+        .theme-form-input::placeholder {
+            color: var(--bg-neutral-4);
+        }
+
+        .theme-form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .file-input-container {
+            position: relative;
+            width: 100%;
+            height: 18rem;
+            border: 2px dashed var(--bg-neutral-4);
+            border-radius: var(--radius-l);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .file-input-container:hover {
+            border-color: var(--secondary-color);
+        }
+
+        .file-input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-input-label {
+            text-align: center;
+            color: var(--divider-color);
+        }
+
+        .file-input-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--bg-neutral-4);
+        }
+    </style>
 
 
     <div class="container-theme-form">
@@ -83,7 +151,6 @@
 
 
     <script>
-        // Preview image functionality
         document.getElementById('theme-image').addEventListener('change', function(e) {
             const fileInput = e.target;
             const fileInputContainer = fileInput.parentElement;

@@ -1,4 +1,61 @@
 <aside class="sidebar">
+
+    <style>
+        /* Sidebar Styles */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--bg-neutral-1);
+            border-right: 1px solid var(--bg-neutral-4);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            gap: 0.5rem;
+        }
+
+        .sidebar img {
+            width: 100%;
+        }
+
+        .sidebar-nav {
+            padding: 1rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: var(--font-color);
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: var(--radius-m);
+            transition: all 0.2s ease;
+            gap: 0.75rem;
+            border-left: 0.4rem solid transparent;
+        }
+
+        .nav-item:hover {
+            background: var(--outline-color);
+
+        }
+
+        .nav-item.active {
+            font-weight: 700;
+            border-left: 0.4rem solid var(--secondary-color);
+            background: var(--outline-color);
+        }
+
+        .nav-item svg {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+
+
     <nav class="sidebar-nav">
         <div style="display: flex;flex-direction: row;justify-content: center">
             <a href="/">
