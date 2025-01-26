@@ -119,9 +119,13 @@ class User extends Authenticatable
 
     public function isSubscribedToTheme($theme_id)
     {
-        return $this->subscriptions()->where('theme_id', $theme_id)->exists();
+        return $this->subscriptions()->where('theme_id', $theme_id)->where("status", "approved")->exists();
     }
 
+    public function isRequestedSubscription($theme_id)
+    {
+        return $this->subscriptions()->where('theme_id', $theme_id)->exists();
+    }
 
 
     /**

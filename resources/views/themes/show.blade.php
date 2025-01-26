@@ -179,6 +179,13 @@
             </div>
         @endif
 
+
+        @if (Auth::user()->isRequestedSubscription($theme->id) && !Auth::user()->isSubscribedToTheme($theme->id))
+            <div class="alert success">
+                You requested is waiting approval.
+            </div>
+        @endif
+
         <!-- Theme Header -->
         <div class="header">
             <img src="{{ str_starts_with($theme->image, 'http') ? $theme->image : asset($theme->image) }}"
@@ -193,28 +200,31 @@
 
         <!-- Related Articles -->
         <div class="articles">
-            <h2>Related Articles</h2>
+            @if (Auth::user()->isSubscribedToTheme($theme->id))
 
-            @if ($articles->count() > 0)
-                <div class="grid">
-                    @foreach ($articles as $article)
-                        <article>
-                            <a style="all: unset;cursor: pointer;"
-                                href="{{ route('articles.show', ['theme' => $theme->id, 'article' => $article->id]) }}">
-                                <h3>{{ $article->title }}</h3>
-                                <div class="metadata">
-                                    <img src="{{ str_starts_with($article->image, 'http') ? $article->image : asset($theme->image) }}"
-                                        alt="">
-                                    <span>Status: {{ $article->public ? 'Public' : 'Private' }}</span>
-                                    <span>Last updated: 2025-01-24 23:09:57</span>
-                                    <span>By: @someone here</span>
-                                </div>
-                            </a>
-                        </article>
-                    @endforeach
-                </div>
-            @else
-                <p class="empty">No articles found for this theme.</p>
+                <h2>Related Articles</h2>
+
+                @if ($articles->count() > 0)
+                    <div class="grid">
+                        @foreach ($articles as $article)
+                            <article>
+                                <a style="all: unset;cursor: pointer;"
+                                    href="{{ route('articles.show', ['theme' => $theme->id, 'article' => $article->id]) }}">
+                                    <h3>{{ $article->title }}</h3>
+                                    <div class="metadata">
+                                        <img src="{{ str_starts_with($article->image, 'http') ? $article->image : asset($theme->image) }}"
+                                            alt="">
+                                        <span>Status: {{ $article->public ? 'Public' : 'Private' }}</span>
+                                        <span>Last updated: 2025-01-24 23:09:57</span>
+                                        <span>By: @someone here</span>
+                                    </div>
+                                </a>
+                            </article>
+                        @endforeach
+                    </div>
+                @else
+                    <p class="empty">No articles found for this theme.</p>
+                @endif
             @endif
 
             <!-- Actions -->
