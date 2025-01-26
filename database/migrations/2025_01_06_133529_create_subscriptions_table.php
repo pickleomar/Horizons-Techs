@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('theme_id')->constrained('themes')->onDelete('cascade');
-            $table->dateTime('subscription_date');
+            $table->dateTime('subscription_date')->default(now());
             $table->timestamps();
         });
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ThemeController;
+use App\Http\Controllers\RatingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SubscriptionController;
 
@@ -47,6 +48,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+// Rating Routes (nested under themes and articles)
+Route::middleware(["auth", "verified"])->group(function () {
+    // Rate an article
+    Route::post('themes/{theme}/articles/{article}/rate', [RatingController::class, 'rateArticle'])->name('articles.rate');
+
+    // Get average rating for an article
+    Route::get('themes/{theme}/articles/{articleId}/average-rating', 
+    [RatingController::class, 'getAverageRating'])->name('articles.average-rating');
 });
 
 require __DIR__ . '/auth.php';
