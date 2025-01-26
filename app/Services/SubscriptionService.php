@@ -65,8 +65,7 @@ class SubscriptionService
         if (!$subscription) {
             return false;
         }
-        $this->subscriptionRepository->update($user_id, $theme_id, ["status" => "approved"]);
-        return true;
+        return $this->subscriptionRepository->update($user_id, $theme_id, ["status" => "approved"]);
     }
     public function rejectSubscription($user_id, $theme_id)
     {
@@ -75,7 +74,6 @@ class SubscriptionService
         if (!$subscription) {
             return false;
         }
-        $this->subscriptionRepository->update($user_id, $theme_id, ["status" => "rejected"]);
-        return true;
+        return $this->subscriptionRepository->update($user_id, $theme_id, ["status" => "rejected"]);
     }
 }

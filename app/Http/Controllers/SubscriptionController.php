@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\SubscriptionApprovedNotification;
+use App\Notifications\SubscriptionRejectedNotification;
 use Illuminate\Http\Request;
 use App\Services\SubscriptionService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class SubscriptionController extends Controller
 {
@@ -75,10 +78,13 @@ class SubscriptionController extends Controller
 
     public function approve($user_id, $theme_id)
     {
-        $subscription = $this->subscriptionService->approveSubscription($user_id, $theme_id);
+
+        $subscription = $this->subscriptionService->approveSubscription($user_id, $theme_id)->first();
         if (!$subscription) {
             return redirect()->back()->with('error', 'Something went wrong.');
         }
+
+        Notification::send($subscription->user, new SubscriptionApprovedNotification($subscription));
 
         return redirect()->back()->with('success', 'Subscription approved.');
     }
@@ -87,10 +93,13 @@ class SubscriptionController extends Controller
     public function reject($user_id, $theme_id)
     {
 
-        $subscription = $this->subscriptionService->rejectSubscription($user_id, $theme_id);
+        $subscription = $this->subscriptionService->rejectSubscription($user_id, $theme_id)->first();
         if (!$subscription) {
             return redirect()->back()->with('error', 'Something went wrong.');
         }
+
+        Notification::send($subscription->user, new SubscriptionRejectedNotification($subscription));
+
         return redirect()->back()->with('success', 'Subscription rejected.');
     }
 }
