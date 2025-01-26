@@ -9,6 +9,7 @@ use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\RatingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\ChatController;
 
 Route::get('/', function () {
     return view('home');
@@ -50,7 +51,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Store a chat message (accessible to subscribers)
+Route::post('/chats', [ChatController::class, 'store'])
+    ->middleware(['auth', 'verified', 'role:subscriber'])
+    ->name('chats.store');
+
+// Delete a chat message (accessible to admins/editors)
+Route::delete('/chats/{chat}', [ChatController::class, 'destroy'])
+    ->middleware(['auth', 'verified', 'role:admin,editor'])
+    ->name('chats.destroy');
 // Rating Routes (nested under themes and articles)
+
 Route::middleware(["auth", "verified"])->group(function () {
     // Rate an article
     Route::post('themes/{theme}/articles/{article}/rate', [RatingController::class, 'rateArticle'])->name('articles.rate');

@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class RoleMiddleware
 {
@@ -14,13 +15,24 @@ class RoleMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $role): Response
+    //Updates: Users with higher roles inherit permissions of lower roles 
+    public function handle(Request $request, Closure $next, ...$roles): Response 
     {
-        // Check if the user is authenticated and has the required role
-        if (!Auth::check() || Auth::user()->role >= $role) {
+        if (!Auth::check()) {
             abort(403, 'Unauthorized');
         }
 
-        return $next($request);
+        //Exemple: Admin can access routes restricted to editor
+        $user = Auth::user();
+        $userRoleLevel = User::ROLE_HIERARCHY[$user->role] ?? 0;
+
+        foreach ($roles as $role) {
+            $requiredRoleLevel = User::ROLE_HIERARCHY[$role] ?? 0;
+            if ($userRoleLevel >= $requiredRoleLevel) {
+                return $next($request);
+            }
+        }
+
+        abort(403, 'Unauthorized');
     }
 }
