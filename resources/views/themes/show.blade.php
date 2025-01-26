@@ -1,60 +1,168 @@
 <x-app-layout>
-    {{-- @if (session('error'))
-        <div style="color: #F14336">
-            {{ session('error') }}
-        </div>
-    @endif
+    <style>
+        .theme-page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
 
-    @if (session('success'))
-        <div style="color: var(--primary-color)">
-            {{ session('success') }}
-        </div>
-    @endif
+        .theme-page .alert {
+            padding: 1rem;
+            border-radius: 0.25rem;
+            margin-bottom: 1rem;
+        }
 
-    <pre>
+        .theme-page .alert.success {
+            background-color: rgba(31, 136, 61, 0.1);
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
 
-        {{ $theme }}
-    </pre>
-    Related Articles
+        .theme-page .alert.error {
+            background-color: rgba(207, 34, 46, 0.1);
+            border: 1px solid var(--danger-color);
+            color: var(--danger-color);
+        }
 
-    @foreach ($articles as $article)
-        <pre>
-            <span> Theme id {{ $article->theme_id }} </span> <br>
-            <span> Title {{ $article->title }} </span> <br>
-            <span> Public = {{ $article->public }} </span> <br>
-        </pre>
-    @endforeach
-    {{ $articles }}
+        .theme-page .header {
+            background-color: var(--bg-neutral-2);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--bg-neutral-3);
+        }
 
-    <div>
+        .theme-page .header img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 0.25rem;
+            margin-bottom: 1.5rem;
+        }
 
-        <x-button class="btn-primary fit-w" href="{{ route('article.create', ['theme' => $theme->id]) }}">Create an
-            article</x-button>
-    </div>
+        .theme-page .header h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--font-color);
+        }
+
+        .theme-page .header p {
+            color: var(--divider-color);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .theme-page .metadata {
+            display: flex;
+            gap: 1rem;
+            color: var(--bg-neutral-4);
+            font-size: 0.875rem;
+        }
+
+        .theme-page .articles {
+            background-color: var(--bg-neutral-2);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            border: 1px solid var(--bg-neutral-3);
+        }
+
+        .theme-page .articles h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--font-color);
+        }
+
+        .theme-page .articles .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .theme-page .articles article {
+            background-color: var(--bg-neutral-3);
+            border-radius: 0.25rem;
+            padding: 1.5rem;
+            transition: transform 0.2s;
+        }
 
 
+        .theme-page .articles article h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--font-color);
+        }
 
-    @if ((Auth::user()->isAdmin() && $theme->manager_id == Auth::user()->id) || Auth::user()->isEditor())
-        <div>
-            <form method="POST" action="{{ route('themes.destroy', ['id' => $theme->id]) }}">
-                @csrf
-                @method('DELETE')
-                <x-button type="submit" class="btn-danger outline fit-w" href="">DeleteTheme</x-button>
-            </form>
-        </div>
-    @endif
+        .theme-page .articles article .metadata {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
 
+        .theme-page .empty {
+            color: var(--bg-neutral-4);
+            text-align: center;
+            padding: 2rem;
+        }
 
+        .theme-page .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
 
-    @if (!Auth::user()->isSubscribedToTheme($theme->id))
-        <div>
-            <form method="POST" action="{{ route('subscriptions.store') }}">
-                @csrf
-                <input type="hidden" name="theme_id" value="{{ $theme->id }}">
-                <x-button type="submit" class="btn-secondary outline fit-w">Subscribe</x-button>
-            </form>
-        </div>
-    @endif --}}
+        .theme-page .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.25rem;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            width: 100%;
+        }
+
+        .theme-page .btn:hover {
+            opacity: 0.9;
+        }
+
+        .theme-page .btn.primary {
+            background-color: var(--primary-color);
+            color: var(--font-color);
+        }
+
+        .theme-page .btn.secondary {
+            background-color: var(--secondary-color);
+            color: var(--font-color);
+        }
+
+        .theme-page .btn.danger {
+            background-color: var(--danger-color);
+            color: var(--font-color);
+        }
+
+        @media (max-width: 768px) {
+            .theme-page {
+                padding: 1rem;
+            }
+
+            .theme-page .header img {
+                height: 200px;
+            }
+
+            .theme-page .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .theme-page .articles .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 
 
     <div class="theme-page">
