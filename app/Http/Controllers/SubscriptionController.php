@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Notifications\SubscriptionApprovedNotification;
 use App\Notifications\SubscriptionRejectedNotification;
 use Illuminate\Http\Request;
@@ -82,6 +83,13 @@ class SubscriptionController extends Controller
         $subscription = $this->subscriptionService->approveSubscription($user_id, $theme_id)->first();
         if (!$subscription) {
             return redirect()->back()->with('error', 'Something went wrong.');
+        }
+
+        $user = User::findOrFail($subscription->user_id);
+
+        if ($user->role === "user") {
+            $user->role = "subscriber";
+            $user->save();
         }
 
         Notification::send($subscription->user, new SubscriptionApprovedNotification($subscription));
