@@ -1,5 +1,28 @@
 <x-dashboard-layout>
+    <style>
+        .subscription-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
 
+        .subscription-card {
+            background: var(--bg-color-n-1);
+            padding: 1.5rem;
+            border-radius: var(--radius-l);
+            border: 1px solid var(--bg-color-n-2);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .subscription-action {
+            display: flex;
+            margin-top: 0.5rem;
+            gap: 0.25rem;
+        }
+    </style>
 
     <section class="dashboard-section">
         <header class="welcome-header">

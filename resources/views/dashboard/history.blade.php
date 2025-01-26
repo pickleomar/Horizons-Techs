@@ -1,5 +1,34 @@
 <x-dashboard-layout>
+    <style>
+        .history-container {
+            background: var(--bg-color-n-3);
+            padding: 1.5rem;
+            border-radius: var(--radius-l);
+            border: 1px solid var(--bg-color-n-2);
+            overflow-x: auto;
+        }
 
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .history-table th,
+        .history-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--bg-color-n-2);
+        }
+
+        .history-table th {
+            font-weight: 600;
+            color: var(--font-color);
+        }
+
+        .history-table tbody tr:hover {
+            background: var(--outline-color);
+        }
+    </style>
 
     <section class="dashboard-section">
         <h2>Historique de Navigation</h2>
