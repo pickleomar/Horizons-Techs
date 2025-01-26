@@ -13,24 +13,26 @@
                 </thead>
                 <tbody>
 
-                    @foreach ($subscription_requests as $request)
+                    @foreach ($subscription_requests as $sub_request)
                         <tr>
-                            <td>{{ $request->theme->name }}</td>
-                            <td>{{ $request->user->name }}</td>
-                            <td>{{ $request->created_at }}</td>
+                            <td>{{ $sub_request->theme->name }}</td>
+                            <td>{{ $sub_request->user->name }}</td>
+                            <td>{{ $sub_request->created_at }}</td>
                             <td style="display: flex;gap: 1rem">
-                                <x-button size="sm" class="btn-primary full-w">Approve</x-button>
-                                <x-button size="sm" class="btn-danger full-w">Reject</x-button>
-
-                                {{-- <form class="full-w" action="{{ route('history.destroy') }}" method="post">
+                                <form class="full-w"
+                                    action="{{ route('subscriptions.approve', ['user_id' => $sub_request->user->id, 'theme_id' => $sub_request->theme->id]) }}"
+                                    method="post">
                                     @csrf
-                                    @method('DELETE')
+                                    <x-button type="submit" size="sm" class="btn-primary full-w">Approve</x-button>
+                                </form>
 
-                                    <input type="hidden" required name="article_id"
-                                        value="{{ $history->article->id }}">
-                                    <x-button type="submit" size="sm"
-                                        class="btn-danger outline full-w">Suprimmer</x-button>
-                                </form> --}}
+                                <form class="full-w"
+                                    action="{{ route('subscriptions.reject', ['user_id' => $sub_request->user->id, 'theme_id' => $sub_request->theme->id]) }}"
+                                    method="post">
+                                    @csrf
+                                    <x-button type="submit" size="sm" class="btn-danger full-w">Reject</x-button>
+                                </form>
+
                             </td>
                         </tr>
                     @endforeach
