@@ -39,7 +39,7 @@ class SubscriptionService
 
     public function getSubscriptionsByUser($user_id)
     {
-        return $this->subscriptionRepository->all()->where("user_id", $user_id);
+        return $this->subscriptionRepository->all()->where("user_id", $user_id)->where("status", "approved");
     }
 
     public function isUserSubscribed($user_id, $theme_id)
