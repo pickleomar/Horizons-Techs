@@ -29,4 +29,8 @@ class Rating extends Model
     {
         return $this->belongsTo(Article::class);
     }
+
+    /**
+     * 
+     */
 }

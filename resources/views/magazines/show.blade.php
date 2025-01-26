@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="magazine">
         <div class="magazine-topper">
-            <h1>Magazine</h1>
+            <h1 class="magazine-head">Magazine</h1>
             <ul class="menu-bar">
                 <li>
                     <a href="#past-issues" class="menu-item">View past issues</a>                
