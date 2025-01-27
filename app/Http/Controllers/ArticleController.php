@@ -118,4 +118,32 @@ class ArticleController extends Controller
         return redirect()->route('articles.index')
             ->with('success', 'Article deleted successfully.');
     }
+
+
+    public function manage_articles(Request $request, $theme_id)
+    {
+        $articles = $this->articleService->getAllArticles()->where("theme_id", $theme_id)->where("status", "Pending");
+
+        return view("dashboard.themes-manage.articles", compact("articles"));
+    }
+
+
+    public function approve($article_id)
+    {
+        $article = $this->articleService->approveArticle($article_id)->first();
+        if (!$article) {
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+        return redirect()->back()->with('success', 'Article approved.');
+    }
+
+
+    public function reject($article_id)
+    {
+        $article = $this->articleService->rejectArticle($article_id)->first();
+        if (!$article) {
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+        return redirect()->back()->with('success', 'Article rejected.');
+    }
 }

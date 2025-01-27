@@ -32,4 +32,22 @@ class ArticleService
     {
         return $this->articleRepository->delete($id);
     }
+
+
+    public function approveArticle($article_id)
+    {
+        $article = $this->articleRepository->find($article_id)->first();
+        if (!$article) {
+            return false;
+        }
+        return $this->articleRepository->update($article_id, ["status" => "Approved"]);
+    }
+    public function rejectArticle($article_id)
+    {
+        $article = $this->articleRepository->find($article_id)->first();
+        if (!$article) {
+            return false;
+        }
+        return $this->articleRepository->update($article_id, ["status" => "Rejected"]);
+    }
 }

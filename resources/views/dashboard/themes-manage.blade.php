@@ -150,7 +150,8 @@
                             <div style="gap: 1rem" class="theme-metadata">
                                 <x-button href="{{ route('dashboard.theme.subscriptions', ['id' => $theme->id]) }}"
                                     class="btn-primary outline full-w">Subscriptions</x-button>
-                                <x-button class="btn-primary outline full-w">Articles</x-button>
+                                <x-button href="{{ route('dashboard.theme.articles', ['id' => $theme->id]) }}"
+                                    class="btn-primary outline full-w">Articles</x-button>
                             </div>
                     </div>
                     </a>

@@ -39,6 +39,7 @@
                 <thead>
                     <tr>
                         <th>Theme</th>
+                        <th>Article</th>
                         <th>User</th>
                         <th>Date</th>
                         <th>Actions</th>
@@ -46,25 +47,29 @@
                 </thead>
                 <tbody>
 
-                    @foreach ($subscription_requests as $sub_request)
+                    @foreach ($articles as $article)
                         <tr>
-                            <td>{{ $sub_request->theme->name }}</td>
-                            <td>{{ $sub_request->user->name }}</td>
-                            <td>{{ $sub_request->created_at }}</td>
+                            <td>{{ $article->theme->name }}</td>
+                            <td>{{ $article->title }}</td>
+                            <td>{{ $article->author->name }}</td>
+                            <td>{{ $article->created_at }}</td>
                             <td style="display: flex;gap: 1rem">
                                 <form class="full-w"
-                                    action="{{ route('subscriptions.approve', ['user_id' => $sub_request->user->id, 'theme_id' => $sub_request->theme->id]) }}"
+                                    action="{{ route('articles.approve', ['article_id' => $article->id]) }}"
                                     method="post">
                                     @csrf
                                     <x-button type="submit" size="sm" class="btn-primary full-w">Approve</x-button>
                                 </form>
 
                                 <form class="full-w"
-                                    action="{{ route('subscriptions.reject', ['user_id' => $sub_request->user->id, 'theme_id' => $sub_request->theme->id]) }}"
+                                    action="{{ route('articles.reject', ['article_id' => $article->id]) }}"
                                     method="post">
                                     @csrf
                                     <x-button type="submit" size="sm" class="btn-danger full-w">Reject</x-button>
                                 </form>
+                                <x-button
+                                    href="{{ route('articles.show', ['theme' => $article->theme_id, 'article' => $article->id]) }}"
+                                    size="sm" class="btn-secondary full-w">voir</x-button>
 
                             </td>
                         </tr>
