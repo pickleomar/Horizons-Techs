@@ -152,28 +152,42 @@
                         @switch($article->status)
                             @case('Rejected')
                                 <span class="status status-rejected">{{ $article->status }}</span>
+
+                                <div class="article-actions">
+                                    <x-button class="btn-secondary">Edit</x-button>
+                                    <x-button class="btn-primary">Request</x-button>
+                                    <x-button class="btn-danger">Delete</x-button>
+                                </div>
                             @break
 
                             @case('Approved')
                                 <span class="status status-approved">{{ $article->status }}</span>
+                                <div class="article-actions">
+                                    <x-button class="btn-primary">Publish</x-button>
+                                    <x-button class="btn-secondary">Edit</x-button>
+                                    <x-button class="btn-danger">Delete</x-button>
+                                </div>
                             @break
 
                             @case('Pending')
                                 <span class="status status-approved">{{ $article->status }}</span>
+                                <div class="article-actions">
+                                    <x-button class="btn-secondary">Edit</x-button>
+                                    <x-button class="btn-danger">Delete</x-button>
+                                </div>
                             @break
 
                             @case('Published')
                                 <span class="status status-approved">{{ $article->status }}</span>
+                                <div class="article-actions">
+                                    <x-button class="btn-secondary">Edit</x-button>
+                                    <x-button class="btn-danger">Delete</x-button>
+                                </div>
                             @break
 
                             @default
                         @endswitch
 
-                        <div class="article-actions">
-                            <x-button class="btn-secondary">Edit</x-button>
-                            <x-button class="btn-primary">Publish</x-button>
-                            <x-button class="btn-danger">Delete</x-button>
-                        </div>
                     </div>
                 </article>
             @endforeach
