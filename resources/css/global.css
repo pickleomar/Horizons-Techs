@@ -29,6 +29,75 @@
 }
 
 
+.dark-theme {
+
+    /* Components Colors */
+    --primary-color: rgba(31, 136, 61, 1.0);
+    --secondary-color: rgba(9, 105, 218, 1.0);
+    --tertiary-color: rgba(75, 98, 133, 1.0);
+    --warning-color: rgba(154, 103, 0, 1.0);
+    --danger-color: rgba(207, 34, 46, 1.0);
+    --outline-color: rgba(37, 44, 52, 1.0);
+
+    /* Background Colors */
+    --bg-color: rgba(13, 17, 23, 1.0);
+    --bg-neutral-1: rgba(1, 4, 9, 1.0);
+    --bg-neutral-2: rgba(21, 27, 35, 1.0);
+    --bg-neutral-3: rgba(31, 35, 40, 1.0);
+    --bg-neutral-4: rgba(89, 99, 110, 1.0);
+
+    /* Font Color */
+
+    --font-color: rgba(255, 255, 255, 1.0);
+    --divider-color: rgba(197, 203, 212, 1.0);
+    /* border radius */
+    --radius-s: 0.125rem;
+    --radius-m: 0.25rem;
+    --radius-l: 0.5rem;
+    --radius-xl: 1rem;
+    /* Related Dashboard */
+    --sidebar-width: 20rem;
+}
+
+
+.light-theme {
+    --primary-color: rgba(21, 112, 47, 1.0);
+    /* Darker green for better contrast */
+    --secondary-color: rgba(7, 85, 185, 1.0);
+    /* Deepened blue */
+    --tertiary-color: rgba(66, 88, 122, 1.0);
+    /* Muted slate-blue for subtlety */
+    --warning-color: rgba(128, 85, 0, 1.0);
+    /* Darkened amber for visibility */
+    --danger-color: rgba(183, 28, 38, 1.0);
+    /* Richer red for urgency */
+    --outline-color: rgba(173, 181, 189, 1.0);
+    /* Soft gray for borders */
+
+    --bg-color: rgba(255, 255, 255, 1.0);
+    /* Pure white base */
+    --bg-neutral-1: rgba(248, 249, 250, 1.0);
+    /* Lightest gray (for subtle layers) */
+    --bg-neutral-2: rgba(233, 236, 239, 1.0);
+    /* Soft contrast for cards/modals */
+    --bg-neutral-3: rgba(222, 226, 230, 1.0);
+    /* Medium gray (hover states) */
+    --bg-neutral-4: rgba(206, 212, 218, 1.0);
+    /* Accent gray (dividers/disabled) */
+
+    --font-color: rgba(33, 37, 41, 1.0);
+    /* Near-black for readability */
+    --divider-color: rgba(206, 212, 218, 1.0);
+    /* Matches --bg-neutral-4 */
+
+    /* Retain existing border radii and sidebar width */
+    --radius-s: 0.125rem;
+    --radius-m: 0.25rem;
+    --radius-l: 0.5rem;
+    --radius-xl: 1rem;
+    --sidebar-width: 20rem;
+}
+
 
 /* @media(prefers-color-scheme : light) {
     :root {
