@@ -75,6 +75,96 @@
                 font-size: 14px;
             }
         }
+
+        .rating-section {
+            padding: 24px;
+            background-color: var(--bg-neutral-2);
+            border-top: 1px solid var(--bg-neutral-3);
+        }
+
+        .rating-title {
+            color: var(--font-color);
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .rating-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .stars {
+            display: flex;
+
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .star-radio {
+            display: none;
+        }
+
+        .star-label {
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--bg-neutral-4);
+            transition: color 0.2s;
+        }
+
+        .star-radio:checked~.star-label {
+            color: var(--bg-neutral-4);
+        }
+
+        .star-label:hover,
+        .star-label:hover~.star-label,
+        .star-radio:checked+.star-label {
+            color: var(--primary-color);
+        }
+
+        .rating-input {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--bg-neutral-1);
+            border: 1px solid var(--bg-neutral-3);
+            border-radius: var(--radius-m);
+            color: var(--font-color);
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .rating-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .rating-submit {
+            align-self: flex-end;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary-color);
+            color: var(--font-color);
+            border: none;
+            border-radius: var(--radius-m);
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .rating-submit:hover {
+            opacity: 0.9;
+        }
+
+        .current-user {
+            color: var(--divider-color);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .timestamp {
+            color: var(--divider-color);
+            font-size: 0.875rem;
+            text-align: right;
+            margin-top: 0.5rem;
+        }
     </style>
 
 
@@ -98,6 +188,37 @@
         <div class="article-footer">
             <span>Posted on: {{ $article->publication_date }}</span>
             <span>Author: {{ '@' . $article->author->name }}</span>
+        </div>
+
+
+
+        {{-- Rating Section --}}
+        <div class="rating-section">
+            <p class="current-user">Rating as: {{ '@' . Auth::user()->name }}</p>
+            <form class="rating-form" method="POST">
+                @csrf
+                <div class="stars">
+
+                    <input type="radio" name="rating" value="1" id="star1" class="star-radio">
+                    <label for="star1" class="star-label">★</label>
+
+                    <input type="radio" name="rating" value="2" id="star2" class="star-radio">
+                    <label for="star2" class="star-label">★</label>
+
+                    <input type="radio" name="rating" value="3" id="star3" class="star-radio">
+                    <label for="star3" class="star-label">★</label>
+
+                    <input type="radio" name="rating" value="4" id="star4" class="star-radio">
+                    <label for="star4" class="star-label">★</label>
+
+                    <input type="radio" name="rating" value="5" id="star5" class="star-radio">
+                    <label for="star5" class="star-label">★</label>
+
+
+
+                </div>
+                <x-button type="submit" class="rating-submit">Submit Rating</x-button>
+            </form>
         </div>
     </article>
 

@@ -45,11 +45,6 @@ Route::get('/magazines/{id}/load-more', [IssueController::class, 'loadMore'])->n
 
 
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
 
 // Store a chat message (accessible to subscribers)
 Route::post('/chats', [ChatController::class, 'store'])
