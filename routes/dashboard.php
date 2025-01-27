@@ -22,18 +22,6 @@ Route::middleware('auth',)->group(function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 //
 Route::middleware(['auth', "role:editor,admin"])->group(function () {
 

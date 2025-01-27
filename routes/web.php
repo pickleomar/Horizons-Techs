@@ -22,14 +22,14 @@ Route::get('/', function () {
 
 // Themes Routes
 Route::get("/themes", [ThemeController::class, "index"])->name("themes.index");
-Route::get("/themes/create", [ThemeController::class, "create"])->name("themes.create");
-Route::post("/themes/create", [ThemeController::class, "store"]);
+Route::get("/themes/create", [ThemeController::class, "create"])->middleware("auth")->name("themes.create");
+Route::post("/themes/create", [ThemeController::class, "store"])->middleware("auth");
 
 
 // View Theme
-Route::get("/themes/{theme}", [ThemeController::class, "show"])->name("themes.show");
+Route::get("/themes/{theme}", [ThemeController::class, "show"])->name("themes.show")->middleware("auth");
 // Delete Themes
-Route::delete("/themes/{id}", [ThemeController::class, "destroy"])->name("themes.destroy");
+Route::delete("/themes/{id}", [ThemeController::class, "destroy"])->name("themes.destroy")->middleware("auth");
 // View Theme Articles
 Route::get('themes/{theme}/articles', [ArticleController::class, "index"])->middleware(["auth", "verified"])->name('articles.index');
 Route::get('themes/{theme}/articles/{article}', [ArticleController::class, "show"])->middleware(["auth", "verified"])->name('articles.show');
@@ -67,8 +67,10 @@ Route::middleware(["auth", "verified"])->group(function () {
     Route::post('themes/{theme}/articles/{article}/rate', [RatingController::class, 'rateArticle'])->name('articles.rate');
 
     // Get average rating for an article
-    Route::get('themes/{theme}/articles/{articleId}/average-rating', 
-    [RatingController::class, 'getAverageRating'])->name('articles.average-rating');
+    Route::get(
+        'themes/{theme}/articles/{articleId}/average-rating',
+        [RatingController::class, 'getAverageRating']
+    )->name('articles.average-rating');
 });
 
 require __DIR__ . '/auth.php';
