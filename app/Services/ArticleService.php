@@ -20,6 +20,13 @@ class ArticleService
     {
         return $this->articleRepository->find($id);
     }
+
+
+    public function getArticleByUser($user_id)
+    {
+        return $this->articleRepository->all()->where("author_id", $user_id);
+    }
+
     public function createArticle(array $data)
     {
         return $this->articleRepository->create($data);
@@ -49,5 +56,15 @@ class ArticleService
             return false;
         }
         return $this->articleRepository->update($article_id, ["status" => "Rejected"]);
+    }
+
+
+    public function publishArticle($article_id)
+    {
+        $article = $this->articleRepository->find($article_id)->first();
+        if (!$article) {
+            return false;
+        }
+        return $this->articleRepository->update($article_id, ["status" => "Published"]);
     }
 }

@@ -27,11 +27,9 @@ class ArticleController extends Controller
     {
         $user = Auth::user();
 
-        // TODO THIS FEATURE ISN'T IMPLEMENTED YET : Filtering
+        $articles = $this->articleService->getArticleByUser($user->id);
 
-        $articles = $theme->articles;
-
-        return view('articles.index', compact('articles'));
+        return view('dashboard.articles', compact('articles'));
     }
 
     /**

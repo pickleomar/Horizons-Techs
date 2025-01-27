@@ -11,7 +11,6 @@ class DashboardController extends Controller
         return view("dashboard.index");
     }
 
-
     public function subscription(Request $request)
     {
         return view("dashboard.subscription");
