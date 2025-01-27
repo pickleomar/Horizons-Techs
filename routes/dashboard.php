@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\ProfileController;
@@ -34,13 +35,16 @@ Route::middleware(['auth', "role:editor,admin"])->group(function () {
     Route::post('/subscriptions/{user_id}/{theme_id}/approve', [SubscriptionController::class, 'approve'])->name('subscriptions.approve');
     Route::post('/subscriptions/{user_id}/{theme_id}/reject', [SubscriptionController::class, 'reject'])->name('subscriptions.reject');
 
+
+    Route::post('/articles/{article_id}/approve', [ArticleController::class, 'approve'])->name('articles.approve');
+    Route::post('/articles/{article_id}/reject', [ArticleController::class, 'reject'])->name('articles.reject');
+
+
+
     Route::get('/dashboard/themes', [ThemeController::class, 'manage'])->name('dashboard.themes');
     Route::get('/dashboard/themes/{id}/subscription', [SubscriptionController::class, 'manage_subscriptions'])->name('dashboard.theme.subscriptions');
+    Route::get('/dashboard/themes/{id}/articles', [ArticleController::class, 'manage_articles'])->name('dashboard.theme.articles');
 
 
     // History Related
 });
-
-Route::get('/apply', function () {
-    return view('apply.index');
-})->name("apply.index");
