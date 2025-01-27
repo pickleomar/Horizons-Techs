@@ -215,7 +215,6 @@
                     <label for="star5" class="star-label">★</label>
 
 
-
                 </div>
                 <x-button type="submit" class="rating-submit">Submit Rating</x-button>
             </form>
