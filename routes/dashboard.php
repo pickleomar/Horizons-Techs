@@ -35,7 +35,7 @@ Route::middleware('auth',)->group(function () {
 
 
 //
-Route::middleware('auth', "role:admin|editor",)->group(function () {
+Route::middleware(['auth', "role:editor,admin"])->group(function () {
 
     // approve / reject Subscription
     Route::post('/subscriptions/{user_id}/{theme_id}/approve', [SubscriptionController::class, 'approve'])->name('subscriptions.approve');

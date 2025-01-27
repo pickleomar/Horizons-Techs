@@ -16,7 +16,7 @@ class RoleMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     //Updates: Users with higher roles inherit permissions of lower roles 
-    public function handle(Request $request, Closure $next, ...$roles): Response 
+    public function handle(Request $request, Closure $next, ...$roles): Response
     {
         if (!Auth::check()) {
             abort(403, 'Unauthorized');
