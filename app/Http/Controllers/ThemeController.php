@@ -64,7 +64,7 @@ class ThemeController extends Controller
     {
         $theme = $this->themeService->getThemeById($id);
 
-        $articles = $theme->articles;
+        $articles = $theme->articles->where("status", "Approved");
 
         return view("themes.show", compact("theme", "articles"));
     }
