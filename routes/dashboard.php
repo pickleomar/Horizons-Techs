@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\ThemeController;
@@ -18,6 +19,10 @@ Route::middleware('auth',)->group(function () {
 
     Route::get('/dashboard/history', [HistoryController::class, 'index'])->name('dashboard.history');
     Route::delete('/history', [HistoryController::class, 'destroy'])->name('history.destroy');
+
+
+    Route::get('/dashboard/profile', [ProfileController::class, 'index'])->name('dashboard.profile');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 
