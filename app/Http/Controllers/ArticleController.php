@@ -9,18 +9,23 @@ use App\Services\ArticleService;
 use App\Services\HistoryService;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\RatingController;
+use App\Services\RatingService;
 
 class ArticleController extends Controller
 {
 
     protected $articleService;
     protected $historyService;
+    protected $ratingController;
 
-    public function __construct(ArticleService $articleService, HistoryService $historyService,RatingController $ratingController)
+    protected $ratingService;
+
+    public function __construct(ArticleService $articleService, HistoryService $historyService, RatingController $ratingController, RatingService $ratingService)
     {
         $this->articleService = $articleService;
         $this->historyService = $historyService;
-        $this->ratingController=$ratingController;
+        $this->ratingController = $ratingController;
+        $this->ratingService = $ratingService;
     }
 
     public function index(Theme $theme)
@@ -68,12 +73,16 @@ class ArticleController extends Controller
 
 
     public function show(Theme $theme, Article $article)
-    {   
+    {
         if ($article->status === "Published") {
             $this->historyService->trackHistory(Auth::user()->id, $article->id);
         }
         $userRating = $this->ratingController->getUserRating($article);
-        return view('articles.show', compact('article','userRating'));
+
+        $avgRating  = round($this->ratingService->getAverageRating($article->id), 2);
+
+
+        return view('articles.show', compact('article', 'userRating', "avgRating"));
     }
 
     public function edit(Article $article)

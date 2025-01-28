@@ -45,34 +45,10 @@ class RatingController extends Controller
         return redirect()->back()->with('success', 'Rating submitted successfully!');
     }
     //Retreive the existing user Rating and displays it
-    public function getUserRating(Article $article){
-        $user=Auth::user();
-        return Rating::where('user_id', $user->id)->where('article_id',$article->id)->first();
-
-    }
-
-    /**
-     * Get the average rating for an article.
-     */
-
-    public function getAverageRating(Theme $theme, $articleId)
+    public function getUserRating(Article $article)
     {
-        try {
-            $article = Article::findOrFail($articleId);
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            return response()->json([
-                'message' => 'Article not found'
-            ], 404);
-        }
-
-        // Rest of your existing logic
-        $averageRating = $this->ratingService->getAverageRating($article->id);
-
-        return response()->json([
-            'article_id' => $article->id,
-            'average_rating' => round($averageRating, 2),
-            'total_ratings' => $this->ratingService->getTotalRatings($article->id)
-        ]);
+        $user = Auth::user();
+        return Rating::where('user_id', $user->id)->where('article_id', $article->id)->first();
     }
 
     /**
@@ -90,6 +66,4 @@ class RatingController extends Controller
 
         return 'You are not authorized to rate this article.';
     }
-
-    
 }

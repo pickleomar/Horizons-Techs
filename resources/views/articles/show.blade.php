@@ -92,6 +92,7 @@
             display: flex;
             flex-direction: column;
             gap: 1rem;
+            align-items: center;
         }
 
         .stars {
@@ -403,7 +404,9 @@
         </div>
 
 
-
+        <div>
+            Avergae is {{ $avgRating }}
+        </div>
         {{-- Rating Section --}}
         <div class="rating-section">
             <p class="current-user">Rating as: {{ '@' . Auth::user()->name }}</p>
