@@ -96,8 +96,8 @@
 
         .stars {
             display: flex;
-            flex-direction: row-reverse; 
-            justify-content: flex-end; 
+            flex-direction: row-reverse;
+            justify-content: flex-end;
             gap: 0.5rem;
             margin-bottom: 1rem;
         }
@@ -112,15 +112,15 @@
             color: var(--bg-neutral-4);
             transition: color 0.2s;
         }
-        
-        .star-radio:checked + .star-label,
-        .star-radio:checked ~ .star-label {
+
+        .star-radio:checked+.star-label,
+        .star-radio:checked~.star-label {
             color: var(--primary-color);
         }
 
 
         .star-label:hover,
-        .star-label:hover ~ .star-label {
+        .star-label:hover~.star-label {
             color: var(--primary-color);
         }
 
@@ -166,6 +166,124 @@
             font-size: 0.875rem;
             text-align: right;
             margin-top: 0.5rem;
+        }
+
+
+        .comments-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .comments-section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .comments-section h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 80%;
+            background: var(--primary-color);
+            border-radius: var(--radius-sm);
+        }
+
+        .comment-form {
+            background: var(--bg-color);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 3rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .comment-form label {
+            display: block;
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .comment-form input,
+        .comment-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--divider-color);
+            border-radius: 0.5rem;
+            background: var(--bg-neutral-2);
+            font-family: inherit;
+        }
+
+        .comment-form input:focus,
+        .comment-form textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.1);
+        }
+
+        .comments-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .comment {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+
+
+        .comment .author {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .author::before {
+            content: '👤';
+            font-size: 0.9em;
+        }
+
+        .comment .timestamp {
+            color: var(--divider-color);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .comment .content {
+            line-height: 1.7;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--divider-color);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .article {
+                padding: 1.5rem;
+                margin: 1rem auto;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 
@@ -214,6 +332,45 @@
                 <x-button type="submit" class="rating-submit">Submit Rating</x-button>
             </form>
         </div>
+
+        <div class="comments-section">
+            <h2>Comments</h2>
+
+            <div class="comment-form">
+                <form method="POST" action="/submit-comment">
+                    <label for="comment-author">Name</label>
+                    <input type="text" id="comment-author" name="author" placeholder="Enter your name" required>
+
+                    <label for="comment-content">Comment</label>
+                    <textarea id="comment-content" name="content" rows="4" placeholder="Write your thoughts..." required></textarea>
+
+                    <x-button class="btn-primary" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            viewBox="0 0 16 16" style="margin-right: 8px;">
+                            <path
+                                d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11zM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07zm6.787-8.201L1.591 6.602l4.339 2.76 7.825-7.825z" />
+                        </svg>
+                        Post Comment
+                    </x-button>
+                </form>
+            </div>
+
+            <ul class="comments-list">
+                <li class="comment">
+                    <div class="author">John Doe</div>
+                    <div class="timestamp">2025-01-26 19:50:06</div>
+                    <div class="content">This is a sample comment with some example text to demonstrate the layout and
+                        styling of the comment section.</div>
+                </li>
+                <li class="comment">
+                    <div class="author">Jane Smith</div>
+                    <div class="timestamp">2025-01-25 14:30:22</div>
+                    <div class="content">Another example comment showing how replies and longer text content would
+                        appear in this beautifully designed interface.</div>
+                </li>
+            </ul>
+        </div>
+
     </article>
 
 </x-app-layout>
