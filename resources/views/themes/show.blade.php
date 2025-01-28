@@ -212,7 +212,7 @@
                                     href="{{ route('articles.show', ['theme' => $theme->id, 'article' => $article->id]) }}">
                                     <h3>{{ $article->title }}</h3>
                                     <div class="metadata">
-                                        <img src="{{ str_starts_with($article->image, 'http') ? $article->image : asset($theme->image) }}"
+                                        <img src="{{ str_starts_with($article->image, 'http') ? $article->image : asset($article->image) }}"
                                             alt="">
                                         <span>Status: {{ $article->public ? 'Public' : 'Private' }}</span>
                                         <span>Last updated: 2025-01-24 23:09:57</span>

@@ -26,6 +26,8 @@ Route::middleware('auth',)->group(function () {
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::get('/dashboard/articles', [ArticleController::class, 'index'])->name('dashboard.articles');
+    Route::post('/articles/{article_id}/publish', [ArticleController::class, 'publish'])->name('articles.publish');
+    Route::delete('/articles/{article_id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
 });
 
 
@@ -46,7 +48,6 @@ Route::middleware(['auth', "role:editor,admin"])->group(function () {
     Route::get('/dashboard/themes', [ThemeController::class, 'manage'])->name('dashboard.themes');
     Route::get('/dashboard/themes/{id}/subscription', [SubscriptionController::class, 'manage_subscriptions'])->name('dashboard.theme.subscriptions');
     Route::get('/dashboard/themes/{id}/articles', [ArticleController::class, 'manage_articles'])->name('dashboard.theme.articles');
-
 
     // History Related
 });

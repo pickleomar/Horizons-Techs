@@ -156,16 +156,32 @@
                                 <div class="article-actions">
                                     <x-button class="btn-secondary">Edit</x-button>
                                     <x-button class="btn-primary">Request</x-button>
-                                    <x-button class="btn-danger">Delete</x-button>
+                                    <form method="post"
+                                        action="{{ route('articles.destroy', ['article_id' => $article->id]) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <x-button type="submit" class="btn-danger">Delete</x-button>
+                                    </form>
                                 </div>
                             @break
 
                             @case('Approved')
                                 <span class="status status-approved">{{ $article->status }}</span>
                                 <div class="article-actions">
-                                    <x-button class="btn-primary">Publish</x-button>
+
+                                    <form method="post"
+                                        action="{{ route('articles.publish', ['article_id' => $article->id]) }}">
+                                        @csrf
+                                        <x-button type="submit" class="btn-primary">Publish</x-button>
+                                    </form>
+
                                     <x-button class="btn-secondary">Edit</x-button>
-                                    <x-button class="btn-danger">Delete</x-button>
+                                    <form method="post"
+                                        action="{{ route('articles.destroy', ['article_id' => $article->id]) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <x-button type="submit" class="btn-danger">Delete</x-button>
+                                    </form>
                                 </div>
                             @break
 
@@ -173,7 +189,12 @@
                                 <span class="status status-approved">{{ $article->status }}</span>
                                 <div class="article-actions">
                                     <x-button class="btn-secondary">Edit</x-button>
-                                    <x-button class="btn-danger">Delete</x-button>
+                                    <form method="post"
+                                        action="{{ route('articles.destroy', ['article_id' => $article->id]) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <x-button type="submit" class="btn-danger">Delete</x-button>
+                                    </form>
                                 </div>
                             @break
 
@@ -181,7 +202,12 @@
                                 <span class="status status-approved">{{ $article->status }}</span>
                                 <div class="article-actions">
                                     <x-button class="btn-secondary">Edit</x-button>
-                                    <x-button class="btn-danger">Delete</x-button>
+                                    <form method="post"
+                                        action="{{ route('articles.destroy', ['article_id' => $article->id]) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <x-button type="submit" class="btn-danger">Delete</x-button>
+                                    </form>
                                 </div>
                             @break
 
@@ -197,7 +223,7 @@
 
 
 
-    <div id="toast"></div>
+    {{-- <div id="toast"></div> --}}
 
 
     <script>
