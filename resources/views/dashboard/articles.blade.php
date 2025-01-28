@@ -221,24 +221,6 @@
         </div>
     </section>
 
-
-
-    {{-- <div id="toast"></div> --}}
-
-
-    <script>
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.style.display = 'block';
-            setTimeout(() => toast.style.display = 'none', 3000);
-        }
-
-        document.querySelectorAll('button').forEach(button => {
-            button.addEventListener('click', () => {
-                showToast(`Action: ${button.textContent}`);
-            });
-        });
-    </script>
+    <script></script>
 
 </x-dashboard-layout>
