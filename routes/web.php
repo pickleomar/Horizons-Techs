@@ -15,11 +15,6 @@ Route::get('/', function () {
     return view('home');
 })->name("home");
 
-// Articles Routes
-// Route::get('/articles', [ArticleController::class, "index"])->middleware(["auth", "verified", "role:admin"])->name('articles.index');
-
-// Route::get('/articles/{article}', [ArticleController::class, "show"])->middleware(["auth", "verified"])->name('articles.show');
-
 // Themes Routes
 Route::get("/themes", [ThemeController::class, "index"])->name("themes.index");
 Route::get("/themes/create", [ThemeController::class, "create"])->middleware("auth")->name("themes.create");
@@ -30,11 +25,15 @@ Route::post("/themes/create", [ThemeController::class, "store"])->middleware("au
 Route::get("/themes/{theme}", [ThemeController::class, "show"])->name("themes.show")->middleware("auth");
 // Delete Themes
 Route::delete("/themes/{id}", [ThemeController::class, "destroy"])->name("themes.destroy")->middleware("auth");
+
+
+
 // View Theme Articles
-Route::get('themes/{theme}/articles', [ArticleController::class, "index"])->middleware(["auth", "verified"])->name('articles.index');
 Route::get('themes/{theme}/articles/{article}', [ArticleController::class, "show"])->middleware(["auth", "verified"])->name('articles.show');
-Route::get('themes/{theme}/articles/create', [ArticleController::class, "create"])->middleware(["auth", "verified"])->name('article.create');
-Route::post('themes/{theme}/articles/create', [ArticleController::class, "store"])->middleware(["auth", "verified"]);
+
+
+Route::get('articles/{theme}/create', [ArticleController::class, "create"])->middleware(["auth", "verified"])->name('article.create');
+Route::post('articles/{theme}/create', [ArticleController::class, "store"])->middleware(["auth", "verified"]);
 
 //Magazines Routes
 Route::get("/magazines", [IssueController::class, "index"])->name("magazines.index");

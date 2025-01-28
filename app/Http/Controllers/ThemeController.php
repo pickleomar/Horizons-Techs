@@ -66,6 +66,7 @@ class ThemeController extends Controller
 
         $articles = $theme->articles->where("status", "Published");
 
+
         return view("themes.show", compact("theme", "articles"));
     }
 
