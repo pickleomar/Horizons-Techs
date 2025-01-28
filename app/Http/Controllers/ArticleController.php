@@ -20,9 +20,7 @@ class ArticleController extends Controller
         $this->articleService = $articleService;
         $this->historyService = $historyService;
     }
-    /**
-     * Display a listing of the articles.
-     */
+
     public function index(Theme $theme)
     {
         $user = Auth::user();
@@ -32,18 +30,12 @@ class ArticleController extends Controller
         return view('dashboard.articles', compact('articles'));
     }
 
-    /**
-     * Show the form for creating a new article.
-     */
     public function create(Theme $theme)
     {
-
         return view('articles.create', compact('theme'));
     }
 
-    /**
-     * Store a newly created article in storage.
-     */
+
     public function store(Request $request, Theme $theme)
     {
         $request->validate([
@@ -68,22 +60,20 @@ class ArticleController extends Controller
 
         $this->articleService->createArticle($data);
 
-        return redirect()->route('articles.index', ["theme" => $theme->id])
+        return redirect()->route('dashboard.articles', ["theme" => $theme->id])
             ->with('success', 'Article created successfully and is now under review.');
     }
 
-    /**
-     * Display the specified article.
-     */
+
     public function show(Theme $theme, Article $article)
     {
-        $this->historyService->trackHistory(Auth::user()->id, $article->id);
+        if ($article->status === "Published") {
+            $this->historyService->trackHistory(Auth::user()->id, $article->id);
+        }
+
         return view('articles.show', compact('article'));
     }
 
-    /**
-     * Show the form for editing the specified article.
-     */
     public function edit(Article $article)
     {
         //$this->authorize('update', $article);
@@ -91,9 +81,7 @@ class ArticleController extends Controller
         return view('articles.edit', compact('article', 'themes'));
     }
 
-    /**
-     * Update the specified article in storage.
-     */
+
     public function update(Request $request, Article $article)
     {
         $request->validate([
@@ -106,14 +94,12 @@ class ArticleController extends Controller
             ->with('success', 'Article updated successfully.');
     }
 
-    /**
-     * Remove the specified article from storage.
-     */
-    public function destroy($id)
-    {
-        $this->articleService->deleteArticle($id);
 
-        return redirect()->route('articles.index')
+    public function destroy($article_id)
+    {
+        $this->articleService->deleteArticle($article_id);
+
+        return redirect()->route('dashboard.articles')
             ->with('success', 'Article deleted successfully.');
     }
 
@@ -139,6 +125,21 @@ class ArticleController extends Controller
     public function reject($article_id)
     {
         $article = $this->articleService->rejectArticle($article_id)->first();
+        if (!$article) {
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+        return redirect()->back()->with('success', 'Article rejected.');
+    }
+
+
+    public function publish($article_id)
+    {
+        $user  = Auth::user();
+        // if ($user->role !== "editor" && !$theme->manager_id === $user->id) {
+        //     abort(403, "Not allowed to accomplish this action");
+        // }
+
+        $article = $this->articleService->publishArticle($article_id)->first();
         if (!$article) {
             return redirect()->back()->with('error', 'Something went wrong.');
         }
