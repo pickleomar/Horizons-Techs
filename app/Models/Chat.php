@@ -15,6 +15,10 @@ class Chat extends Model
         'message',
         'message_date',
     ];
+    protected $casts = [
+        'message_date' => 'datetime',
+    ];
+
 
     /**
      * Get the user that the chat belongs to.

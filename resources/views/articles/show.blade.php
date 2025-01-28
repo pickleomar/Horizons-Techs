@@ -356,18 +356,17 @@
             </div>
 
             <ul class="comments-list">
-                <li class="comment">
-                    <div class="author">John Doe</div>
-                    <div class="timestamp">2025-01-26 19:50:06</div>
-                    <div class="content">This is a sample comment with some example text to demonstrate the layout and
-                        styling of the comment section.</div>
-                </li>
-                <li class="comment">
-                    <div class="author">Jane Smith</div>
-                    <div class="timestamp">2025-01-25 14:30:22</div>
-                    <div class="content">Another example comment showing how replies and longer text content would
-                        appear in this beautifully designed interface.</div>
-                </li>
+
+                @foreach ($article->chats as $chat)
+                    <li class="comment">
+                        <div class="author">{{ $chat->user->name }}</div>
+                        <div class="timestamp">{{ $chat->message_date->diffForHumans() }}</div>
+                        <div class="content">
+                            {{ $chat->message }}
+                        </div>
+                    </li>
+                @endforeach
+
             </ul>
         </div>
 

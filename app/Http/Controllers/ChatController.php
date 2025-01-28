@@ -6,16 +6,27 @@ use App\Models\Chat;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreChatRequest;
+use App\Services\ChatService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller as BaseController;
 
 class ChatController extends Controller
-{   
-    use AuthorizesRequests,ValidatesRequests;
+{
+    use AuthorizesRequests, ValidatesRequests;
     /**
      * Store a newly created chat message.
      */
+
+    protected $chatService;
+
+    public  function __construct(ChatService $chatService)
+    {
+        $this->chatService = $chatService;
+    }
+
+
+
+
     public function store(StoreChatRequest $request)
     {
         // Find the article
