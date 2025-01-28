@@ -132,7 +132,7 @@
         <header id="header">
             <h1>My Articles</h1>
             <div id="user-info">
-                <div>@regisx001</div>
+                <div>{{ '@' . Auth::user()->name }}</div>
                 <div>UTC: 2025-01-27 22:52:49</div>
             </div>
         </header>
