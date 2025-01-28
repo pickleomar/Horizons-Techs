@@ -12,7 +12,7 @@
             margin-bottom: 1rem;
         }
 
-        .theme-page .alert.success {
+        /* .theme-page .alert.success {
             background-color: rgba(31, 136, 61, 0.1);
             border: 1px solid var(--primary-color);
             color: var(--primary-color);
@@ -21,7 +21,7 @@
         .theme-page .alert.error {
             background-color: rgba(207, 34, 46, 0.1);
             border: 1px solid var(--danger-color);
-            color: var(--danger-color);
+            color: var(--danger-color); */
         }
 
         .theme-page .header {
@@ -167,7 +167,7 @@
 
     <div class="theme-page">
         <!-- Alert Messages -->
-        @if (session('error'))
+        {{-- @if (session('error'))
             <div class="alert error">
                 {{ session('error') }}
             </div>
@@ -177,7 +177,7 @@
             <div class="alert success">
                 {{ session('success') }}
             </div>
-        @endif
+        @endif --}}
 
 
         @if (Auth::user()->isRequestedSubscription($theme->id) && !Auth::user()->isSubscribedToTheme($theme->id))
