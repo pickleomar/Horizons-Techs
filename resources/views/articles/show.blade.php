@@ -25,6 +25,8 @@
 
         .article-metadata {
             position: absolute;
+            display: flex;
+            justify-content: space-between;
             bottom: 0;
             left: 0;
             right: 0;
@@ -171,7 +173,6 @@
 
 
         .comments-section {
-            margin-top: 3rem;
             padding-top: 2rem;
             padding-bottom: 2rem;
             border-top: 1px solid var(--border-color);
@@ -389,6 +390,8 @@
                 alt="Article Image" class="article-image">
             <div class="article-metadata">
                 Published by {{ '@' . $article->author->name }}
+
+                <h3> Rating : {{ $avgRating }}</h3>
             </div>
         </div>
         <div class="article-content">
@@ -404,9 +407,6 @@
         </div>
 
 
-        <div>
-            Avergae is {{ $avgRating }}
-        </div>
         {{-- Rating Section --}}
         <div class="rating-section">
             <p class="current-user">Rating as: {{ '@' . Auth::user()->name }}</p>
