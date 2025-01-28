@@ -49,5 +49,9 @@ Route::middleware(['auth', "role:editor,admin"])->group(function () {
     Route::get('/dashboard/themes/{id}/subscription', [SubscriptionController::class, 'manage_subscriptions'])->name('dashboard.theme.subscriptions');
     Route::get('/dashboard/themes/{id}/articles', [ArticleController::class, 'manage_articles'])->name('dashboard.theme.articles');
 
+
+
+    Route::delete("/themes", [ThemeController::class, "destroy"])->name("themes.destroy")->middleware("auth");
+
     // History Related
 });

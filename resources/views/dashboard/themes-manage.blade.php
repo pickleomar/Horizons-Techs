@@ -106,7 +106,8 @@
             font-size: 0.75rem;
             color: var(--bg-neutral-4);
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
+            gap: 0.5rem;
             padding-top: 1rem;
             border-top: 1px solid var(--bg-neutral-3);
         }
@@ -183,6 +184,7 @@
         <header class="welcome-header">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                 <h1>Manage Your Themes</h1>
+
             </div>
 
             <div class="search-container">
@@ -206,11 +208,17 @@
                             <p class="theme-description">
                                 {{ $theme->description }}
                             </p>
-                            <div style="gap: 1rem" class="theme-metadata">
+                            <div class="theme-metadata">
                                 <x-button href="{{ route('dashboard.theme.subscriptions', ['id' => $theme->id]) }}"
-                                    class="btn-primary outline full-w">Subscriptions</x-button>
+                                    class="btn-primary  full-w">Subscriptions</x-button>
+
                                 <x-button href="{{ route('dashboard.theme.articles', ['id' => $theme->id]) }}"
-                                    class="btn-primary outline full-w">Articles</x-button>
+                                    class="btn-secondary  full-w">Articles</x-button>
+
+                                @if (Auth::user()->role === 'editor')
+                                    <x-button onclick="showDeleteDialog({{ $theme->id }})"
+                                        class="btn-danger outline full-w">Delete</x-button>
+                                @endif
                             </div>
                         </a>
                     </div>
@@ -223,6 +231,30 @@
             </div>
         </main>
     </section>
+
+
+    {{-- Confirmation dialog for deleting --}}
+    <div class="overlay" id="overlay"></div>
+    <div class="confirmation-dialog" id="deleteDialog">
+        <h3 style="margin-bottom: 1rem">Confirm Unsubscribe</h3>
+        <p style="margin-bottom: 1.5rem">Are you sure you want to delete this theme ?</p>
+        <form action="{{ route('themes.destroy') }}" method="POST" id="deleteForm">
+            @csrf
+            @method('DELETE')
+            <input type="hidden" name="theme_id" id="themeIdInput">
+            <div style="display: flex; gap: 1rem;">
+                <button type="button" class="btn btn-secondary" onclick="hideDeleteDialog()">
+                    Cancel
+                </button>
+                <button type="submit" class="btn btn-warning">
+                    Confirm Delete
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+
 
     <script>
         // Search functionality
@@ -285,5 +317,18 @@
                 performSearch();
             }
         });
+
+
+
+        function showDeleteDialog(themeId) {
+            document.getElementById('themeIdInput').value = themeId;
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('deleteDialog').style.display = 'block';
+        }
+
+        function hideDeleteDialog() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('deleteDialog').style.display = 'none';
+        }
     </script>
 </x-dashboard-layout>

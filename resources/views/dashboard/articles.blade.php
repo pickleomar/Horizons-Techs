@@ -213,7 +213,7 @@
     <div class="overlay" id="overlay"></div>
     <div class="confirmation-dialog" id="deleteDialog">
         <h3 style="margin-bottom: 1rem">Confirm Unsubscribe</h3>
-        <p style="margin-bottom: 1.5rem">Are you sure you want to unsubscribe from this theme?</p>
+        <p style="margin-bottom: 1.5rem">Are you sure you want to delete from this article?</p>
         <form action="{{ route('articles.destroy') }}" method="POST" id="deleteForm">
             @csrf
             @method('DELETE')

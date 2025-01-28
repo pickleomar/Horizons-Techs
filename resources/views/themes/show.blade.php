@@ -242,9 +242,11 @@
                 @endif
 
                 @if ((Auth::user()->isAdmin() && $theme->manager_id == Auth::user()->id) || Auth::user()->isEditor())
-                    <form method="POST" action="{{ route('themes.destroy', ['id' => $theme->id]) }}">
+                    <form method="POST" action="{{ route('themes.destroy') }}">
                         @csrf
                         @method('DELETE')
+
+                        <input type="hidden" name="theme_id" value="{{ $theme->id }}">
                         <button type="submit" class="btn danger">Delete Theme</button>
                     </form>
                 @endif
