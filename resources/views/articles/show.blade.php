@@ -233,10 +233,11 @@
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
+            padding: 1rem;
         }
 
         .comment {
-            background: var(--card-bg);
+            background: var(--bg-neutral-3);
             padding: 1.5rem;
             border-radius: 0.5rem;
             border: 1px solid var(--border-color);
@@ -247,16 +248,17 @@
 
         .comment .author {
             font-weight: 600;
-            color: var(--primary-color);
+            color: var(--secondary-color);
             margin-bottom: 0.25rem;
             display: flex;
             align-items: center;
             gap: 0.75rem;
+            cursor: pointer;
         }
 
-        .author::before {
-            content: '👤';
-            font-size: 0.9em;
+        .comment .author:hover {
+            color: var(--primary-color);
+
         }
 
         .comment .timestamp {
@@ -360,7 +362,16 @@
 
                 @foreach ($article->chats as $chat)
                     <li class="comment">
-                        <div class="author">{{ $chat->user->name }}</div>
+                        <div style="display: flex;justify-content: space-between">
+                            <div class="author">{{ $chat->user->name }}</div>
+
+                            @if (Auth::user()->role === 'editor' ||
+                                    (Auth::user()->role === 'admin' && Auth::user()->id === $article->theme->manager_id) ||
+                                    Auth::user()->id === $chat->user_id)
+                                <x-button size="sm" onclick="showDeleteDialog({{ $chat->id }})"
+                                    class="btn-danger outline">delete</x-button>
+                            @endif
+                        </div>
                         <div class="timestamp">{{ $chat->message_date }}</div>
                         <div class="content">
                             {{ $chat->message }}
@@ -372,5 +383,40 @@
         </div>
 
     </article>
+
+
+
+    {{-- Confirmation dialog for deleting --}}
+    <div class="overlay" id="overlay"></div>
+    <div class="confirmation-dialog" id="deleteDialog">
+        <h3 style="margin-bottom: 1rem">Confirm Delete comment</h3>
+        <p style="margin-bottom: 1.5rem">Are you sure you want to delete this comment ?</p>
+        <form action="{{ route('chats.destroy') }}" method="POST" id="deleteForm">
+            @csrf
+            @method('DELETE')
+            <input type="hidden" name="chat_id" id="chatIdInput">
+            <div style="display: flex; gap: 1rem;">
+                <button type="button" class="btn btn-secondary" onclick="hideDeleteDialog()">
+                    Cancel
+                </button>
+                <button type="submit" class="btn btn-warning">
+                    Confirm Delete
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function showDeleteDialog(chatId) {
+            document.getElementById('chatIdInput').value = chatId;
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('deleteDialog').style.display = 'block';
+        }
+
+        function hideDeleteDialog() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('deleteDialog').style.display = 'none';
+        }
+    </script>
 
 </x-app-layout>

@@ -50,8 +50,8 @@ Route::post('/chats', [ChatController::class, 'store'])
     ->name('chats.store');
 
 // Delete a chat message (accessible to admins/editors)
-Route::delete('/chats/{chat}', [ChatController::class, 'destroy'])
-    ->middleware(['auth', 'verified', 'role:admin,editor'])
+Route::delete('/chats', [ChatController::class, 'destroy'])
+    ->middleware(['auth', 'verified', 'role:admin,editor,subscriber'])
     ->name('chats.destroy');
 // Rating Routes (nested under themes and articles)
 

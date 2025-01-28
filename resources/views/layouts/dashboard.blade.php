@@ -18,6 +18,19 @@
     @include('dashboard.aside')
 
     <main class="main-content">
+
+        @if (session('error'))
+            <div class="alert error">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        @if (session('success'))
+            <div class="alert success">
+                {{ session('success') }}
+            </div>
+        @endif
+
         {{ $slot }}
     </main>
 </body>

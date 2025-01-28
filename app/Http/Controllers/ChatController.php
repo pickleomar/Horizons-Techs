@@ -34,13 +34,24 @@ class ChatController extends Controller
         $article = Article::findOrFail($request->article_id);
 
 
-        // Create the chat message
-        $chat = Chat::create([
+        $data = [
             'user_id' => Auth::user()->id,
             'article_id' => $article->id,
             'message' => $request->message,
             'message_date' => now(),
-        ]);
+        ];
+
+        // Create the chat message
+        // $chat = Chat::create([
+        //     'user_id' => Auth::user()->id,
+        //     'article_id' => $article->id,
+        //     'message' => $request->message,
+        //     'message_date' => now(),
+        // ]);
+
+        $this->chatService->createChat($data);
+
+
 
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Message posted successfully!');
@@ -49,10 +60,13 @@ class ChatController extends Controller
     /**
      * Delete a chat message.
      */
-    public function destroy(Chat $chat)
+    public function destroy(Request $request)
     {
+        $request->validate(["chat_id" => "required|exists:chats,id"]);
         // Delete the chat message
-        $chat->delete();
+        // $chat->delete();
+
+        $this->chatService->deleteChat($request->chat_id);
 
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Message deleted successfully!');
