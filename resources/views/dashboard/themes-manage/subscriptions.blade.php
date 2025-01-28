@@ -41,6 +41,7 @@
                         <th>Theme</th>
                         <th>User</th>
                         <th>Date</th>
+                        <th>Feedback</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -51,18 +52,24 @@
                             <td>{{ $sub_request->theme->name }}</td>
                             <td>{{ $sub_request->user->name }}</td>
                             <td>{{ $sub_request->created_at }}</td>
+                            <td><input id="feedback" type="text" value="{{ $sub_request->feedback }}"
+                                    placeholder="feedback"></td>
                             <td style="display: flex;gap: 1rem">
                                 <form class="full-w"
                                     action="{{ route('subscriptions.approve', ['user_id' => $sub_request->user->id, 'theme_id' => $sub_request->theme->id]) }}"
                                     method="post">
                                     @csrf
-                                    <x-button type="submit" size="sm" class="btn-primary full-w">Approve</x-button>
+                                    <input id="fbback1" type="hidden" name="feedback" value="">
+                                    <x-button type="submit" size="sm"
+                                        class="btn-primary full-w">Approve</x-button>
                                 </form>
 
                                 <form class="full-w"
                                     action="{{ route('subscriptions.reject', ['user_id' => $sub_request->user->id, 'theme_id' => $sub_request->theme->id]) }}"
                                     method="post">
                                     @csrf
+
+                                    <input id="fbback2" type="hidden" name="feedback" value="">
                                     <x-button type="submit" size="sm" class="btn-danger full-w">Reject</x-button>
                                 </form>
 
@@ -75,5 +82,16 @@
         </div>
 
     </section>
+
+    <script>
+        feedback1 = document.getElementById("fbback1");
+        feedback2 = document.getElementById("fbback2");
+
+        document.getElementById("feedback").addEventListener('input', function() {
+            feedback1.value = this.value;
+            feedback2.value = this.value;
+            console.log(event.target.value);
+        });
+    </script>
 
 </x-dashboard-layout>

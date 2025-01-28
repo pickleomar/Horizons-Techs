@@ -77,10 +77,10 @@ class SubscriptionController extends Controller
     }
 
 
-    public function approve($user_id, $theme_id)
+    public function approve(Request $request, $user_id, $theme_id)
     {
 
-        $subscription = $this->subscriptionService->approveSubscription($user_id, $theme_id)->first();
+        $subscription = $this->subscriptionService->approveSubscription($user_id, $theme_id, $request->feedback)->first();
         if (!$subscription) {
             return redirect()->back()->with('error', 'Something went wrong.');
         }
@@ -98,10 +98,10 @@ class SubscriptionController extends Controller
     }
 
 
-    public function reject($user_id, $theme_id)
+    public function reject(Request $request, $user_id, $theme_id)
     {
 
-        $subscription = $this->subscriptionService->rejectSubscription($user_id, $theme_id)->first();
+        $subscription = $this->subscriptionService->rejectSubscription($user_id, $theme_id, $request->feedback)->first();
         if (!$subscription) {
             return redirect()->back()->with('error', 'Something went wrong.');
         }

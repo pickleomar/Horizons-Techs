@@ -30,6 +30,7 @@ class Subscription extends Model
         'user_id',
         'theme_id',
         'subscription_date',
+        "feedback"
     ];
 
     /**
