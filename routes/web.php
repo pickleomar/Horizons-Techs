@@ -46,7 +46,7 @@ Route::get('/magazines/{id}/load-more', [IssueController::class, 'loadMore'])->n
 
 // Store a chat message (accessible to subscribers)
 Route::post('/chats', [ChatController::class, 'store'])
-    ->middleware(['auth', 'verified', 'role:subscriber'])
+    ->middleware(['auth', 'verified', 'role:editor,admin,subscriber'])
     ->name('chats.store');
 
 // Delete a chat message (accessible to admins/editors)

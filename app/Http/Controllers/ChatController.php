@@ -6,27 +6,37 @@ use App\Models\Chat;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreChatRequest;
+use App\Services\ChatService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Auth;
 
 class ChatController extends Controller
-{   
-    use AuthorizesRequests,ValidatesRequests;
+{
+    use AuthorizesRequests, ValidatesRequests;
     /**
      * Store a newly created chat message.
      */
+
+    protected $chatService;
+
+    public  function __construct(ChatService $chatService)
+    {
+        $this->chatService = $chatService;
+    }
+
+
+
+
     public function store(StoreChatRequest $request)
     {
         // Find the article
         $article = Article::findOrFail($request->article_id);
 
-        // Authorize the action using the ChatPolicy
-        $this->authorize('create', [Chat::class, $article]);
 
         // Create the chat message
         $chat = Chat::create([
-            'user_id' => auth()->id(),
+            'user_id' => Auth::user()->id,
             'article_id' => $article->id,
             'message' => $request->message,
             'message_date' => now(),
@@ -41,9 +51,6 @@ class ChatController extends Controller
      */
     public function destroy(Chat $chat)
     {
-        // Authorize the action using the ChatPolicy
-        $this->authorize('delete', $chat);
-
         // Delete the chat message
         $chat->delete();
 
