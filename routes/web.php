@@ -57,7 +57,8 @@ Route::delete('/chats/{chat}', [ChatController::class, 'destroy'])
 
 Route::middleware(["auth", "verified"])->group(function () {
     // Rate an article
-    Route::post('themes/{theme}/articles/{article}/rate', [RatingController::class, 'rateArticle'])->name('articles.rate');
+    Route::get('/articles/{theme}/{article}/rate', [RatingController::class, 'rateArticle'])->name('rate.article');
+    //Route::post('themes/{theme}/articles/{article}/rate', [RatingController::class, 'rateArticle'])->name('articles.rate');
 
     // Get average rating for an article
     Route::get(
