@@ -59,21 +59,21 @@ class SubscriptionService
     }
 
 
-    public function approveSubscription($user_id, $theme_id)
+    public function approveSubscription($user_id, $theme_id, $feedback = null)
     {
         $subscription = $this->subscriptionRepository->find($user_id, $theme_id)->first();
         if (!$subscription) {
             return false;
         }
-        return $this->subscriptionRepository->update($user_id, $theme_id, ["status" => "approved"]);
+        return $this->subscriptionRepository->update($user_id, $theme_id, ["status" => "approved", "feedback" => $feedback]);
     }
-    public function rejectSubscription($user_id, $theme_id)
+    public function rejectSubscription($user_id, $theme_id, $feedback = null)
     {
 
         $subscription = $this->subscriptionRepository->find($user_id, $theme_id)->first();
         if (!$subscription) {
             return false;
         }
-        return $this->subscriptionRepository->update($user_id, $theme_id, ["status" => "rejected"]);
+        return $this->subscriptionRepository->update($user_id, $theme_id, ["status" => "rejected", "feedback" => $feedback]);
     }
 }
