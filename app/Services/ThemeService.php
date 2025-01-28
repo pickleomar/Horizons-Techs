@@ -51,4 +51,9 @@ class ThemeService
     {
         return $this->themeRepository->random($number);
     }
+
+    public function searchInThemes($search)
+    {
+        return $this->themeRepository->search($search);
+    }
 }
