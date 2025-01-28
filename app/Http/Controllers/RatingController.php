@@ -42,10 +42,13 @@ class RatingController extends Controller
         // Update or create the rating
         $this->ratingService->updateOrCreateRating($user->id, $article->id, $rating);
 
-        return response()->json([
-            'message' => 'Rating submitted successfully',
-            'rating' => $rating
-        ]);
+        return redirect()->back()->with('success', 'Rating submitted successfully!');
+    }
+    //Retreive the existing user Rating and displays it
+    public function getUserRating(Article $article){
+        $user=Auth::user();
+        return Rating::where('user_id', $user->id)->where('article_id',$article->id)->first();
+
     }
 
     /**
@@ -87,4 +90,6 @@ class RatingController extends Controller
 
         return 'You are not authorized to rate this article.';
     }
+
+    
 }
