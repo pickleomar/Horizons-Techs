@@ -93,4 +93,10 @@ class ThemeRepository
         }
         return false;
     }
+
+
+    public function random($number)
+    {
+        return $this->model->inRandomOrder()->limit($number)->get();
+    }
 }

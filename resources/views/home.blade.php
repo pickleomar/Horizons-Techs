@@ -129,37 +129,21 @@
             <div class="container">
                 <div class="section-header">
                     <h2>Popular Themes</h2>
-                    <a href="#" class="btn btn-outline">Explore All</a>
+                    <a href="#" class="btn btn-outline"></a>
+                    <x-button class="btn-secondary" href="{{ route('themes.index') }}"> Explore All</x-button>
                 </div>
                 <div class="grid grid-4">
-                    <div class="card" style="text-align: center;">
-                        <h3 style="margin-bottom: 1rem;">Web Development</h3>
-                        <p style="color: var(--divider-color); margin-bottom: 1.5rem;">
-                            Modern web development techniques and best practices.
-                        </p>
-                        <a href="#" class="btn btn-outline">Learn More</a>
-                    </div>
-                    <div class="card" style="text-align: center;">
-                        <h3 style="margin-bottom: 1rem;">Data Science</h3>
-                        <p style="color: var(--divider-color); margin-bottom: 1.5rem;">
-                            Data analysis, visualization, and machine learning.
-                        </p>
-                        <a href="#" class="btn btn-outline">Learn More</a>
-                    </div>
-                    <div class="card" style="text-align: center;">
-                        <h3 style="margin-bottom: 1rem;">Cloud Computing</h3>
-                        <p style="color: var(--divider-color); margin-bottom: 1.5rem;">
-                            Cloud platforms and distributed systems.
-                        </p>
-                        <a href="#" class="btn btn-outline">Learn More</a>
-                    </div>
-                    <div class="card" style="text-align: center;">
-                        <h3 style="margin-bottom: 1rem;">Cybersecurity</h3>
-                        <p style="color: var(--divider-color); margin-bottom: 1.5rem;">
-                            Security principles and best practices.
-                        </p>
-                        <a href="#" class="btn btn-outline">Learn More</a>
-                    </div>
+                    @foreach ($themes as $theme)
+                        <div class="card" style="text-align: center;">
+                            <h3 style="margin-bottom: 1rem;">{{ $theme->name }}</h3>
+                            <p style="color: var(--divider-color); margin-bottom: 1.5rem;">
+                                {{ $theme->description }}
+                            </p>
+                            <x-button class="btn-primary" href="{{ route('themes.show', ['theme' => $theme]) }}">Learn
+                                More</x-button>
+                        </div>
+                    @endforeach
+
                 </div>
             </div>
         </section>
@@ -170,7 +154,7 @@
                 <p style="color: var(--divider-color); margin: 1rem 0 2rem;">
                     Join our community today and start exploring amazing content curated just for you.
                 </p>
-                <a href="#" class="btn btn-primary">Create Account</a>
+                <x-button class="btn-primary" href="{{ route('register') }}">Create Account</x-button>
             </div>
         </section>
     </main>

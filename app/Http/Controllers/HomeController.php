@@ -19,7 +19,8 @@ class HomeController extends Controller
     public function index()
     {
         $articles = $this->articleService->getRandomArticles();
+        $themes = $this->themeService->getRandomThemes();
         // dd($articles);
-        return view("home", compact("articles"));
+        return view("home", compact("articles", "themes"));
     }
 }
