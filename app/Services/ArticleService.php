@@ -67,4 +67,9 @@ class ArticleService
         }
         return $this->articleRepository->update($article_id, ["status" => "Published"]);
     }
+
+    public function getRandomArticles($number = 3)
+    {
+        return $this->articleRepository->random($number);
+    }
 }
