@@ -317,10 +317,15 @@
         {{-- Rating Section --}}
         <div class="rating-section">
             <p class="current-user">Rating as: {{ '@' . Auth::user()->name }}</p>
-            <form class="rating-form" method="GET">
+            <form class="rating-form" method="GET" action="{{ route('rate.article', ['theme'=>$article->theme_id, 'article'=> $article->id]) }}">
                 @csrf
                 <div class="stars">
-                    <input type="radio" name="rating" value="5" id="star5" class="star-radio">
+                    @for ($i = 5; $i >= 1; $i--)
+                        <input type="radio" name="rating" value="{{ $i }}" id="star{{ $i }}" class="star-radio"
+                            @if(optional($userRating)->rating == $i) checked @endif >
+                        <label for="star{{ $i }}" class="star-label">★</label>
+                    @endfor
+                    {{--<input type="radio" name="rating" value="5" id="star5" class="star-radio">
                     <label for="star5" class="star-label">★</label>
                     <input type="radio" name="rating" value="4" id="star4" class="star-radio">
                     <label for="star4" class="star-label">★</label>
@@ -329,7 +334,7 @@
                     <input type="radio" name="rating" value="2" id="star2" class="star-radio">
                     <label for="star2" class="star-label">★</label>
                     <input type="radio" name="rating" value="1" id="star1" class="star-radio">
-                    <label for="star1" class="star-label">★</label>
+                    <label for="star1" class="star-label">★</label>--}}
                 </div>
                 <x-button type="submit" class="rating-submit">Submit Rating</x-button>
             </form>
