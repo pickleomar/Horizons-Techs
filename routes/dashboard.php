@@ -27,7 +27,7 @@ Route::middleware('auth',)->group(function () {
 
     Route::get('/dashboard/articles', [ArticleController::class, 'index'])->name('dashboard.articles');
     Route::post('/articles/{article_id}/publish', [ArticleController::class, 'publish'])->name('articles.publish');
-    Route::delete('/articles/{article_id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
+    Route::delete('/articles', [ArticleController::class, 'destroy'])->name('articles.destroy');
 });
 
 

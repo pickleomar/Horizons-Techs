@@ -244,39 +244,6 @@
             });
         });
 
-        // Filter functionality
-        const filterChips = document.querySelectorAll('.filter-chip');
-
-        filterChips.forEach(chip => {
-            chip.addEventListener('click', function() {
-                // Remove active class from all chips
-                filterChips.forEach(c => c.classList.remove('active'));
-                // Add active class to clicked chip
-                this.classList.add('active');
-
-                const filter = this.dataset.filter;
-                const now = new Date();
-
-                themeCards.forEach(card => {
-                    const date = new Date(card.dataset.date);
-                    const daysDiff = (now - date) / (1000 * 60 * 60 * 24);
-
-                    switch (filter) {
-                        case 'recent':
-                            card.style.display = daysDiff <= 7 ? 'block' : 'none';
-                            break;
-                        case 'updated':
-                            // Add logic for recently updated
-                            break;
-                        case 'favorite':
-                            // Add logic for favorites
-                            break;
-                        default:
-                            card.style.display = 'block';
-                    }
-                });
-            });
-        });
 
         // Unsubscribe dialog
         function showUnsubscribeDialog(themeId) {

@@ -156,12 +156,10 @@
                                 <div class="article-actions">
                                     <x-button class="btn-secondary">Edit</x-button>
                                     <x-button class="btn-primary">Request</x-button>
-                                    <form method="post"
-                                        action="{{ route('articles.destroy', ['article_id' => $article->id]) }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <x-button type="submit" class="btn-danger">Delete</x-button>
-                                    </form>
+
+
+                                    <x-button onclick="showDeleteDialog({{ $article->id }})"
+                                        class="btn-danger">Delete</x-button>
                                 </div>
                             @break
 
@@ -176,12 +174,8 @@
                                     </form>
 
                                     <x-button class="btn-secondary">Edit</x-button>
-                                    <form method="post"
-                                        action="{{ route('articles.destroy', ['article_id' => $article->id]) }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <x-button type="submit" class="btn-danger">Delete</x-button>
-                                    </form>
+                                    <x-button onclick="showDeleteDialog({{ $article->id }})"
+                                        class="btn-danger">Delete</x-button>
                                 </div>
                             @break
 
@@ -189,12 +183,8 @@
                                 <span class="status status-approved">{{ $article->status }}</span>
                                 <div class="article-actions">
                                     <x-button class="btn-secondary">Edit</x-button>
-                                    <form method="post"
-                                        action="{{ route('articles.destroy', ['article_id' => $article->id]) }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <x-button type="submit" class="btn-danger">Delete</x-button>
-                                    </form>
+                                    <x-button onclick="showDeleteDialog({{ $article->id }})"
+                                        class="btn-danger">Delete</x-button>
                                 </div>
                             @break
 
@@ -202,12 +192,8 @@
                                 <span class="status status-approved">{{ $article->status }}</span>
                                 <div class="article-actions">
                                     <x-button class="btn-secondary">Edit</x-button>
-                                    <form method="post"
-                                        action="{{ route('articles.destroy', ['article_id' => $article->id]) }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <x-button type="submit" class="btn-danger">Delete</x-button>
-                                    </form>
+                                    <x-button onclick="showDeleteDialog({{ $article->id }})"
+                                        class="btn-danger">Delete</x-button>
                                 </div>
                             @break
 
@@ -221,6 +207,42 @@
         </div>
     </section>
 
-    <script></script>
+
+
+    {{-- Confirmation dialog for deleting --}}
+    <div class="overlay" id="overlay"></div>
+    <div class="confirmation-dialog" id="deleteDialog">
+        <h3 style="margin-bottom: 1rem">Confirm Unsubscribe</h3>
+        <p style="margin-bottom: 1.5rem">Are you sure you want to unsubscribe from this theme?</p>
+        <form action="{{ route('articles.destroy') }}" method="POST" id="deleteForm">
+            @csrf
+            @method('DELETE')
+            <input type="hidden" name="article_id" id="articleIdInput">
+            <div style="display: flex; gap: 1rem;">
+                <button type="button" class="btn btn-secondary" onclick="hideDeleteDialog()">
+                    Cancel
+                </button>
+                <button type="submit" class="btn btn-warning">
+                    Confirm Delete
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+
+
+    <script>
+        function showDeleteDialog(articleId) {
+            document.getElementById('articleIdInput').value = articleId;
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('deleteDialog').style.display = 'block';
+        }
+
+        function hideDeleteDialog() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('deleteDialog').style.display = 'none';
+        }
+    </script>
 
 </x-dashboard-layout>
