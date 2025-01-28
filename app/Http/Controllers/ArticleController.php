@@ -95,9 +95,11 @@ class ArticleController extends Controller
     }
 
 
-    public function destroy($article_id)
+    public function destroy(Request $request)
     {
-        $this->articleService->deleteArticle($article_id);
+        $request->validate(["article_id" => "required|exists:articles,id"]);
+
+        $this->articleService->deleteArticle($request->article_id);
 
         return redirect()->route('dashboard.articles')
             ->with('success', 'Article deleted successfully.');

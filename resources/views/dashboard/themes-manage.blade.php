@@ -1,7 +1,7 @@
 <x-dashboard-layout>
 
     <style>
-        <style>.themes-container {
+        .themes-container {
 
             max-width: 1200px;
             margin: 1rem auto;
@@ -106,7 +106,8 @@
             font-size: 0.75rem;
             color: var(--bg-neutral-4);
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
+            gap: 0.5rem;
             padding-top: 1rem;
             border-top: 1px solid var(--bg-neutral-3);
         }
@@ -124,40 +125,210 @@
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
         }
-    </style>
+
+        .search-container {
+            margin: 1rem 0 2rem;
+            position: relative;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            padding-left: 2.5rem;
+            background: var(--bg-neutral-2);
+            border: 1px solid var(--bg-neutral-3);
+            border-radius: var(--radius-m);
+            color: var(--font-color);
+            font-size: 1rem;
+        }
+
+        #searchInput:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--bg-neutral-4);
+        }
+
+        .theme-card {
+            display: block;
+            /* For smooth hide/show */
+        }
+
+        .theme-card.hidden {
+            display: none;
+        }
+
+        .search-info {
+            color: var(--divider-color);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        #noResults {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 2rem;
+            background: var(--bg-neutral-2);
+            border-radius: var(--radius-l);
+            color: var(--divider-color);
+            display: none;
+        }
     </style>
     <section class="dashboard-section">
-
         <header class="welcome-header">
-            <h1>Manage Your Themes</h1>
-            <input type="text" class="search-bar" placeholder="Search themes...">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h1>Manage Your Themes</h1>
+
+            </div>
+
+            <div class="search-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Search themes by name, description, or tags..."
+                    autocomplete="off">
+                <div class="search-info" id="searchInfo"></div>
+            </div>
         </header>
 
-        <main class="themes-grid">
+        <main class="themes-grid" id="themesGrid">
             @foreach ($themes as $theme)
-                <article class="theme-card">
+                <article class="theme-card" data-name="{{ strtolower($theme->name) }}"
+                    data-description="{{ strtolower($theme->description) }}">
                     <img src="{{ str_starts_with($theme->image, 'http') ? $theme->image : asset($theme->image) }}"
                         alt="{{ $theme->name }}">
                     <div class="theme-content">
                         <a style="all: unset;cursor: pointer;"
                             href="{{ route('themes.show', ['theme' => $theme->id]) }}">
-
-
-                            <h2 class="theme-title"> {{ $theme->name }}</h2>
+                            <h2 class="theme-title">{{ $theme->name }}</h2>
                             <p class="theme-description">
                                 {{ $theme->description }}
                             </p>
-                            <div style="gap: 1rem" class="theme-metadata">
+                            <div class="theme-metadata">
                                 <x-button href="{{ route('dashboard.theme.subscriptions', ['id' => $theme->id]) }}"
-                                    class="btn-primary outline full-w">Subscriptions</x-button>
+                                    class="btn-primary  full-w">Subscriptions</x-button>
+
                                 <x-button href="{{ route('dashboard.theme.articles', ['id' => $theme->id]) }}"
-                                    class="btn-primary outline full-w">Articles</x-button>
+                                    class="btn-secondary  full-w">Articles</x-button>
+
+                                @if (Auth::user()->role === 'editor')
+                                    <x-button onclick="showDeleteDialog({{ $theme->id }})"
+                                        class="btn-danger outline full-w">Delete</x-button>
+                                @endif
                             </div>
+                        </a>
                     </div>
-                    </a>
                 </article>
             @endforeach
-        </main>
 
+            <div id="noResults">
+                <h3>No matching themes found</h3>
+                <p>Try adjusting your search terms</p>
+            </div>
+        </main>
     </section>
+
+
+    {{-- Confirmation dialog for deleting --}}
+    <div class="overlay" id="overlay"></div>
+    <div class="confirmation-dialog" id="deleteDialog">
+        <h3 style="margin-bottom: 1rem">Confirm Unsubscribe</h3>
+        <p style="margin-bottom: 1.5rem">Are you sure you want to delete this theme ?</p>
+        <form action="{{ route('themes.destroy') }}" method="POST" id="deleteForm">
+            @csrf
+            @method('DELETE')
+            <input type="hidden" name="theme_id" id="themeIdInput">
+            <div style="display: flex; gap: 1rem;">
+                <button type="button" class="btn btn-secondary" onclick="hideDeleteDialog()">
+                    Cancel
+                </button>
+                <button type="submit" class="btn btn-warning">
+                    Confirm Delete
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+
+
+    <script>
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const themesGrid = document.getElementById('themesGrid');
+        const themeCards = document.querySelectorAll('.theme-card');
+        const searchInfo = document.getElementById('searchInfo');
+        const noResults = document.getElementById('noResults');
+
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        function performSearch() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            if (searchTerm === '') {
+                themeCards.forEach(card => {
+                    card.classList.remove('hidden');
+                });
+                searchInfo.textContent = '';
+                noResults.style.display = 'none';
+                return;
+            }
+
+            themeCards.forEach(card => {
+                const name = card.dataset.name;
+                const description = card.dataset.description;
+
+                if (name.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            // Update search info and no results message
+            searchInfo.textContent = `Found ${visibleCount} theme${visibleCount !== 1 ? 's' : ''}`;
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        // Debounce search for better performance
+        const debouncedSearch = debounce(performSearch, 300);
+
+        searchInput.addEventListener('input', debouncedSearch);
+
+        // Clear search when clicking the X (clear) button
+        searchInput.addEventListener('search', function() {
+            if (this.value === '') {
+                performSearch();
+            }
+        });
+
+
+
+        function showDeleteDialog(themeId) {
+            document.getElementById('themeIdInput').value = themeId;
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('deleteDialog').style.display = 'block';
+        }
+
+        function hideDeleteDialog() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('deleteDialog').style.display = 'none';
+        }
+    </script>
 </x-dashboard-layout>

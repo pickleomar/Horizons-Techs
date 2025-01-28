@@ -85,14 +85,16 @@ class ThemeController extends Controller
 
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
+        $request->validate(["theme_id" => "required|exists:themes,id"]);
         $user = Auth::user();
 
-        if ($user->role == "editor" || $this->themeService->isUserThemeManager($user->id, $id)) {
-            $this->themeService->deleteTheme($id);
+        if ($user->role == "editor" || $this->themeService->isUserThemeManager($user->id, $request->theme_id)) {
+            $this->themeService->deleteTheme($request->theme_id);
             return redirect()->route('themes.index')->with("success", "Theme deleted with success");
         }
+        // TODO Configure redirection
         return redirect()->route('themes.index')->with("error", "An error occured !");
     }
 

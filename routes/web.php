@@ -24,7 +24,6 @@ Route::post("/themes/create", [ThemeController::class, "store"])->middleware("au
 // View Theme
 Route::get("/themes/{theme}", [ThemeController::class, "show"])->name("themes.show")->middleware("auth");
 // Delete Themes
-Route::delete("/themes/{id}", [ThemeController::class, "destroy"])->name("themes.destroy")->middleware("auth");
 
 
 
