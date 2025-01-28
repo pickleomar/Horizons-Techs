@@ -96,7 +96,8 @@
 
         .stars {
             display: flex;
-
+            flex-direction: row-reverse; 
+            justify-content: flex-end; 
             gap: 0.5rem;
             margin-bottom: 1rem;
         }
@@ -111,14 +112,15 @@
             color: var(--bg-neutral-4);
             transition: color 0.2s;
         }
-
-        .star-radio:checked~.star-label {
-            color: var(--bg-neutral-4);
+        
+        .star-radio:checked + .star-label,
+        .star-radio:checked ~ .star-label {
+            color: var(--primary-color);
         }
 
+
         .star-label:hover,
-        .star-label:hover~.star-label,
-        .star-radio:checked+.star-label {
+        .star-label:hover ~ .star-label {
             color: var(--primary-color);
         }
 
@@ -195,26 +197,19 @@
         {{-- Rating Section --}}
         <div class="rating-section">
             <p class="current-user">Rating as: {{ '@' . Auth::user()->name }}</p>
-            <form class="rating-form" method="POST">
+            <form class="rating-form" method="GET">
                 @csrf
                 <div class="stars">
-
-                    <input type="radio" name="rating" value="1" id="star1" class="star-radio">
-                    <label for="star1" class="star-label">★</label>
-
-                    <input type="radio" name="rating" value="2" id="star2" class="star-radio">
-                    <label for="star2" class="star-label">★</label>
-
-                    <input type="radio" name="rating" value="3" id="star3" class="star-radio">
-                    <label for="star3" class="star-label">★</label>
-
-                    <input type="radio" name="rating" value="4" id="star4" class="star-radio">
-                    <label for="star4" class="star-label">★</label>
-
                     <input type="radio" name="rating" value="5" id="star5" class="star-radio">
                     <label for="star5" class="star-label">★</label>
-
-
+                    <input type="radio" name="rating" value="4" id="star4" class="star-radio">
+                    <label for="star4" class="star-label">★</label>
+                    <input type="radio" name="rating" value="3" id="star3" class="star-radio">
+                    <label for="star3" class="star-label">★</label>
+                    <input type="radio" name="rating" value="2" id="star2" class="star-radio">
+                    <label for="star2" class="star-label">★</label>
+                    <input type="radio" name="rating" value="1" id="star1" class="star-radio">
+                    <label for="star1" class="star-label">★</label>
                 </div>
                 <x-button type="submit" class="rating-submit">Submit Rating</x-button>
             </form>
