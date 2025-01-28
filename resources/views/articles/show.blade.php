@@ -337,13 +337,14 @@
             <h2>Comments</h2>
 
             <div class="comment-form">
-                <form method="POST" action="/submit-comment">
-                    <label for="comment-author">Name</label>
-                    <input type="text" id="comment-author" name="author" placeholder="Enter your name" required>
+                <form method="POST" action="{{ route('chats.store') }}">
+                    @csrf
+                    {{-- <label for="comment-author">Name</label>
+                    <input type="text" id="comment-author" name="author" placeholder="Enter your name" required> --}}
 
                     <label for="comment-content">Comment</label>
-                    <textarea id="comment-content" name="content" rows="4" placeholder="Write your thoughts..." required></textarea>
-
+                    <textarea id="comment-content" name="message" rows="4" placeholder="Write your thoughts..." required></textarea>
+                    <input type="hidden" name="article_id" value="{{ $article->id }}">
                     <x-button class="btn-primary" type="submit">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             viewBox="0 0 16 16" style="margin-right: 8px;">
@@ -360,7 +361,7 @@
                 @foreach ($article->chats as $chat)
                     <li class="comment">
                         <div class="author">{{ $chat->user->name }}</div>
-                        <div class="timestamp">{{ $chat->message_date->diffForHumans() }}</div>
+                        <div class="timestamp">{{ $chat->message_date }}</div>
                         <div class="content">
                             {{ $chat->message }}
                         </div>

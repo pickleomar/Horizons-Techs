@@ -9,6 +9,7 @@ use App\Http\Requests\StoreChatRequest;
 use App\Services\ChatService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Support\Facades\Auth;
 
 class ChatController extends Controller
 {
@@ -32,12 +33,10 @@ class ChatController extends Controller
         // Find the article
         $article = Article::findOrFail($request->article_id);
 
-        // Authorize the action using the ChatPolicy
-        $this->authorize('create', [Chat::class, $article]);
 
         // Create the chat message
         $chat = Chat::create([
-            'user_id' => auth()->id(),
+            'user_id' => Auth::user()->id,
             'article_id' => $article->id,
             'message' => $request->message,
             'message_date' => now(),
@@ -52,9 +51,6 @@ class ChatController extends Controller
      */
     public function destroy(Chat $chat)
     {
-        // Authorize the action using the ChatPolicy
-        $this->authorize('delete', $chat);
-
         // Delete the chat message
         $chat->delete();
 
