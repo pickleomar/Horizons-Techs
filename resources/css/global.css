@@ -208,6 +208,12 @@ body {
 
 
 
+.alert {
+    padding: 1rem;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+}
+
 .alert .success {
     background-color: rgba(31, 136, 61, 0.1);
     border: 1px solid var(--primary-color);
