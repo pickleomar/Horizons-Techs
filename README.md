@@ -364,6 +364,8 @@ Ensure you have the following installed:
 ## 📜 License
 This project is licensed under the **MIT License**.
 
----
-
-🚀 **Developed by [Your Name]**
+##  Credits
+This Project was developed by :
+#### ZARQI Ezzouabir
+#### Mohamed Omar azaoui
+#### Amami Yousra
