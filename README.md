@@ -350,6 +350,10 @@ Ensure you have the following installed:
    php artisan serve
    npm run dev
    ```
+## Project Supervised By :
+
+### M.Aitkbir Mhamed
+### M.Elyussufi Yassyn
 
 ## 🔥 Challenges Faced
 - **Security in Role Management**: Ensuring only authorized users can access specific features.
