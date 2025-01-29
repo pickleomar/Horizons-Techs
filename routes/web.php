@@ -10,6 +10,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IssueController;
 
 Route::get("/", [HomeController::class, "index"])->name("home");
+Route::get("/faq", function () {
+    return view("faq");
+})->name("faq");
 
 Route::get("/articles", [ArticleController::class, "public_index"])->name("articles.public");
 Route::get("/articles/{article}", [ArticleController::class, "public_show"])->name("articles.public.show");

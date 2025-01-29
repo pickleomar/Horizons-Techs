@@ -87,6 +87,15 @@ class ArticleService
     }
 
 
+    public function setPending($article_id)
+    {
+        $article = $this->articleRepository->find($article_id)->first();
+        if (!$article) {
+            return false;
+        }
+        return $this->articleRepository->update($article_id, ["status" => "Pending"]);
+    }
+
 
     public function getRandomArticles($number = 3)
     {

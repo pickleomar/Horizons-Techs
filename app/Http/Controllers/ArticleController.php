@@ -86,7 +86,7 @@ class ArticleController extends Controller
 
     public function show(Theme $theme, Article $article)
     {
-        if ($article->status === "Published") {
+        if ($article->status === "Published" || $article->status === "Proposed" || $article->status === "Approved") {
             $this->historyService->trackHistory(Auth::user()->id, $article->id);
         }
         $userRating = $this->ratingController->getUserRating($article);
@@ -155,18 +155,14 @@ class ArticleController extends Controller
     }
 
 
-    public function publish($article_id)
+    public function pending($article_id)
     {
-        $user  = Auth::user();
-        // if ($user->role !== "editor" && !$theme->manager_id === $user->id) {
-        //     abort(403, "Not allowed to accomplish this action");
-        // }
 
-        $article = $this->articleService->publishArticle($article_id)->first();
+        $article = $this->articleService->setPending($article_id)->first();
         if (!$article) {
             return redirect()->back()->with('error', 'Something went wrong.');
         }
-        return redirect()->back()->with('success', 'Article rejected.');
+        return redirect()->back()->with('success', 'Article Waiting approval.');
     }
 
 

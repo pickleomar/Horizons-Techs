@@ -363,9 +363,6 @@
         }
     </style>
 
-
-
-
     <article class="article">
         <div class="breadcrumb-container">
             <nav class="breadcrumb-gradient">
@@ -383,6 +380,20 @@
                     <span class="separator">⟩</span>
                     <span class="active">{{ $article->title }}</span>
                 </div>
+
+                @auth
+
+                    @if (Auth::user()->role === 'editor' ||
+                            (Auth::user()->role === 'admin' && Auth::user()->id === $article->theme->manager_id))
+                        <form method="post" action="{{ route('articles.destroy') }}">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="article_id" value="{{ $article->id }}">
+                            <x-button type="submit" size="sm" class="btn-danger outline">delete</x-button>
+                        </form>
+                    @endif
+                @endauth
+
             </nav>
         </div>
         <div class="article-image-container">
@@ -431,24 +442,27 @@
 
         <div class="comments-section">
             <h2>Comments</h2>
+            @auth
 
-            <div class="comment-form">
-                <form method="POST" action="{{ route('chats.store') }}">
-                    @csrf
+                <div class="comment-form">
+                    <form method="POST" action="{{ route('chats.store') }}">
+                        @csrf
 
-                    <label for="comment-content">Comment</label>
-                    <textarea id="comment-content" name="message" rows="4" placeholder="Write your thoughts..." required></textarea>
-                    <input type="hidden" name="article_id" value="{{ $article->id }}">
-                    <x-button class="btn-primary" type="submit">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            viewBox="0 0 16 16" style="margin-right: 8px;">
-                            <path
-                                d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11zM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07zm6.787-8.201L1.591 6.602l4.339 2.76 7.825-7.825z" />
-                        </svg>
-                        Post Comment
-                    </x-button>
-                </form>
-            </div>
+                        <label for="comment-content">Comment</label>
+                        <textarea id="comment-content" name="message" rows="4" placeholder="Write your thoughts..." required></textarea>
+                        <input type="hidden" name="article_id" value="{{ $article->id }}">
+                        <x-button class="btn-primary" type="submit">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                viewBox="0 0 16 16" style="margin-right: 8px;">
+                                <path
+                                    d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11zM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07zm6.787-8.201L1.591 6.602l4.339 2.76 7.825-7.825z" />
+                            </svg>
+                            Post Comment
+                        </x-button>
+                    </form>
+                </div>
+
+            @endauth
 
             <ul class="comments-list">
 
@@ -456,13 +470,15 @@
                     <li class="comment">
                         <div style="display: flex;justify-content: space-between">
                             <div class="author">{{ $chat->user->name }}</div>
+                            @auth
 
-                            @if (Auth::user()->role === 'editor' ||
-                                    (Auth::user()->role === 'admin' && Auth::user()->id === $article->theme->manager_id) ||
-                                    Auth::user()->id === $chat->user_id)
-                                <x-button size="sm" onclick="showDeleteDialog({{ $chat->id }})"
-                                    class="btn-danger outline">delete</x-button>
-                            @endif
+                                @if (Auth::user()->role === 'editor' ||
+                                        (Auth::user()->role === 'admin' && Auth::user()->id === $article->theme->manager_id) ||
+                                        Auth::user()->id === $chat->user_id)
+                                    <x-button size="sm" onclick="showDeleteDialog({{ $chat->id }})"
+                                        class="btn-danger outline">delete</x-button>
+                                @endif
+                            @endauth
                         </div>
                         <div class="timestamp">{{ $chat->message_date }}</div>
                         <div class="content">

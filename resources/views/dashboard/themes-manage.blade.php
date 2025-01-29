@@ -209,11 +209,26 @@
                                 {{ $theme->description }}
                             </p>
                             <div class="theme-metadata">
-                                <x-button href="{{ route('dashboard.theme.subscriptions', ['id' => $theme->id]) }}"
-                                    class="btn-primary  full-w">Subscriptions</x-button>
+                                <x-button style="position: relative"
+                                    href="{{ route('dashboard.theme.subscriptions', ['id' => $theme->id]) }}"
+                                    class="btn-primary  full-w">
+                                    <div
+                                        style="position: absolute;top:0;right: 0;background-color: red;width: 1.2rem;height: 1.2rem;transform: translate(50%,-50%);border-radius: 40%">
+                                        {{ count($theme->subscriptions->where('status', 'pending')) }}
+                                    </div>
+                                    Subscriptions
+                                </x-button>
 
-                                <x-button href="{{ route('dashboard.theme.articles', ['id' => $theme->id]) }}"
-                                    class="btn-secondary  full-w">Articles</x-button>
+                                <x-button style="position: relative"
+                                    href="{{ route('dashboard.theme.articles', ['id' => $theme->id]) }}"
+                                    class="btn-secondary  full-w">
+                                    <div
+                                        style="position: absolute;top:0;right: 0;background-color: red;width: 1.2rem;height: 1.2rem;transform: translate(50%,-50%);border-radius: 40%">
+                                        {{ count($theme->articles->where('status', 'Pending')) }}
+
+                                    </div>
+                                    Articles
+                                </x-button>
 
                                 @if (Auth::user()->role === 'editor')
                                     <x-button onclick="showDeleteDialog({{ $theme->id }})"

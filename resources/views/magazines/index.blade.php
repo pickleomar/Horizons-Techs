@@ -217,15 +217,17 @@
             <div class="search-bar">
                 <h1>Magazine Issues</h1>
                 <input type="text" class="search-input" placeholder="Search issues...">
+                @auth
 
-                @if (Auth::user()->isEditor())
-                    <x-button href="#" class="btn-primary">
-                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M8 1v14M1 8h14" />
-                        </svg>
-                        New Issue
-                    </x-button>
-                @endif
+                    @if (Auth::user()->isEditor())
+                        <x-button href="#" class="btn-primary">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M8 1v14M1 8h14" />
+                            </svg>
+                            New Issue
+                        </x-button>
+                    @endif
+                @endauth
 
             </div>
 

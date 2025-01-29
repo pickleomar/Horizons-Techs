@@ -154,45 +154,28 @@
             <div class="footer-column">
                 <h3>About Us</h3>
                 <p style="color: var(--footer-text); font-size: 0.875rem; line-height: 1.6; margin-bottom: 1rem;">
-                    Empowering developers with cutting-edge knowledge and resources to build the future of technology.
-                </p>
-                <div class="footer-social">
-                    <a href="#" class="social-icon">𝕏</a>
-                    <a href="#" class="social-icon">𝔾</a>
-                    <a href="#" class="social-icon">in</a>
-                </div>
+                    Tech Horizons is an online magazine dedicated to exploring cutting-edge technological innovations
+                    and their societal impact. We cover topics including Artificial Intelligence, Internet of Things,
+                    Cybersecurity, Virtual and Augmented Reality, and more. </p>
+
             </div>
 
-            <!-- Quick Links -->
-            <div class="footer-column">
-                <h3>Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Our Services</a></li>
-                    <li><a href="#">Latest Articles</a></li>
-                    <li><a href="#">Contact Support</a></li>
-                </ul>
-            </div>
 
-            <!-- Resources -->
-            <div class="footer-column">
-                <h3>Resources</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Documentation</a></li>
-                    <li><a href="#">Tutorials</a></li>
-                    <li><a href="#">API Reference</a></li>
-                    <li><a href="#">Community Forum</a></li>
-                </ul>
-            </div>
 
-            <!-- Legal -->
             <div class="footer-column">
                 <h3>Legal</h3>
                 <ul class="footer-links">
+                    <li><a href="{{ route('faq') }}">FAQ</a></li>
                     <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Cookie Policy</a></li>
-                    <li><a href="#">GDPR Compliance</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul class="footer-links">
+                    <li><a href="#">+212 00000089</a></li>
+                    <li><a href="#">contact@techhorizon.com</a></li>
+                    <li><a href="#">Community Forum</a></li>
                 </ul>
             </div>
         </div>
