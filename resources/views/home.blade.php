@@ -97,7 +97,7 @@
             <div class="container">
                 <div class="section-header">
                     <h2>Featured Articles</h2>
-                    {{--  //TODO public articles<a href="#" class="btn btn-outline">View All</a> --}}
+                    <x-button href="{{ route('articles.public') }}" class="btn-secondary">View All</x-button>
                 </div>
                 <div class="grid grid-3">
                     @foreach ($articles as $article)
@@ -114,7 +114,7 @@
                                     <span
                                         style="color: var(--bg-neutral-4);">{{ $article->created_at->diffForHumans() }}</span>
                                     <x-button class="btn-secondary outline"
-                                        href="{{ route('articles.show', ['article' => $article, 'theme' => $article->theme]) }}">
+                                        href="{{ route('articles.public.show', ['article' => $article, 'theme' => $article->theme]) }}">
                                         Read More
                                     </x-button>
                                 </div>

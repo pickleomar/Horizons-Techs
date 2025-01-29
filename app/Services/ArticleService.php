@@ -74,7 +74,7 @@ class ArticleService
         if (!$article) {
             return false;
         }
-        return $this->articleRepository->update($article_id, ["public" => true]);
+        return $this->articleRepository->update($article_id, ["public" => 1]);
     }
 
 

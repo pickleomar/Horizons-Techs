@@ -180,9 +180,11 @@ class ArticleController extends Controller
         // }
 
         $article = $this->articleService->publicArticle($article_id)->first();
+
         if (!$article) {
             return redirect()->back()->with('error', 'Something went wrong.');
         }
-        return redirect()->back()->with('success', 'Article rejected.');
+
+        return redirect()->back()->with('success', 'Articles is Public.');
     }
 }

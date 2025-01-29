@@ -18,6 +18,7 @@ class Article extends Model
         'author_id',
         'status',
         'publication_date',
+        "public",
     ];
 
     protected $casts = [
