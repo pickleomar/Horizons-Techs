@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Issue;
 use App\Services\ArticleService;
 use App\Services\IssueService;
@@ -125,5 +126,11 @@ class IssueController extends Controller
             return redirect()->back()->with('error', 'Something went wrong.');
         }
         return redirect()->back()->with('success', 'Article approved.');
+    }
+
+
+    public function show_article(Issue $issue, Article $article)
+    {
+        return view("magazines.article", compact("article"));
     }
 }

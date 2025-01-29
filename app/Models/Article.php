@@ -16,6 +16,7 @@ class Article extends Model
         'image',
         'theme_id',
         'author_id',
+        'issue_id',
         'status',
         'publication_date',
         "public",
