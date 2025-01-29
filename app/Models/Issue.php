@@ -15,7 +15,12 @@ class Issue extends Model
     protected $casts = [
         'publication_date' => 'datetime',
     ];
-    
+
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
 
     /**
      * Todo Handle Issue Relationship
