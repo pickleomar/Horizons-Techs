@@ -155,19 +155,15 @@ class ArticleController extends Controller
     }
 
 
-    // public function publish($article_id)
-    // {
-    //     $user  = Auth::user();
-    //     // if ($user->role !== "editor" && !$theme->manager_id === $user->id) {
-    //     //     abort(403, "Not allowed to accomplish this action");
-    //     // }
+    public function pending($article_id)
+    {
 
-    //     $article = $this->articleService->publishArticle($article_id)->first();
-    //     if (!$article) {
-    //         return redirect()->back()->with('error', 'Something went wrong.');
-    //     }
-    //     return redirect()->back()->with('success', 'Article rejected.');
-    // }
+        $article = $this->articleService->setPending($article_id)->first();
+        if (!$article) {
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+        return redirect()->back()->with('success', 'Article Waiting approval.');
+    }
 
 
     public function propose($article_id)

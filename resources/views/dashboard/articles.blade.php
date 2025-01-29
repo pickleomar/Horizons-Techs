@@ -156,7 +156,13 @@
                                 <div class="article-actions">
                                     <x-button href="{{ route('article.edit', ['article' => $article]) }}"
                                         class="btn-secondary">Edit</x-button>
-                                    <x-button class="btn-primary">Request</x-button>
+
+
+                                    <form action="{{ route('articles.pending', ['article_id' => $article->id]) }}"
+                                        method="post">
+                                        @csrf
+                                        <x-button type="submit" class="btn-primary">Request</x-button>
+                                    </form>
 
 
                                     <x-button onclick="showDeleteDialog({{ $article->id }})"
