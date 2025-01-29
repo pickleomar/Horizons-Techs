@@ -390,8 +390,9 @@
                 alt="Article Image" class="article-image">
             <div class="article-metadata">
                 Published by {{ '@' . $article->author->name }}
-
-                <h3> Rating : {{ $avgRating }}</h3>
+                @isset($avgRating)
+                    <h3> Rating : {{ $avgRating }}</h3>
+                @endisset
             </div>
         </div>
         <div class="article-content">
@@ -408,21 +409,25 @@
 
 
         {{-- Rating Section --}}
-        <div class="rating-section">
-            <p class="current-user">Rating as: {{ '@' . Auth::user()->name }}</p>
-            <form class="rating-form" method="GET"
-                action="{{ route('rate.article', ['theme' => $article->theme_id, 'article' => $article->id]) }}">
-                @csrf
-                <div class="stars">
-                    @for ($i = 5; $i >= 1; $i--)
-                        <input type="radio" name="rating" value="{{ $i }}" id="star{{ $i }}"
-                            class="star-radio" @if (optional($userRating)->rating == $i) checked @endif>
-                        <label for="star{{ $i }}" class="star-label">★</label>
-                    @endfor
-                </div>
-                <x-button type="submit" class="rating-submit">Submit Rating</x-button>
-            </form>
-        </div>
+        @isset($avgRating)
+
+            <div class="rating-section">
+                <p class="current-user">Rating as: {{ '@' . Auth::user()->name }}</p>
+                <form class="rating-form" method="GET"
+                    action="{{ route('rate.article', ['theme' => $article->theme_id, 'article' => $article->id]) }}">
+                    @csrf
+                    <div class="stars">
+                        @for ($i = 5; $i >= 1; $i--)
+                            <input type="radio" name="rating" value="{{ $i }}" id="star{{ $i }}"
+                                class="star-radio" @if (optional($userRating)->rating == $i) checked @endif>
+                            <label for="star{{ $i }}" class="star-label">★</label>
+                        @endfor
+                    </div>
+                    <x-button type="submit" class="rating-submit">Submit Rating</x-button>
+                </form>
+            </div>
+        @endisset
+
 
         <div class="comments-section">
             <h2>Comments</h2>
@@ -430,8 +435,6 @@
             <div class="comment-form">
                 <form method="POST" action="{{ route('chats.store') }}">
                     @csrf
-                    {{-- <label for="comment-author">Name</label>
-                    <input type="text" id="comment-author" name="author" placeholder="Enter your name" required> --}}
 
                     <label for="comment-content">Comment</label>
                     <textarea id="comment-content" name="message" rows="4" placeholder="Write your thoughts..." required></textarea>

@@ -71,6 +71,7 @@
             #hero h1 {
                 font-size: 2.5rem;
             }
+
         }
     </style>
 
@@ -136,7 +137,8 @@
                     @foreach ($themes as $theme)
                         <div class="card" style="text-align: center;">
                             <h3 style="margin-bottom: 1rem;">{{ $theme->name }}</h3>
-                            <p style="color: var(--divider-color); margin-bottom: 1.5rem;">
+                            <p
+                                style="color: var(--divider-color); margin-bottom: 1.5rem;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;">
                                 {{ $theme->description }}
                             </p>
                             <x-button class="btn-primary" href="{{ route('themes.show', ['theme' => $theme]) }}">Learn

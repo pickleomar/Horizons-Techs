@@ -37,6 +37,18 @@ class ArticleController extends Controller
         return view('dashboard.articles', compact('articles'));
     }
 
+
+    public function public_index(Request $request)
+    {
+        $articles = $this->articleService->getPublicArticles();
+
+        return view("articles.index", compact("articles"));
+    }
+
+    public function public_show(Article $article)
+    {
+        return view("articles.show", compact("article"));
+    }
     public function create(Theme $theme)
     {
         return view('articles.create', compact('theme'));
@@ -153,6 +165,21 @@ class ArticleController extends Controller
         // }
 
         $article = $this->articleService->publishArticle($article_id)->first();
+        if (!$article) {
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+        return redirect()->back()->with('success', 'Article rejected.');
+    }
+
+
+    public function make_public($article_id)
+    {
+        $user  = Auth::user();
+        // if ($user->role !== "editor" && !$theme->manager_id === $user->id) {
+        //     abort(403, "Not allowed to accomplish this action");
+        // }
+
+        $article = $this->articleService->publicArticle($article_id)->first();
         if (!$article) {
             return redirect()->back()->with('error', 'Something went wrong.');
         }

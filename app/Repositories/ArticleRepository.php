@@ -96,6 +96,6 @@ class ArticleRepository
 
     public function random($number)
     {
-        return $this->model->inRandomOrder()->limit($number)->get();
+        return $this->model->where("public", "1")->inRandomOrder()->limit($number)->get();
     }
 }
