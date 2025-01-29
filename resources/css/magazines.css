@@ -66,13 +66,13 @@
     position: relative;
 }
 
-.magazine-head{
+.magazine-head {
     font-family: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
     font-weight: bold;
-    font-size:1.8em;
-    color:var(--divider-color);
+    font-size: 1.8em;
+    color: var(--divider-color);
     margin-left: 19rem;
-    margin-top:2.38rem;
+    margin-top: 2.38rem;
 }
 
 .issue {
