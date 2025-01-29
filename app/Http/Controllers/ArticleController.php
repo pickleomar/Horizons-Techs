@@ -86,7 +86,7 @@ class ArticleController extends Controller
 
     public function show(Theme $theme, Article $article)
     {
-        if ($article->status === "Published") {
+        if ($article->status === "Published" || $article->status === "Proposed" || $article->status === "Approved") {
             $this->historyService->trackHistory(Auth::user()->id, $article->id);
         }
         $userRating = $this->ratingController->getUserRating($article);
