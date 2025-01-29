@@ -37,6 +37,7 @@ Route::post('articles/{theme}/create', [ArticleController::class, "store"])->mid
 
 Route::get("/magazine", [IssueController::class, "index"])->name("magazines.index");
 Route::get("/magazine/{issue}", [IssueController::class, "show"])->name("magazines.show");
+Route::get("/magazine/{issue}/{article}", [IssueController::class, "show_article"])->name("magazines.show.article");
 
 
 

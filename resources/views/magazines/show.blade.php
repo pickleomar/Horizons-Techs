@@ -204,7 +204,7 @@
                 <div class="issue-info">
                     <h1 class="issue-title">January 2025 Edition</h1>
                     <div class="issue-meta">
-                        <span>Issue #124</span>
+                        <span>Issue #{{ $issue->id }}</span>
                         <span>Published: {{ $issue->publication_date->format('d.M.Y') }}</span>
                         <span>84 pages</span>
                         <span>{{ count($issue->articles) }} articles</span>
@@ -217,7 +217,7 @@
                     <span>•</span>
                     <span>2025-01-29 03:11:10</span> --}}
                 </div>
-                <div class="action-buttons">
+                {{-- <div class="action-buttons">
                     <a href="#" class="btn btn-primary">
                         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M12 5l-8 8M12 13l-8-8" />
@@ -230,7 +230,7 @@
                         </svg>
                         New Element
                     </a>
-                </div>
+                </div> --}}
             </div>
         </header>
 
@@ -244,20 +244,24 @@
             <div class="elements-grid">
 
                 @foreach ($issue->articles as $article)
-                    <article class="element-card">
-                        <div class="element-image">
-                            <img src="{{ asset($article->image) }}" alt="AI Revolution">
-                        </div>
-                        <div class="element-content">
-                            <span class="element-type">Article</span>
-                            <h3 class="element-title">{{ $article->title }}</h3>
-                            <div class="element-metadata">
-                                <span>Created by {{ '@' . $article->author->name }}</span>
-                                <span>Updated: {{ $article->updated_at->diffForHumans() }}</span>
-                                <span>Status: {{ $article->status }}</span>
+                    <a style="all: unset;cursor: pointer;"
+                        href="{{ route('magazines.show.article', ['issue' => $issue, 'article' => $article]) }}">
+
+                        <article class="element-card">
+                            <div class="element-image">
+                                <img src="{{ asset($article->image) }}" alt="AI Revolution">
                             </div>
-                        </div>
-                    </article>
+                            <div class="element-content">
+                                <span class="element-type">Article</span>
+                                <h3 class="element-title">{{ $article->title }}</h3>
+                                <div class="element-metadata">
+                                    <span>Created by {{ '@' . $article->author->name }}</span>
+                                    <span>Updated: {{ $article->updated_at->diffForHumans() }}</span>
+                                    <span>Status: {{ $article->status }}</span>
+                                </div>
+                            </div>
+                        </article>
+                    </a>
                 @endforeach
 
             </div>
