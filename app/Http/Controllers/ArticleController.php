@@ -9,18 +9,23 @@ use App\Services\ArticleService;
 use App\Services\HistoryService;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\RatingController;
+use App\Services\RatingService;
 
 class ArticleController extends Controller
 {
 
     protected $articleService;
     protected $historyService;
+    protected $ratingController;
 
-    public function __construct(ArticleService $articleService, HistoryService $historyService,RatingController $ratingController)
+    protected $ratingService;
+
+    public function __construct(ArticleService $articleService, HistoryService $historyService, RatingController $ratingController, RatingService $ratingService)
     {
         $this->articleService = $articleService;
         $this->historyService = $historyService;
-        $this->ratingController=$ratingController;
+        $this->ratingController = $ratingController;
+        $this->ratingService = $ratingService;
     }
 
     public function index(Theme $theme)
@@ -32,6 +37,18 @@ class ArticleController extends Controller
         return view('dashboard.articles', compact('articles'));
     }
 
+
+    public function public_index(Request $request)
+    {
+        $articles = $this->articleService->getPublicArticles();
+
+        return view("articles.index", compact("articles"));
+    }
+
+    public function public_show(Article $article)
+    {
+        return view("articles.show", compact("article"));
+    }
     public function create(Theme $theme)
     {
         return view('articles.create', compact('theme'));
@@ -68,12 +85,16 @@ class ArticleController extends Controller
 
 
     public function show(Theme $theme, Article $article)
-    {   
+    {
         if ($article->status === "Published") {
             $this->historyService->trackHistory(Auth::user()->id, $article->id);
         }
         $userRating = $this->ratingController->getUserRating($article);
-        return view('articles.show', compact('article','userRating'));
+
+        $avgRating  = round($this->ratingService->getAverageRating($article->id), 2);
+
+
+        return view('articles.show', compact('article', 'userRating', "avgRating"));
     }
 
     public function edit(Article $article)
@@ -144,6 +165,21 @@ class ArticleController extends Controller
         // }
 
         $article = $this->articleService->publishArticle($article_id)->first();
+        if (!$article) {
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+        return redirect()->back()->with('success', 'Article rejected.');
+    }
+
+
+    public function make_public($article_id)
+    {
+        $user  = Auth::user();
+        // if ($user->role !== "editor" && !$theme->manager_id === $user->id) {
+        //     abort(403, "Not allowed to accomplish this action");
+        // }
+
+        $article = $this->articleService->publicArticle($article_id)->first();
         if (!$article) {
             return redirect()->back()->with('error', 'Something went wrong.');
         }

@@ -25,6 +25,8 @@
 
         .article-metadata {
             position: absolute;
+            display: flex;
+            justify-content: space-between;
             bottom: 0;
             left: 0;
             right: 0;
@@ -92,6 +94,7 @@
             display: flex;
             flex-direction: column;
             gap: 1rem;
+            align-items: center;
         }
 
         .stars {
@@ -170,7 +173,6 @@
 
 
         .comments-section {
-            margin-top: 3rem;
             padding-top: 2rem;
             padding-bottom: 2rem;
             border-top: 1px solid var(--border-color);
@@ -198,7 +200,8 @@
         .comment-form {
             background: var(--bg-color);
             padding: 2rem;
-            border-radius: var(--radius-md);
+            margin: 1rem;
+            border-radius: 1rem;
             margin-bottom: 3rem;
             border: 1px solid var(--border-color);
         }
@@ -209,7 +212,7 @@
             font-weight: 500;
         }
 
-        .comment-form input,
+
         .comment-form textarea {
             width: 100%;
             padding: 1rem;
@@ -220,7 +223,6 @@
             font-family: inherit;
         }
 
-        .comment-form input:focus,
         .comment-form textarea:focus {
             outline: none;
             border-color: var(--secondary-color);
@@ -240,7 +242,6 @@
             background: var(--bg-neutral-3);
             padding: 1.5rem;
             border-radius: 0.5rem;
-            border: 1px solid var(--border-color);
             position: relative;
         }
 
@@ -287,17 +288,111 @@
                 font-size: 2rem;
             }
         }
+
+
+        .breadcrumb-container {
+            --breadcrumb-bg: var(--bg-neutral-2);
+            --breadcrumb-border: var(--bg-neutral-3);
+            --breadcrumb-text: var(--divider-color);
+            --breadcrumb-active: var(--primary-color);
+            --breadcrumb-hover: var(--secondary-color);
+
+            max-width: 800px;
+        }
+
+        .breadcrumb-gradient {
+            border-radius: var(--radius-l);
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--breadcrumb-border);
+        }
+
+
+        .breadcrumb-gradient a {
+            color: var(--breadcrumb-text);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb-gradient a:hover {
+            color: var(--breadcrumb-hover);
+        }
+
+
+        .breadcrumb-gradient .separator {
+            color: var(--breadcrumb-border);
+            font-size: 0.75rem;
+            opacity: 0.7;
+        }
+
+        .breadcrumb-gradient .active {
+            color: var(--breadcrumb-active);
+            font-weight: 500;
+        }
+
+        .breadcrumb-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .breadcrumb-container {
+                padding: 0 1rem;
+                margin: 1rem auto;
+            }
+
+            .breadcrumb-gradient {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+
+        }
     </style>
 
 
 
 
     <article class="article">
+        <div class="breadcrumb-container">
+            <nav class="breadcrumb-gradient">
+                <div class="breadcrumb-content">
+                    <a href="{{ route('home') }}">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                            <polyline points="9 22 9 12 15 12 15 22" />
+                        </svg>
+                        Home
+                    </a>
+                    <span class="separator">⟩</span>
+                    <a href="{{ route('themes.show', ['theme' => $article->theme]) }}">{{ $article->theme->name }}</a>
+                    <span class="separator">⟩</span>
+                    <span class="active">{{ $article->title }}</span>
+                </div>
+            </nav>
+        </div>
         <div class="article-image-container">
             <img src="{{ str_starts_with($article->image, 'http') ? $article->image : asset($article->image) }}"
                 alt="Article Image" class="article-image">
             <div class="article-metadata">
                 Published by {{ '@' . $article->author->name }}
+                @isset($avgRating)
+                    <h3> Rating : {{ $avgRating }}</h3>
+                @endisset
             </div>
         </div>
         <div class="article-content">
@@ -313,32 +408,26 @@
         </div>
 
 
-
         {{-- Rating Section --}}
-        <div class="rating-section">
-            <p class="current-user">Rating as: {{ '@' . Auth::user()->name }}</p>
-            <form class="rating-form" method="GET" action="{{ route('rate.article', ['theme'=>$article->theme_id, 'article'=> $article->id]) }}">
-                @csrf
-                <div class="stars">
-                    @for ($i = 5; $i >= 1; $i--)
-                        <input type="radio" name="rating" value="{{ $i }}" id="star{{ $i }}" class="star-radio"
-                            @if(optional($userRating)->rating == $i) checked @endif >
-                        <label for="star{{ $i }}" class="star-label">★</label>
-                    @endfor
-                    {{--<input type="radio" name="rating" value="5" id="star5" class="star-radio">
-                    <label for="star5" class="star-label">★</label>
-                    <input type="radio" name="rating" value="4" id="star4" class="star-radio">
-                    <label for="star4" class="star-label">★</label>
-                    <input type="radio" name="rating" value="3" id="star3" class="star-radio">
-                    <label for="star3" class="star-label">★</label>
-                    <input type="radio" name="rating" value="2" id="star2" class="star-radio">
-                    <label for="star2" class="star-label">★</label>
-                    <input type="radio" name="rating" value="1" id="star1" class="star-radio">
-                    <label for="star1" class="star-label">★</label>--}}
-                </div>
-                <x-button type="submit" class="rating-submit">Submit Rating</x-button>
-            </form>
-        </div>
+        @isset($avgRating)
+
+            <div class="rating-section">
+                <p class="current-user">Rating as: {{ '@' . Auth::user()->name }}</p>
+                <form class="rating-form" method="GET"
+                    action="{{ route('rate.article', ['theme' => $article->theme_id, 'article' => $article->id]) }}">
+                    @csrf
+                    <div class="stars">
+                        @for ($i = 5; $i >= 1; $i--)
+                            <input type="radio" name="rating" value="{{ $i }}" id="star{{ $i }}"
+                                class="star-radio" @if (optional($userRating)->rating == $i) checked @endif>
+                            <label for="star{{ $i }}" class="star-label">★</label>
+                        @endfor
+                    </div>
+                    <x-button type="submit" class="rating-submit">Submit Rating</x-button>
+                </form>
+            </div>
+        @endisset
+
 
         <div class="comments-section">
             <h2>Comments</h2>
@@ -346,8 +435,6 @@
             <div class="comment-form">
                 <form method="POST" action="{{ route('chats.store') }}">
                     @csrf
-                    {{-- <label for="comment-author">Name</label>
-                    <input type="text" id="comment-author" name="author" placeholder="Enter your name" required> --}}
 
                     <label for="comment-content">Comment</label>
                     <textarea id="comment-content" name="message" rows="4" placeholder="Write your thoughts..." required></textarea>

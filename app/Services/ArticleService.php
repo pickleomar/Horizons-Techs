@@ -59,12 +59,34 @@ class ArticleService
     }
 
 
-    public function publishArticle($article_id)
+    public function publishArticle($article_id, $public = 0)
     {
         $article = $this->articleRepository->find($article_id)->first();
         if (!$article) {
             return false;
         }
         return $this->articleRepository->update($article_id, ["status" => "Published"]);
+    }
+
+    public function publicArticle($article_id)
+    {
+        $article = $this->articleRepository->find($article_id)->first();
+        if (!$article) {
+            return false;
+        }
+        return $this->articleRepository->update($article_id, ["public" => true]);
+    }
+
+
+
+    public function getRandomArticles($number = 3)
+    {
+        return $this->articleRepository->random($number);
+    }
+
+
+    public function getPublicArticles()
+    {
+        return $this->getAllArticles()->where("public", 1)->all();
     }
 }

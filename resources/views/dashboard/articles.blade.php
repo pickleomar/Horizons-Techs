@@ -132,8 +132,8 @@
         <header id="header">
             <h1>My Articles</h1>
             <div id="user-info">
-                <div>@regisx001</div>
-                <div>UTC: 2025-01-27 22:52:49</div>
+                <div>{{ '@' . Auth::user()->name }}</div>
+                <div>{{ now() }}</div>
             </div>
         </header>
 
@@ -173,6 +173,13 @@
                                         <x-button type="submit" class="btn-primary">Publish</x-button>
                                     </form>
 
+                                    @if (!$article->public)
+                                        <form method="post"
+                                            action="{{ route('articles.make.public', ['article_id' => $article->id]) }}">
+                                            @csrf
+                                            <x-button type="submit" class="btn-warning">public</x-button>
+                                        </form>
+                                    @endif
                                     <x-button class="btn-secondary">Edit</x-button>
                                     <x-button onclick="showDeleteDialog({{ $article->id }})"
                                         class="btn-danger">Delete</x-button>
@@ -192,6 +199,14 @@
                                 <span class="status status-approved">{{ $article->status }}</span>
                                 <div class="article-actions">
                                     <x-button class="btn-secondary">Edit</x-button>
+                                    @if (!$article->public)
+                                        <form method="post"
+                                            action="{{ route('articles.make.public', ['article_id' => $article->id]) }}">
+                                            @csrf
+                                            <x-button type="submit" class="btn-warning">public</x-button>
+                                        </form>
+                                    @endif
+
                                     <x-button onclick="showDeleteDialog({{ $article->id }})"
                                         class="btn-danger">Delete</x-button>
                                 </div>

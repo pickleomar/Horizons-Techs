@@ -93,4 +93,21 @@ class ThemeRepository
         }
         return false;
     }
+
+
+    public function random($number)
+    {
+        return $this->model->inRandomOrder()->limit($number)->get();
+    }
+
+    public function search($search)
+    {
+        return $this->model->where(function ($q) use ($search) {
+            $q->where('name', 'LIKE', "%{$search}%")
+                ->orWhere('description', 'LIKE', "%{$search}%")
+                ->orWhereHas('manager', function ($q) use ($search) {
+                    $q->where('name', 'LIKE', "%{$search}%");
+                });
+        })->get();;
+    }
 }

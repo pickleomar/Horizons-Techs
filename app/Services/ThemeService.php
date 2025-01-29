@@ -45,4 +45,15 @@ class ThemeService
         $themes = $this->themeRepository->all()->where("manager_id", $user_id);
         return $themes;
     }
+
+
+    public function getRandomThemes($number = 4)
+    {
+        return $this->themeRepository->random($number);
+    }
+
+    public function searchInThemes($search)
+    {
+        return $this->themeRepository->search($search);
+    }
 }

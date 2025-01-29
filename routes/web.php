@@ -10,11 +10,12 @@ use App\Http\Controllers\RatingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('home');
-})->name("home");
+Route::get("/", [HomeController::class, "index"])->name("home");
 
+Route::get("/articles", [ArticleController::class, "public_index"])->name("articles.public");
+Route::get("/articles/{article}", [ArticleController::class, "public_show"])->name("articles.public.show");
 // Themes Routes
 Route::get("/themes", [ThemeController::class, "index"])->name("themes.index");
 Route::get("/themes/create", [ThemeController::class, "create"])->middleware("auth")->name("themes.create");

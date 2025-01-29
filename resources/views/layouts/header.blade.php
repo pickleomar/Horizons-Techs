@@ -4,9 +4,6 @@
             <img src="/header_logo.png" alt="header tech horizon iot programming">
         </a>
     </div>
-    <div>
-        <input type="text" placeholder="Search ...">
-    </div>
     <nav>
         <a href="{{ route('themes.index') }}">Themes</a>
         @guest

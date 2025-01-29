@@ -9,6 +9,7 @@ use App\Services\SubscriptionService;
 use App\Services\ThemeService;
 use Illuminate\Support\Facades\Auth;
 
+use function Laravel\Prompts\search;
 
 class ThemeController extends Controller
 {
@@ -25,10 +26,16 @@ class ThemeController extends Controller
 
 
 
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->input('search');
         $themes = $this->themeService->getAllThemes();
-        return view("themes.index", compact("themes"));
+
+        if ($search) {
+            $themes = $this->themeService->searchInThemes($search);
+        }
+
+        return view("themes.index", compact("themes", "search"));
     }
 
     public function create(Request $request)

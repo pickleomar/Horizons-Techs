@@ -123,6 +123,61 @@
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
         }
+
+        .search-input {
+            background: var(--bg-neutral-2);
+            border: 1px solid var(--bg-neutral-3);
+            border-radius: var(--radius-m);
+            padding: 0.75rem 1rem;
+            color: var(--font-color);
+            width: 300px;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(31, 136, 61, 0.2);
+        }
+
+        .search-info {
+            padding: 0.75rem;
+            margin: 1rem 0;
+            color: var(--divider-color);
+            font-size: 0.875rem;
+            text-align: center;
+            background: var(--bg-neutral-2);
+            border-radius: var(--radius-m);
+            border: 1px solid var(--bg-neutral-3);
+        }
+
+        .theme-card {
+            transition: opacity 0.3s ease;
+        }
+
+        .theme-card.hidden {
+            display: none;
+        }
+
+        .highlight {
+            background: rgba(31, 136, 61, 0.2);
+            border-radius: var(--radius-s);
+            padding: 0 0.25rem;
+        }
+
+        /* Search metadata */
+        .search-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--divider-color);
+            font-size: 0.75rem;
+        }
+
+        .search-meta .user {
+            color: var(--primary-color);
+        }
     </style>
 
 
@@ -146,16 +201,13 @@
         <header class="header">
             <div class="header-content">
                 <h1 class="page-title">Discover themes</h1>
+                <form method="get" action="{{ route('themes.index') }}">
+                    <input type="text" name="search" class="search-input" placeholder="Search themes..."
+                        value="{{ $search ?? '' }}" autocomplete="off">
+                </form>
                 <x-button href="{{ route('themes.create') }}" class="new-theme-btn">+ New theme</x-button>
             </div>
         </header>
-
-        <div class="filters">
-            <button class="filter-btn active">All</button>
-            <button class="filter-btn">Popular</button>
-            <button class="filter-btn">Recent</button>
-            <button class="filter-btn">Featured</button>
-        </div>
 
         <main class="themes-grid">
 
@@ -185,4 +237,6 @@
 
         </main>
     </div>
+
+
 </x-app-layout>
