@@ -170,6 +170,20 @@ class ArticleController extends Controller
     }
 
 
+    public function propose($article_id)
+    {
+        $user  = Auth::user();
+        // if ($user->role !== "editor" && !$theme->manager_id === $user->id) {
+        //     abort(403, "Not allowed to accomplish this action");
+        // }
+
+        $article = $this->articleService->proposeArticle($article_id)->first();
+        if (!$article) {
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+        return redirect()->back()->with('success', 'Article Proposed.');
+    }
+
     public function make_public($article_id)
     {
         $user  = Auth::user();

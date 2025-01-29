@@ -77,6 +77,16 @@ class IssueService
         return $this->issueRepository->update($issue_id, ["public" => 1]);
     }
 
+
+    public function privateIssue($issue_id)
+    {
+        $issue = $this->issueRepository->find($issue_id)->first();
+        if (!$issue) {
+            return false;
+        }
+        return $this->issueRepository->update($issue_id, ["public" => 0]);
+    }
+
     public function getPublicIssues()
     {
         return $this->getAllIssues()->where("public", 1)->all();

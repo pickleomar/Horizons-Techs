@@ -50,29 +50,6 @@
             box-shadow: 0 0 0 3px rgba(31, 136, 61, 0.1);
         }
 
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: var(--radius-m);
-            font-weight: 500;
-            transition: all 0.2s ease;
-            border: none;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            text-decoration: none;
-        }
-
-        .btn-primary {
-            background: var(--primary-color);
-            color: var(--bg-color);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(31, 136, 61, 0.2);
-        }
-
         /* Filter Section */
         .filters {
             display: flex;
@@ -240,12 +217,16 @@
             <div class="search-bar">
                 <h1>Magazine Issues</h1>
                 <input type="text" class="search-input" placeholder="Search issues...">
-                <a href="#" class="btn btn-primary">
-                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M8 1v14M1 8h14" />
-                    </svg>
-                    New Issue
-                </a>
+
+                @if (Auth::user()->isEditor())
+                    <x-button href="#" class="btn-primary">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M8 1v14M1 8h14" />
+                        </svg>
+                        New Issue
+                    </x-button>
+                @endif
+
             </div>
 
             {{-- <div class="filters">
@@ -275,8 +256,9 @@
                             <span>Updated: {{ $issue->updated_at->diffForHumans() }}</span>
                         </div>
                         <div class="actions">
-                            <a href="#">Read Now</a>
-                            <a href="#">Download</a>
+                            <x-button class="btn-primary" href="{{ route('magazines.show', ['issue' => $issue]) }}">Read
+                                Now</x-button>
+                            <x-button href="#">Download</x-button>
                         </div>
                     </div>
                 </article>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\IssueController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SubscriptionController;
@@ -30,7 +31,7 @@ Route::middleware('auth',)->group(function () {
     Route::get('/dashboard/articles', [ArticleController::class, 'index'])->name('dashboard.articles');
     Route::get('/articles/edit/{article}', [ArticleController::class, 'edit'])->name('article.edit');
     Route::post('/articles/edit/{article}', [ArticleController::class, 'update'])->name('article.update');
-
+    Route::post('/articles/{article_id}/propose', [ArticleController::class, 'propose'])->name('articles.propose');
 
 
     Route::post('/articles/{article_id}/publish', [ArticleController::class, 'publish'])->name('articles.publish');
@@ -62,4 +63,18 @@ Route::middleware(['auth', "role:editor,admin"])->group(function () {
     Route::delete("/themes", [ThemeController::class, "destroy"])->name("themes.destroy")->middleware("auth");
 
     // History Related
+});
+
+
+Route::middleware(['auth', "role:editor"])->group(function () {
+    Route::get('/dashboard/issues', [IssueController::class, 'manage'])->name('dashboard.issues');
+    Route::get('/issues/create', [IssueController::class, 'create'])->name('issues.create');
+    Route::post('/issues', [IssueController::class, 'store'])->name('issues.store');
+    Route::post('/issues/{issue_id}/publish', [IssueController::class, 'publish'])->name('issues.publish');
+    Route::post('/issues/{issue_id}/private', [IssueController::class, 'private'])->name('issues.private');
+
+    Route::get('/issues/{issue}/articles', [IssueController::class, 'manage_articles'])->name('issues.articles');
+
+    Route::post('/issues/{issue_id}/{article_id}/approve', [IssueController::class, 'approve_article'])->name('issues.articles.approve');
+    Route::post('/issues/{issue_id}/{article_id}/reject', [IssueController::class, 'reject_article'])->name('issues.articles.reject');
 });

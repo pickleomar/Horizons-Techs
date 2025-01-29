@@ -9,6 +9,7 @@ class Issue extends Model
     protected $fillable = [
         'title',
         'description',
+        "image",
         'publication_date',
         'public',
         "publisher"

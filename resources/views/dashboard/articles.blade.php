@@ -169,9 +169,9 @@
                                 <div class="article-actions">
 
                                     <form method="post"
-                                        action="{{ route('articles.publish', ['article_id' => $article->id]) }}">
+                                        action="{{ route('articles.propose', ['article_id' => $article->id]) }}">
                                         @csrf
-                                        <x-button type="submit" class="btn-primary">Publish</x-button>
+                                        <x-button type="submit" class="btn-primary">Propose</x-button>
                                     </form>
 
                                     @if (!$article->public)
@@ -191,6 +191,18 @@
                             @break
 
                             @case('Pending')
+                                <span class="status status-approved">{{ $article->status }}</span>
+                                <div class="article-actions">
+
+                                    <x-button href="{{ route('article.edit', ['article' => $article]) }}"
+                                        class="btn-secondary">Edit</x-button>
+
+                                    <x-button onclick="showDeleteDialog({{ $article->id }})"
+                                        class="btn-danger">Delete</x-button>
+                                </div>
+                            @break
+
+                            @case('Proposed')
                                 <span class="status status-approved">{{ $article->status }}</span>
                                 <div class="article-actions">
 
