@@ -1,7 +1,7 @@
-# Subscription Management System
+# Horizons Techs
 
 ## 📌 Project Overview
-This project is a **Laravel-based** web application designed to manage **user subscriptions for themes** with **role-based access control (RBAC)**. It ensures secure authentication, dynamic content management, and user-specific access permissions.
+Horizons Tech is a dynamic web application built with Laravel 9.x, aimed at delivering a seamless user experience for managing subscriptions, proposing articles, and tracking user activity. This project leverages Laravel’s powerful features to create a robust and scalable platform for content management and engagement.
 
 ## ✨ Features
 - 🔐 **User Authentication**: Secure login & registration.
