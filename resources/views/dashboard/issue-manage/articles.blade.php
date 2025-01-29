@@ -33,7 +33,7 @@
         }
     </style>
     <section class="dashboard-section">
-        <h2>Gestion des Abonnement </h2>
+        <h2>Gestion des Articles d'un Numero </h2>
         <div class="sub-request-container">
             <table class="sub-request-table">
                 <thead>
