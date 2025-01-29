@@ -30,7 +30,7 @@ Route::middleware('auth',)->group(function () {
     Route::get('/dashboard/articles', [ArticleController::class, 'index'])->name('dashboard.articles');
     Route::get('/articles/edit/{article}', [ArticleController::class, 'edit'])->name('article.edit');
     Route::post('/articles/edit/{article}', [ArticleController::class, 'update'])->name('article.update');
-
+    Route::post('/articles/{article_id}/propose', [ArticleController::class, 'propose'])->name('articles.propose');
 
 
     Route::post('/articles/{article_id}/publish', [ArticleController::class, 'publish'])->name('articles.publish');
