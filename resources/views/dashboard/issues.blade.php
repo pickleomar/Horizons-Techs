@@ -161,7 +161,8 @@
                                         @csrf
                                         <x-button type="submit" class="btn-warning">Publish</x-button>
                                     </form>
-                                    <x-button type="submit" class="btn-primary">Manage</x-button>
+                                    <x-button href="{{ route('issues.articles', ['issue' => $issue]) }}"
+                                        class="btn-primary">Manage</x-button>
 
 
 

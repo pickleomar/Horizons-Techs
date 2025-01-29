@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Issue;
+use App\Services\ArticleService;
 use App\Services\IssueService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,9 +14,11 @@ class IssueController extends Controller
 
 
     protected $issueService;
-    public function __construct(IssueService $issueService)
+    protected $articleService;
+    public function __construct(IssueService $issueService, ArticleService $articleService)
     {
         $this->issueService = $issueService;
+        $this->articleService = $articleService;
     }
     public function index(Request $request)
     {
@@ -93,5 +96,34 @@ class IssueController extends Controller
             return redirect()->back()->with('error', 'Something went wrong.');
         }
         return redirect()->back()->with('success', 'Issue Private .');
+    }
+
+
+    public function manage_articles(Request $request, Issue $issue)
+    {
+
+
+        $articles = $this->articleService->getAllArticles()->where("status", "Proposed");
+        return view("dashboard.issue-manage.articles", compact("articles", "issue"));
+    }
+
+
+
+
+    public function approve_article(Request $request, $issue_id, $article_id)
+    {
+        $article = $this->articleService->publishArticle($article_id, $issue_id)->first();
+        if (!$article) {
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+        return redirect()->back()->with('success', 'Article approved.');
+    }
+    public function reject_article(Request $request, $issue_id, $article_id)
+    {
+        $article = $this->articleService->approveArticle($article_id)->first();
+        if (!$article) {
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+        return redirect()->back()->with('success', 'Article approved.');
     }
 }

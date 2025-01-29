@@ -72,4 +72,9 @@ Route::middleware(['auth', "role:editor"])->group(function () {
     Route::post('/issues', [IssueController::class, 'store'])->name('issues.store');
     Route::post('/issues/{issue_id}/publish', [IssueController::class, 'publish'])->name('issues.publish');
     Route::post('/issues/{issue_id}/private', [IssueController::class, 'private'])->name('issues.private');
+
+    Route::get('/issues/{issue}/articles', [IssueController::class, 'manage_articles'])->name('issues.articles');
+
+    Route::post('/issues/{issue_id}/{article_id}/approve', [IssueController::class, 'approve_article'])->name('issues.articles.approve');
+    Route::post('/issues/{issue_id}/{article_id}/reject', [IssueController::class, 'reject_article'])->name('issues.articles.reject');
 });

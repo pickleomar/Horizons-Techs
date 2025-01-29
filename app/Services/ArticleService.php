@@ -59,16 +59,16 @@ class ArticleService
     }
 
 
-    public function publishArticle($article_id, $public = 0)
+    public function publishArticle($article_id, $issue_id)
     {
         $article = $this->articleRepository->find($article_id)->first();
         if (!$article) {
             return false;
         }
-        return $this->articleRepository->update($article_id, ["status" => "Published"]);
+        return $this->articleRepository->update($article_id, ["status" => "Published", "issue_id" => $issue_id]);
     }
 
-    public function proposeArticle($article_id, $public = 0)
+    public function proposeArticle($article_id)
     {
         $article = $this->articleRepository->find($article_id)->first();
         if (!$article) {
