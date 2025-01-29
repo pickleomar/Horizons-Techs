@@ -1,101 +1,105 @@
 <x-app-layout>
     <style>
-        .container {
+        /* Modern Cards & Layout */
+        .magazine {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
         }
 
-        /* Navigation */
-        .nav {
-            background: var(--bg-neutral-2);
-            border-bottom: 1px solid var(--bg-neutral-3);
-            padding: 1rem;
+        /* Header Section */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: var(--bg-color);
+            backdrop-filter: blur(10px);
             margin-bottom: 2rem;
         }
 
-        .nav-content {
-            max-width: 1200px;
-            margin: 0 auto;
+        .search-bar {
             display: flex;
-            justify-content: space-between;
+            gap: 1rem;
             align-items: center;
-        }
-
-        .nav-brand {
-            font-size: 1.25rem;
-            color: var(--font-color);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .nav-user {
-            color: var(--divider-color);
-            font-size: 0.875rem;
-        }
-
-        /* Header */
-        .header {
+            padding: 1.5rem;
             background: var(--bg-neutral-2);
             border: 1px solid var(--bg-neutral-3);
-            border-radius: var(--radius-m);
-            padding: 2rem;
-            margin-bottom: 2rem;
+            border-radius: var(--radius-l);
         }
 
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .page-title {
-            font-size: 2rem;
+        .search-bar h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
             color: var(--font-color);
+            margin-right: auto;
         }
 
         .search-input {
+            width: 300px;
+            padding: 0.75rem 1rem;
             background: var(--bg-neutral-1);
             border: 1px solid var(--bg-neutral-3);
             border-radius: var(--radius-m);
-            padding: 0.75rem 1rem;
-            width: 300px;
             color: var(--font-color);
-            font-size: 0.875rem;
+            transition: all 0.3s ease;
         }
 
-        .new-issue-btn {
-            background: var(--primary-color);
-            color: var(--bg-color);
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(31, 136, 61, 0.1);
+        }
+
+        .btn {
             padding: 0.75rem 1.5rem;
             border-radius: var(--radius-m);
+            font-weight: 500;
+            transition: all 0.2s ease;
             border: none;
-            font-size: 0.875rem;
             cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
             text-decoration: none;
         }
 
-        /* Filters */
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--bg-color);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(31, 136, 61, 0.2);
+        }
+
+        /* Filter Section */
         .filters {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 0.5rem;
+            padding: 0.5rem;
             background: var(--bg-neutral-2);
-            padding: 1rem;
-            border-radius: var(--radius-m);
             border: 1px solid var(--bg-neutral-3);
+            border-radius: var(--radius-l);
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .filters::-webkit-scrollbar {
+            display: none;
         }
 
         .filter-btn {
             padding: 0.5rem 1rem;
-            background: var(--bg-neutral-1);
-            border: 1px solid var(--bg-neutral-3);
-            border-radius: var(--radius-s);
-            color: var(--font-color);
+            border-radius: var(--radius-m);
+            border: none;
+            background: transparent;
+            color: var(--divider-color);
             font-size: 0.875rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            white-space: nowrap;
         }
 
         .filter-btn.active {
@@ -103,38 +107,49 @@
             color: var(--bg-color);
         }
 
+        .filter-btn:hover:not(.active) {
+            color: var(--font-color);
+            background: var(--bg-neutral-3);
+        }
+
         /* Issues Grid */
-        .issues-grid {
+        .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
-        .issue-card {
+        .issue {
             background: var(--bg-neutral-2);
-            border: 1px solid var(--bg-neutral-3);
-            border-radius: var(--radius-m);
+            border-radius: var(--radius-l);
             overflow: hidden;
             transition: all 0.3s ease;
+            border: 1px solid var(--bg-neutral-3);
         }
 
-        .issue-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        .issue:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
         }
 
-        .issue-cover {
+        .cover {
             position: relative;
             height: 400px;
+            overflow: hidden;
         }
 
-        .issue-cover img {
+        .cover img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
         }
 
-        .issue-badge {
+        .issue:hover .cover img {
+            transform: scale(1.05);
+        }
+
+        .badge {
             position: absolute;
             top: 1rem;
             right: 1rem;
@@ -143,19 +158,22 @@
             padding: 0.25rem 0.75rem;
             border-radius: var(--radius-s);
             font-size: 0.75rem;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .issue-content {
+        .content {
             padding: 1.5rem;
         }
 
-        .issue-title {
+        .content h2 {
             font-size: 1.25rem;
-            margin-bottom: 1rem;
+            font-weight: 600;
             color: var(--font-color);
+            margin-bottom: 1rem;
         }
 
-        .issue-metadata {
+        .meta {
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
@@ -166,138 +184,102 @@
             border-bottom: 1px solid var(--bg-neutral-3);
         }
 
-        .issue-actions {
-            display: flex;
-            gap: 1rem;
+        .actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
         }
 
-        .btn {
-            flex: 1;
-            padding: 0.75rem 1rem;
+        .actions a {
+            padding: 0.75rem;
             border-radius: var(--radius-m);
-            font-size: 0.875rem;
-            cursor: pointer;
-            border: none;
-            transition: all 0.3s ease;
             text-align: center;
             text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
         }
 
-        .btn-primary {
+        .actions a:first-child {
             background: var(--primary-color);
             color: var(--bg-color);
         }
 
-        .btn-secondary {
+        .actions a:last-child {
             background: var(--secondary-color);
             color: var(--bg-color);
         }
 
-        /* Footer */
-        .footer {
-            margin-top: 4rem;
-            padding: 2rem;
-            background: var(--bg-neutral-2);
-            border-top: 1px solid var(--bg-neutral-3);
-            text-align: center;
-            color: var(--divider-color);
-            font-size: 0.875rem;
+        .actions a:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
-            .container {
+            .magazine {
                 padding: 1rem;
             }
 
-            .header-content {
+            .search-bar {
                 flex-direction: column;
                 align-items: stretch;
-                gap: 1rem;
             }
 
             .search-input {
                 width: 100%;
             }
 
-            .filters {
-                overflow-x: auto;
-                padding-bottom: 0.5rem;
-            }
-
-            .filter-btn {
-                white-space: nowrap;
-            }
-
-            .issues-grid {
+            .grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 
-    <div class="container">
-        <!-- Header -->
+    <div class="magazine">
         <header class="header">
-            <div class="header-content">
-                <h1 class="page-title">Magazine Issues</h1>
+            <div class="search-bar">
+                <h1>Magazine Issues</h1>
                 <input type="text" class="search-input" placeholder="Search issues...">
-                <a href="#" class="new-issue-btn">+ New Issue</a>
+                <a href="#" class="btn btn-primary">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M8 1v14M1 8h14" />
+                    </svg>
+                    New Issue
+                </a>
+            </div>
+
+            <div class="filters">
+                <button class="filter-btn active">All Issues</button>
+                <button class="filter-btn">Latest</button>
+                <button class="filter-btn">Most Read</button>
+                <button class="filter-btn">Featured</button>
+                <button class="filter-btn">Archived</button>
             </div>
         </header>
 
-        <!-- Filters -->
-        <div class="filters">
-            <button class="filter-btn active">All Issues</button>
-            <button class="filter-btn">Latest</button>
-            <button class="filter-btn">Most Read</button>
-            <button class="filter-btn">Featured</button>
-            <button class="filter-btn">Archived</button>
-        </div>
-
-        <!-- Issues Grid -->
-        <main class="issues-grid">
-            <!-- Issue Card 1 -->
-            <article class="issue-card">
-                <div class="issue-cover">
-                    <img src="https://source.unsplash.com/random/600x800?magazine,tech" alt="January 2025 Issue">
-                    <span class="issue-badge">New</span>
+        <main class="grid">
+            <article class="issue">
+                <div class="cover">
+                    <img src="https://source.unsplash.com/random/600x800?magazine,tech" alt="January 2025">
+                    <span class="badge">New</span>
                 </div>
-                <div class="issue-content">
-                    <h2 class="issue-title">January 2025 Edition</h2>
-                    <div class="issue-metadata">
+                <div class="content">
+                    <h2>January 2025 Edition</h2>
+                    <div class="meta">
                         <span>Issue #124</span>
                         <span>Published: Jan 15, 2025</span>
                         <span>84 pages • 12 articles</span>
                         <span>By: @regisx001</span>
+                        <span>Updated: 2025-01-29 02:47:14</span>
                     </div>
-                    <div class="issue-actions">
-                        <a href="#" class="btn btn-primary">Read Now</a>
-                        <a href="#" class="btn btn-secondary">Download</a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Issue Card 2 -->
-            <article class="issue-card">
-                <div class="issue-cover">
-                    <img src="https://source.unsplash.com/random/600x800?magazine,digital" alt="December 2024 Issue">
-                </div>
-                <div class="issue-content">
-                    <h2 class="issue-title">December 2024 Edition</h2>
-                    <div class="issue-metadata">
-                        <span>Issue #123</span>
-                        <span>Published: Dec 15, 2024</span>
-                        <span>76 pages • 10 articles</span>
-                        <span>By: @regisx001</span>
-                    </div>
-                    <div class="issue-actions">
-                        <a href="#" class="btn btn-primary">Read Now</a>
-                        <a href="#" class="btn btn-secondary">Download</a>
+                    <div class="actions">
+                        <a href="#">Read Now</a>
+                        <a href="#">Download</a>
                     </div>
                 </div>
             </article>
 
-            <!-- Add more issue cards as needed -->
+            <!-- Repeat for second issue -->
         </main>
     </div>
 </x-app-layout>
