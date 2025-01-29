@@ -116,52 +116,35 @@
 
     <div class="container-article-form">
         <header>
-            <h1>Create New Article</h1>
+            <h1>Update Article</h1>
         </header>
 
         <div class="article-form-container">
-            <form method="POST" action="{{ route('article.create', ['theme' => $theme->id]) }}"
+            <form method="POST" action="{{ route('article.update', ['article' => $article]) }}"
                 enctype="multipart/form-data">
                 @csrf
 
                 <div class="article-form-group">
                     <label for="name">Article Name</label>
-                    <input type="text" id="name" name="title" class="article-form-input"
-                        placeholder="Enter article name..." value="{{ old('name') }}">
+                    <input type="text" id="name" name="title" value="{{ $article->title }}"
+                        class="article-form-input" placeholder="Enter article name..." value="{{ old('name') }}">
                     @error('name')
                         <div class="error-message">{{ $message }}</div>
                     @enderror
                 </div>
 
-                <div class="article-form-group">
-                    <label for="image">Article Image</label>
-                    <div class="file-input-container">
-                        <input type="file" id="article-image" name="image" class="file-input"
-                            accept="image/png, image/jpeg">
-                        <div class="file-input-label">
-                            <div class="file-input-icon">📁</div>
-                            <div>Drag and drop your image here or click to browse</div>
-                            <div style="font-size: 0.875rem; margin-top: 0.5rem;">
-                                Supported article-formats: PNG, JPEG
-                            </div>
-                        </div>
-                    </div>
-                    @error('image')
-                        <div class="error-message">{{ $message }}</div>
-                    @enderror
-                </div>
 
                 <div class="article-form-group">
                     <label for="description">Article Description</label>
-                    <textarea id="description" name="content" class="article-form-input article-form-textarea"
-                        placeholder="Enter article content...">{{ old('description') }}</textarea>
+                    <textarea id="description" rows="30" name="content" class="article-form-input article-form-textarea"
+                        placeholder="Enter article content...">{{ $article->content }}</textarea>
                     @error('description')
                         <div class="error-message">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <x-button type="submit" class="btn-primary full-w">
-                    Create Article
+                    Update Article
                 </x-button>
 
 
@@ -170,26 +153,7 @@
     </div>
 
 
-    <script>
-        document.getElementById('article-image').addEventListener('change', function(e) {
-            const fileInput = e.target;
-            const fileInputContainer = fileInput.parentElement;
-            const fileInputLabel = fileInputContainer.querySelector('.file-input-label');
 
-            if (fileInput.files && fileInput.files[0]) {
-                const reader = new FileReader();
-
-                reader.onload = function(e) {
-                    fileInputContainer.style.backgroundImage = `url(${e.target.result})`;
-                    fileInputContainer.style.backgroundSize = 'cover';
-                    fileInputContainer.style.backgroundPosition = 'center';
-                    fileInputLabel.style.display = 'none';
-                }
-
-                reader.readAsDataURL(fileInput.files[0]);
-            }
-        });
-    </script>
 
 
 </x-app-layout>

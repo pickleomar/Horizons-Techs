@@ -25,7 +25,14 @@ Route::middleware('auth',)->group(function () {
     Route::get('/dashboard/profile', [ProfileController::class, 'index'])->name('dashboard.profile');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
+
+
     Route::get('/dashboard/articles', [ArticleController::class, 'index'])->name('dashboard.articles');
+    Route::get('/articles/edit/{article}', [ArticleController::class, 'edit'])->name('article.edit');
+    Route::post('/articles/edit/{article}', [ArticleController::class, 'update'])->name('article.update');
+
+
+
     Route::post('/articles/{article_id}/publish', [ArticleController::class, 'publish'])->name('articles.publish');
     Route::post('/articles/{article_id}/public', [ArticleController::class, 'make_public'])->name('articles.make.public');
     Route::delete('/articles', [ArticleController::class, 'destroy'])->name('articles.destroy');

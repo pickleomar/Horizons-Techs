@@ -154,7 +154,8 @@
                                 <span class="status status-rejected">{{ $article->status }}</span>
 
                                 <div class="article-actions">
-                                    <x-button class="btn-secondary">Edit</x-button>
+                                    <x-button href="{{ route('article.edit', ['article' => $article]) }}"
+                                        class="btn-secondary">Edit</x-button>
                                     <x-button class="btn-primary">Request</x-button>
 
 
@@ -180,7 +181,10 @@
                                             <x-button type="submit" class="btn-warning">public</x-button>
                                         </form>
                                     @endif
-                                    <x-button class="btn-secondary">Edit</x-button>
+
+                                    <x-button href="{{ route('article.edit', ['article' => $article]) }}"
+                                        class="btn-secondary">Edit</x-button>
+
                                     <x-button onclick="showDeleteDialog({{ $article->id }})"
                                         class="btn-danger">Delete</x-button>
                                 </div>
@@ -189,7 +193,10 @@
                             @case('Pending')
                                 <span class="status status-approved">{{ $article->status }}</span>
                                 <div class="article-actions">
-                                    <x-button class="btn-secondary">Edit</x-button>
+
+                                    <x-button href="{{ route('article.edit', ['article' => $article]) }}"
+                                        class="btn-secondary">Edit</x-button>
+
                                     <x-button onclick="showDeleteDialog({{ $article->id }})"
                                         class="btn-danger">Delete</x-button>
                                 </div>
@@ -198,7 +205,11 @@
                             @case('Published')
                                 <span class="status status-approved">{{ $article->status }}</span>
                                 <div class="article-actions">
-                                    <x-button class="btn-secondary">Edit</x-button>
+
+                                    <x-button href="{{ route('article.edit', ['article' => $article]) }}"
+                                        class="btn-secondary">Edit</x-button>
+
+
                                     @if (!$article->public)
                                         <form method="post"
                                             action="{{ route('articles.make.public', ['article_id' => $article->id]) }}">
