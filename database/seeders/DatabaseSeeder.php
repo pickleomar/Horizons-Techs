@@ -41,6 +41,14 @@ class DatabaseSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
+                'name' => 'Ezzoubair',
+                'email' => 'zarqi.ezzoubair@gmail.com',
+                'password' => Hash::make('password'),
+                'role' => 'editor',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
                 'name' => 'John Doe',
                 'email' => 'john@example.com',
                 'password' => Hash::make('password'),
@@ -86,7 +94,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Cybersecurity',
                 'description' => 'This cybersecurity theme explores the latest threats, vulnerabilities, and defense strategies, covering topics like ransomware, phishing, and AI-driven attacks. It provides actionable insights to help professionals and enthusiasts stay ahead in the evolving digital security landscape..',
-                'manager_id' => 1, 
+                'manager_id' => 1,
                 'image' => 'https://slidebazaar.com/wp-content/uploads/2022/09/cyber-security-powerpoint-template-jpg.webp0',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -94,7 +102,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Artificial Intelligence',
                 'description' => 'This theme explores the transformative impact of artificial intelligence on industries, ethics, and future innovations.',
-                'manager_id' => 2, 
+                'manager_id' => 2,
                 'image' => 'https://cms.trustmark.org.uk/media/h34dkakg/adobestock_265254915.jpeg?width=954&height=362&rnd=133440215261700000',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -102,7 +110,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'IoT: Internet of Things',
                 'description' => 'This theme delves into the Internet of Things (IoT), covering smart devices, connectivity, security challenges, and its role in shaping a connected future.',
-                'manager_id' => 3, 
+                'manager_id' => 3,
                 'image' => 'https://etimg.etb2bimg.com/photo/90623301.cms',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -110,7 +118,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Programming Language C++',
                 'description' => 'This theme focuses on the C++ programming language, exploring its advanced features, performance optimization, and applications in software development.',
-                'manager_id' => 4, 
+                'manager_id' => 4,
                 'image' => 'https://training.digigrowhub.in/wp-content/uploads/2021/02/do-coding-of-any-program-by-c-plus-plus-perfectly-and-within-time.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -133,7 +141,7 @@ class DatabaseSeeder extends Seeder
                     'image' => 'https://picsum.photos/800/400',
                     'theme_id' => 1, // Cybersecurity
                     'author_id' => 1,
-                    'status' => 'Published',
+                    'status' => 'Approved',
                     'publication_date' => now(),
                     'created_at' => now(),
                     'updated_at' => now(),
@@ -171,7 +179,8 @@ class DatabaseSeeder extends Seeder
                     'created_at' => now(),
                     'updated_at' => now(),
                 ],
-        ]);
+            ]
+        );
 
         $this->command->info('Articles table seeded successfully!');
     }
@@ -181,47 +190,48 @@ class DatabaseSeeder extends Seeder
      */
     private function seedIssues(): void
     {
-        DB::table('issues')->insert([[
-            'title' =>'Through the Digital Abyss issue',
-            'image'=>'https://i.pinimg.com/736x/52/1d/eb/521debe074b5196063c3494a97ef5fa2.jpg',
-            'description'=>'This magazine issue appears to focus on the intersection of artificial intelligence (AI)
+        DB::table('issues')->insert([
+            [
+                'title' => 'Through the Digital Abyss issue',
+                'image' => 'https://i.pinimg.com/736x/52/1d/eb/521debe074b5196063c3494a97ef5fa2.jpg',
+                'description' => "This magazine issue appears to focus on the intersection of artificial intelligence (AI)
              and security, particularly in a dystopian context. 
              It explores themes such as the fragility of future security, 
              the challenges posed by AI, and the potential collapse of trust in digital systems. 
              Topics likely include the paradoxes of cybersecurity, navigating the complexities of the digital age, and the implications of AI on societal trust and safety. 
-             The issue seems to offer a critical perspective on how AI could shape a potentially unstable future.',
-            'publication_date'=>now(),
-            'public'=> 1,
-            'created_at'=>now(),
-            'updated_at'=>now(),
-        ],
-        [
-            'title' =>'Insights in Science and Technology issue',
-            'image'=>'https://bpb-us-e2.wpmucdn.com/sites.utdallas.edu/dist/a/1165/files/2021/03/issues-cover-summer-600-2016-08.jpg',
-            'description'=>"This issue of the magazine delves into a variety of pressing topics at the intersection of science, technology, and policy. It explores the evolving global environment for space policy, lessons from Donald Trump's approach to governance, and the role of civil society in managing public health crises. Additionally, it examines the economic valuation of ecosystem services, the political dynamics of the Chemical Safety Board, and the potential for more energy-efficient buildings. The issue also touches on the influence of celebrities in the realm of science, offering a comprehensive look at how these diverse elements shape our world",
-            'publication_date'=>now(),
-            'public'=> 1,
-            'created_at'=>now(),
-            'updated_at'=>now(),
-        ],
-        [
-            'title' =>'Tech Journal - A Trends Report Special: The Human Touch issue',
-            'image'=>'https://media-s3-us-east-1.ceros.com/insight-uk/images/2024/03/25/9b74e94fb9f0d773a4eb2fe23ff785fa/be-cover.png?imageOpt=1',
-            'description'=>" This special issue of Tech Journal focuses on humanizing the digital customer experience, emphasizing the importance of personal touch in an increasingly digital world. It includes insights from the 2024 Trends Report, exploring key trends and strategies for enhancing customer engagement. The issue also addresses the reduction of financial risk in IT through the integration of FinOps and GreenOps, highlighting the intersection of financial operations and sustainable practices. This edition aims to provide valuable perspectives on balancing technological advancements with human-centric approaches.",
-            'publication_date'=>now(),
-            'public'=> 1,
-            'created_at'=>now(),
-            'updated_at'=>now(),
-        ],
-        [
-            'title' =>'National Academies of Sciences, Engineering, and Medicine issue',
-            'image'=>'https://issues.org/wp-content/uploads/2018/10/Fall-2018-Cover-1200x1536.jpg',
-            'description'=>" This issue features a special report on the continuing challenge of Alzheimer's disease, highlighting ongoing research and developments in understanding and addressing this condition. It also explores the future of work, examining how advancements in science and technology are reshaping the labor market and workplace dynamics. The publication includes contributions from prestigious institutions such as The University of Texas at Dallas and Arizona State University, offering a comprehensive look at critical issues at the intersection of science, technology, and society.",
-            'publication_date'=>now(),
-            'public'=> 1,
-            'created_at'=>now(),
-            'updated_at'=>now(),
-        ],
+             The issue seems to offer a critical perspective on how AI could shape a potentially unstable future.",
+                'publication_date' => now(),
+                'public' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'title' => 'Insights in Science and Technology issue',
+                'image' => 'https://bpb-us-e2.wpmucdn.com/sites.utdallas.edu/dist/a/1165/files/2021/03/issues-cover-summer-600-2016-08.jpg',
+                'description' => "This issue of the magazine delves into a variety of pressing topics at the intersection of science, technology, and policy. It explores the evolving global environment for space policy, lessons from Donald Trump's approach to governance, and the role of civil society in managing public health crises. Additionally, it examines the economic valuation of ecosystem services, the political dynamics of the Chemical Safety Board, and the potential for more energy-efficient buildings. The issue also touches on the influence of celebrities in the realm of science, offering a comprehensive look at how these diverse elements shape our world",
+                'publication_date' => now(),
+                'public' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'title' => 'Tech Journal - A Trends Report Special: The Human Touch issue',
+                'image' => 'https://media-s3-us-east-1.ceros.com/insight-uk/images/2024/03/25/9b74e94fb9f0d773a4eb2fe23ff785fa/be-cover.png?imageOpt=1',
+                'description' => " This special issue of Tech Journal focuses on humanizing the digital customer experience, emphasizing the importance of personal touch in an increasingly digital world. It includes insights from the 2024 Trends Report, exploring key trends and strategies for enhancing customer engagement. The issue also addresses the reduction of financial risk in IT through the integration of FinOps and GreenOps, highlighting the intersection of financial operations and sustainable practices. This edition aims to provide valuable perspectives on balancing technological advancements with human-centric approaches.",
+                'publication_date' => now(),
+                'public' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'title' => 'National Academies of Sciences, Engineering, and Medicine issue',
+                'image' => 'https://issues.org/wp-content/uploads/2018/10/Fall-2018-Cover-1200x1536.jpg',
+                'description' => " This issue features a special report on the continuing challenge of Alzheimer's disease, highlighting ongoing research and developments in understanding and addressing this condition. It also explores the future of work, examining how advancements in science and technology are reshaping the labor market and workplace dynamics. The publication includes contributions from prestigious institutions such as The University of Texas at Dallas and Arizona State University, offering a comprehensive look at critical issues at the intersection of science, technology, and society.",
+                'publication_date' => now(),
+                'public' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
         $this->command->info('Issues table seeded successfully!');
     }

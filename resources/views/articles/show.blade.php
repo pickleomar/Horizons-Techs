@@ -383,6 +383,15 @@
                     <span class="separator">⟩</span>
                     <span class="active">{{ $article->title }}</span>
                 </div>
+                @if (Auth::user()->role === 'editor' ||
+                        (Auth::user()->role === 'admin' && Auth::user()->id === $article->theme->manager_id))
+                    <form method="post" action="{{ route('articles.destroy') }}">
+                        @csrf
+                        @method('DELETE')
+                        <input type="hidden" name="article_id" value="{{ $article->id }}">
+                        <x-button type="submit" size="sm" class="btn-danger outline">delete</x-button>
+                    </form>
+                @endif
             </nav>
         </div>
         <div class="article-image-container">

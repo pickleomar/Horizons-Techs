@@ -34,7 +34,7 @@ Route::middleware('auth',)->group(function () {
     Route::post('/articles/{article_id}/propose', [ArticleController::class, 'propose'])->name('articles.propose');
 
 
-    Route::post('/articles/{article_id}/publish', [ArticleController::class, 'publish'])->name('articles.publish');
+    // Route::post('/articles/{article_id}/publish', [ArticleController::class, 'publish'])->name('articles.publish');
     Route::post('/articles/{article_id}/public', [ArticleController::class, 'make_public'])->name('articles.make.public');
     Route::delete('/articles', [ArticleController::class, 'destroy'])->name('articles.destroy');
 });

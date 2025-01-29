@@ -263,7 +263,9 @@
         </div>
 
         <!-- Articles Section -->
-        @if (Auth::user()->isSubscribedToTheme($theme->id))
+        @if (Auth::user()->isSubscribedToTheme($theme->id) ||
+                Auth::user()->isEditor() ||
+                (Auth::user()->isAdmin() && Auth::user()->id === $theme->manager_id))
             <div class="articles-section">
                 <div class="articles-header">
                     <h2 class="articles-title">Related Articles</h2>
