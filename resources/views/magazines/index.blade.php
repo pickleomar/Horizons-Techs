@@ -248,37 +248,39 @@
                 </a>
             </div>
 
-            <div class="filters">
+            {{-- <div class="filters">
                 <button class="filter-btn active">All Issues</button>
                 <button class="filter-btn">Latest</button>
                 <button class="filter-btn">Most Read</button>
                 <button class="filter-btn">Featured</button>
                 <button class="filter-btn">Archived</button>
-            </div>
+            </div> --}}
         </header>
 
         <main class="grid">
-            <article class="issue">
-                <div class="cover">
-                    <img src="https://source.unsplash.com/random/600x800?magazine,tech" alt="January 2025">
-                    <span class="badge">New</span>
-                </div>
-                <div class="content">
-                    <h2>January 2025 Edition</h2>
-                    <div class="meta">
-                        <span>Issue #124</span>
-                        <span>Published: Jan 15, 2025</span>
-                        <span>84 pages • 12 articles</span>
-                        <span>By: @regisx001</span>
-                        <span>Updated: 2025-01-29 02:47:14</span>
-                    </div>
-                    <div class="actions">
-                        <a href="#">Read Now</a>
-                        <a href="#">Download</a>
-                    </div>
-                </div>
-            </article>
 
+            @foreach ($issues as $issue)
+                <article class="issue">
+                    <div class="cover">
+                        <img src="{{ asset($issue->image) }}" alt="January 2025">
+                        <span class="badge">New</span>
+                    </div>
+                    <div class="content">
+                        <h2>{{ $issue->title }}</h2>
+                        <div class="meta">
+                            <span>Issue #124</span>
+                            <span>Published: {{ $issue->publication_date->diffForHumans() }}</span>
+                            <span>84 pages • {{ count($issue->articles) }}</span>
+                            {{-- <span>By: {{ '@' . $issue->owner }}</span> --}}
+                            <span>Updated: {{ $issue->updated_at->diffForHumans() }}</span>
+                        </div>
+                        <div class="actions">
+                            <a href="#">Read Now</a>
+                            <a href="#">Download</a>
+                        </div>
+                    </div>
+                </article>
+            @endforeach
             <!-- Repeat for second issue -->
         </main>
     </div>

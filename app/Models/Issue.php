@@ -11,6 +11,7 @@ class Issue extends Model
         'description',
         'publication_date',
         'public',
+        "publisher"
     ];
     protected $casts = [
         'publication_date' => 'datetime',
@@ -22,6 +23,11 @@ class Issue extends Model
         return $this->hasMany(Article::class);
     }
 
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, "publisher_id");
+    }
     /**
      * Todo Handle Issue Relationship
      */
