@@ -99,9 +99,7 @@ class ArticleController extends Controller
 
     public function edit(Article $article)
     {
-        //$this->authorize('update', $article);
-        //$themes = Theme::all();
-        return view('articles.edit', compact('article', 'themes'));
+        return view('articles.edit', compact('article',));
     }
 
 
@@ -112,8 +110,8 @@ class ArticleController extends Controller
             'content' => 'required',
         ]);
 
-        $article->update($request->all());
-        return redirect()->route('articles.index')
+        $article->update(array_merge($request->all(), ["status" => "Pending"]));
+        return redirect()->route("dashboard.articles")
             ->with('success', 'Article updated successfully.');
     }
 
