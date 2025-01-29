@@ -5,6 +5,7 @@
         </a>
     </div>
     <nav>
+        <a href="{{ route('magazines.index') }}">Issues</a>
         <a href="{{ route('articles.public') }}">Public Articles</a>
         <a href="{{ route('themes.index') }}">Themes</a>
         @guest

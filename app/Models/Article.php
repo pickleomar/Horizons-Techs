@@ -44,6 +44,12 @@ class Article extends Model
     }
 
 
+    public function issue()
+    {
+        return $this->belongsTo(Issue::class);
+    }
+
+
     /**
      * Get the rating of the article.
      */
