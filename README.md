@@ -38,7 +38,6 @@ The **Theme Details Page** provides comprehensive information about a specific t
 #### Features:  
 - Displays **all details** about the theme.  
 - **Subscribe button** for users who are not yet subscribed.  
-- **Subscribers list**, including editors and other theme admins.  
 - **Editor is subscribed by default**.  
 - **Delete button** available for **theme admins and editors** to remove the theme.  
 - **Articles section** that is **visible only to subscribed members**.  
