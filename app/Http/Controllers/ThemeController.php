@@ -39,7 +39,10 @@ class ThemeController extends Controller
     }
 
     public function create(Request $request)
-    {
+    {   
+        if (auth()->user()->role !== 'editor') {
+            abort(403, 'Unauthorized action.');
+        }
         return view("themes.create");
     }
 

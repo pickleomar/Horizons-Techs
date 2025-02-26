@@ -190,7 +190,9 @@
                     <input type="text" name="search" class="search-input" placeholder="Search themes..."
                         value="{{ $search ?? '' }}" autocomplete="off">
                 </form>
+                @if(auth()->user()->role === 'editor')
                 <x-button href="{{ route('themes.create') }}" class="new-theme-btn">+ New theme</x-button>
+                @endif
             </div>
         </header>
 
