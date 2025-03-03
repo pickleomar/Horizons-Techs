@@ -149,7 +149,7 @@
                 </div>
             </div>
         </section>
-
+        @guest
         <section class="section" style="text-align: center;">
             <div class="container">
                 <h2>Ready to Get Started?</h2>
@@ -159,6 +159,7 @@
                 <x-button class="btn-primary" href="{{ route('register') }}">Create Account</x-button>
             </div>
         </section>
+        @endguest
     </main>
 
     <script>

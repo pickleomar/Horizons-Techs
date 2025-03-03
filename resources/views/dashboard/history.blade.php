@@ -52,7 +52,7 @@
                             <td style="display: flex;gap: 1rem">
                                 <x-button
                                     href="{{ route('articles.show', ['theme' => $history->article->theme_id, 'article' => $history->article]) }}"
-                                    size="sm" class="btn-secondary full-w">Voir</x-button>
+                                    size="sm" class="btn-secondary full-w">Show</x-button>
 
                                 <form class="full-w" action="{{ route('history.destroy') }}" method="post">
                                     @csrf

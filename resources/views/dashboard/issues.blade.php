@@ -154,7 +154,7 @@
 
                                 <div class="article-actions">
                                     <x-button href="{{ route('magazines.show', ['issue' => $issue]) }}"
-                                        class="btn-secondary">visite</x-button>
+                                        class="btn-secondary">Visit</x-button>
 
 
                                     <form method="post" action="{{ route('issues.publish', ['issue_id' => $issue->id]) }}">
@@ -175,7 +175,7 @@
                                 <div class="article-actions">
 
                                     <x-button href="{{ route('magazines.show', ['issue' => $issue]) }}"
-                                        class="btn-secondary">visite</x-button>
+                                        class="btn-secondary">Visit</x-button>
 
 
 

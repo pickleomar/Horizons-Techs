@@ -69,7 +69,7 @@
                                 </form>
                                 <x-button
                                     href="{{ route('articles.show', ['theme' => $article->theme_id, 'article' => $article->id]) }}"
-                                    size="sm" class="btn-secondary full-w">voir</x-button>
+                                    size="sm" class="btn-secondary full-w">Show</x-button>
 
                             </td>
                         </tr>
