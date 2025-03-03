@@ -407,7 +407,7 @@
             </div>
         </div>
         <div class="article-content">
-            <h1 class="article-title">The Art of Web Design</h1>
+            <h1 class="article-title">{{ $article->title }}</h1>
             <p class="article-description">
                 {{ $article->content }}
             </p>
